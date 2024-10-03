@@ -23,6 +23,7 @@ runs/
 
 ### JetBrains IntelliJ IDEA ###
 .idea/
+!.idea/icon.png
 *.iml
 *.ipr
 *.iws
