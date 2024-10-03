@@ -1,0 +1,41 @@
+### Java ###
+*.class
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+
+### Gradle ###
+.gradle/
+build/
+out/
+classes/
+
+### Fabric ###
+run/
+remappedSrc/
+
+### NeoForge ###
+runs/
+
+### Apple macOS ###
+*.DS_Store
+
+### JetBrains IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### JetBrains Fleet ###
+.fleet/
+
+### VSCode ###
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+### Eclipse ###
+*.launch
