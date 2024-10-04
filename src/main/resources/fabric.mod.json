@@ -10,12 +10,17 @@
   "contact": {
     "homepage": "https://modrinth.com/mod/foggy-pale-garden",
     "sources": "https://github.com/NaoCraftLab/foggy-pale-garden",
-    "issues": "https://github.com/NaoCraftLab/foggy-pale-garden/issues"
+    "issues": "https://github.com/NaoCraftLab/foggy-pale-garden/issues",
+    "discord": "https://discord.gg/NmzHNyrGK4"
   },
   "license": "MIT",
   "icon": "assets/foggy-pale-garden/icon.png",
   "environment": "client",
-  "entrypoints": {},
+  "entrypoints": {
+    "client": [
+      "com.naocraftlab.foggypalegarden.FoggyPaleGardenClientMod"
+    ]
+  },
   "mixins": [
     "foggypalegarden.mixins.json"
   ],
