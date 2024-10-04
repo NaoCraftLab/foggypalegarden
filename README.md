@@ -45,8 +45,6 @@ A Minecraft mod that adds thick fog to the Pale Garden biome.
 4. Place the mod in the `mods` folder
 5. Beware of the monsters in the fog!
 
-Here is the translated README section for your Minecraft mod in English:
-
 ## 🛠️ Configuration
 
 To change the configuration of the mod, edit the `config/foggy-pale-garden.json` file and restart the game.
