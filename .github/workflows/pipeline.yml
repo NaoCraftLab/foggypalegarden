@@ -45,13 +45,13 @@ jobs:
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2)
-          loaders=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | sed 's/\([^,]*\)/"\1"/g' | tr ',' '\n' | tr '[:upper:]' '[:lower:]')
+          loaders_for_modrinth=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | jq -R . | jq -s .)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
           echo "MINECRAFT_FIRST_SNAPSHOT_VERSION=$minecraftFirstSnapshotVersion" >> $GITHUB_ENV
           echo "MINECRAFT_RELEASE_VERSION=$minecraftReleaseVersion" >> $GITHUB_ENV
-          echo "LOADERS_FOR_MODRINTH=$loaders" >> $GITHUB_ENV
+          echo "LOADERS_FOR_MODRINTH=$loaders_for_modrinth" >> $GITHUB_ENV
 
       - name: Get version changelog
         id: changelog
