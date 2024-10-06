@@ -95,7 +95,16 @@ jobs:
           VERSION=$(basename ${{ github.ref }})
           primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}.jar"
           additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}-sources.jar"
-
+          
+          echo "Checking primary file: $primary_file"
+          ls -lh "$primary_file"
+          
+          echo "Checking additional file: $additional_file"
+          ls -lh "$additional_file"
+          
+          echo "env.LOADERS_FOR_MODRINTH: ${{ env.LOADERS_FOR_MODRINTH }}"
+          
+          # Формируем JSON с информацией о версии
           VERSION_DATA=$(jq -n \
             --arg name "$VERSION" \
             --arg version_number "${{ env.MOD_VERSION }}" \
@@ -116,6 +125,8 @@ jobs:
               "primary_file": "file"
             }'
           )
+          
+          echo "Version Data JSON: $VERSION_DATA"
           
           curl -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: $MODRINTH_TOKEN" \
