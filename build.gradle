@@ -1,49 +1,55 @@
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
-    id 'maven-publish'
-    id 'org.jetbrains.kotlin.jvm'
 }
 
-version = project.mod_version
-group = project.maven_group
+version = project.modVersion
+group = project.group
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = "${project.modId}-${project.minecraftReleaseVersion}"
 }
 
 repositories {
     mavenCentral()
-
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft "com.mojang:minecraft:${project.minecraftFirstSnapshotVersion}"
+    mappings "net.fabricmc:yarn:${project.yarnMappingsVersion}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loaderMinVersion}"
 }
 
 processResources {
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand(
+                modId: project.findProperty("modId"),
+                modVersion: project.findProperty("modVersion"),
+                modName: project.findProperty("modName"),
+                modDescription: project.findProperty("modDescription"),
+                modLicense: project.findProperty("modLicense"),
+                modHomepage: project.findProperty("modHomepage"),
+                modSources: project.findProperty("modSources"),
+                modIssueTracker: project.findProperty("modIssueTracker"),
+                modDiscord: project.findProperty("modDiscord"),
+                loaderMinVersion: project.findProperty("loaderMinVersion"),
+                minecraftJavaVersion: project.findProperty("minecraftJavaVersion"),
+                minecraftFirstSnapshotFullVersion: project.findProperty("minecraftFirstSnapshotFullVersion")
+        )
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = minecraftJavaVersion.toInteger()
 }
 
 java {
     withSourcesJar()
-
 }
 
 jar {
     from("LICENSE") {
         rename { "${it}_${project.base.archivesName.get()}" }
     }
-}
-kotlin {
-    jvmToolchain(21)
 }

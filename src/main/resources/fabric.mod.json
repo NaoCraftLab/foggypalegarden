@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "foggy-pale-garden",
-  "version": "${version}",
-  "name": "Foggy Pale Garden",
-  "description": "Adds dense fog to the Pale Garden biome.",
+  "id": "${modId}",
+  "version": "${modVersion}",
+  "name": "${modName}",
+  "description": "${modDescription}",
   "authors": [
     "NaoCraftLab"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/foggy-pale-garden",
-    "sources": "https://github.com/NaoCraftLab/foggy-pale-garden",
-    "issues": "https://github.com/NaoCraftLab/foggy-pale-garden/issues",
-    "discord": "https://discord.gg/NmzHNyrGK4"
+    "homepage": "${modHomepage}",
+    "sources": "${modSources}",
+    "issues": "${modIssueTracker}",
+    "discord": "${modDiscord}"
   },
-  "license": "MIT",
+  "license": "${modLicense}",
   "icon": "assets/foggy-pale-garden/icon.png",
   "environment": "client",
   "entrypoints": {
@@ -25,9 +25,9 @@
     "foggypalegarden.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.4",
-    "minecraft": ">=1.21.2-alpha.24.40.a",
-    "java": ">=21"
+    "fabricloader": ">=${loaderMinVersion}",
+    "minecraft": ">=${minecraftFirstSnapshotFullVersion}",
+    "java": ">=${minecraftJavaVersion}"
   },
   "suggests": {}
 }

@@ -74,19 +74,26 @@ public abstract class PaleGardenFogMixin {
         }
 
         if (fogDensity > 0.0f) {
-            final float brightness = (0.299f * color.x + 0.587f * color.y + 0.114f * color.z) * color.w;
-            final Fog fog = new Fog(
-                    fogSettings.getStartDistance(),
-                    fogSettings.getEndDistance(),
-                    SPHERE,
-                    brightness,
-                    brightness,
-                    brightness,
-                    fogDensity * (fogSettings.getOpacity() / 100f)
-            );
+            final Fog fog = createFog(fogSettings, color);
             cir.setReturnValue(fog);
             cir.cancel();
         }
+    }
+
+    @Unique
+    private static Fog createFog(FogSettings fogSettings, Vector4f color) {
+        final float brightness = (0.299f * color.x + 0.587f * color.y + 0.114f * color.z) * color.w;
+        final float alpha = (fogSettings.getOpacity() > 0f) ? fogDensity * ((fogSettings.getOpacity() - 0.001f) / 100f) : 0f;
+        final Fog fog = new Fog(
+                fogSettings.getStartDistance(),
+                fogSettings.getEndDistance(),
+                SPHERE,
+                brightness,
+                brightness,
+                brightness,
+                alpha
+        );
+        return fog;
     }
 
     @Unique

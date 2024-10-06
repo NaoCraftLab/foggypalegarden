@@ -6,8 +6,11 @@ import java.nio.file.Path;
 
 import static java.lang.System.lineSeparator;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.newBufferedReader;
 import static java.nio.file.Files.newBufferedWriter;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public final class Files {
 
@@ -29,8 +32,11 @@ public final class Files {
     }
 
     public static Path writeString(Path path, CharSequence charSequence) {
-        try (final BufferedWriter writer = newBufferedWriter(path, UTF_8)) {
-            writer.append(charSequence);
+        try {
+            createDirectories(path.getParent());
+            try (final BufferedWriter writer = newBufferedWriter(path, UTF_8, CREATE, TRUNCATE_EXISTING)) {
+                writer.append(charSequence);
+            }
         } catch (Exception e) {
             throw new FoggyPaleGardenException("Failed to write file (" + path.toAbsolutePath() + ")", e);
         }
