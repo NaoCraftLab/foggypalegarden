@@ -95,19 +95,13 @@ jobs:
           VERSION=$(basename ${{ github.ref }})
           primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}.jar"
           additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}-sources.jar"
-          
-          echo "Checking primary file: $primary_file"
-          ls -lh "$primary_file"
-          
-          echo "Checking additional file: $additional_file"
-          ls -lh "$additional_file"
-          
+
           VERSION_DATA=$(jq -n \
             --arg name "$VERSION" \
             --arg version_number "${{ env.MOD_VERSION }}" \
             --arg changelog "${{ env.CHANGELOG }}" \
             --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --argjson loaders "$(echo '["fabric","quilt"]')" \
+            --argjson loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
             --arg project_id "${{ env.MOD_ID }}" \
             '{
               "name": $name,
@@ -118,18 +112,16 @@ jobs:
               "version_type": "release",
               "featured": false,
               "project_id": $project_id,
-              "file_parts": ["primary_file", "additional_file"],
-              "primary_file": "primary_file"
+              "file_parts": ["file", "file2"],
+              "primary_file": "file"
             }'
           )
-          
-          echo "Version Data JSON: $VERSION_DATA"
           
           curl -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: $MODRINTH_TOKEN" \
             -F "data=$VERSION_DATA" \
-            -F "primary_file=@$primary_file" \
-            -F "additional_file=@$additional_file" \
+            -F "file=@$primary_file" \
+            -F "file2=@$additional_file" \
             -v
 
 #      - name: Publish to CurseForge
