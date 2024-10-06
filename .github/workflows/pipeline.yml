@@ -45,8 +45,7 @@ jobs:
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2)
-          # Преобразование списка загрузчиков в формат для Modrinth
-          loaders=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | tr ',' '\n')
+          loaders=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | sed 's/\([^,]*\)/"\1"/g' | tr ',' '\n' | tr '[:upper:]' '[:lower:]')
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
