@@ -46,14 +46,12 @@ jobs:
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2 | xargs)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2 | xargs)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
-          loadersForModrinth=$(echo $fabricSupportedLoaders | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | jq -R . | jq -sc)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MOD_VERSION=$modVersion" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
           echo "MINECRAFT_FIRST_SNAPSHOT_VERSION=$minecraftFirstSnapshotVersion" >> $GITHUB_ENV
           echo "MINECRAFT_RELEASE_VERSION=$minecraftReleaseVersion" >> $GITHUB_ENV
-          echo "LOADERS_FOR_MODRINTH=$loadersForModrinth" >> $GITHUB_ENV
 
       - name: Get version changelog
         id: changelog
@@ -87,49 +85,3 @@ jobs:
           body: ${{ env.FINAL_CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to Modrinth
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        run: |
-          VERSION=$(basename ${{ github.ref }})
-          primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}.jar"
-          additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ env.MOD_VERSION }}-sources.jar"
-
-          VERSION_DATA=$(jq -n \
-            --arg name "$VERSION" \
-            --arg version_number "${{ env.MOD_VERSION }}" \
-            --arg changelog "${{ env.CHANGELOG }}" \
-            --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --arg loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
-            --arg project_id "${{ env.MOD_ID }}" \
-            '{
-              "name": $name,
-              "version_number": $version_number,
-              "changelog": $changelog,
-              "game_versions": $game_versions,
-              "loaders": $loaders,
-              "version_type": "release",
-              "featured": false,
-              "project_id": $project_id,
-              "file_parts": ["file", "file2"],
-              "primary_file": "file"
-            }'
-          )
-          
-          curl -X POST https://api.modrinth.com/v2/version \
-            -H "Authorization: $MODRINTH_TOKEN" \
-            -F "data=$VERSION_DATA" \
-            -F "file=@$primary_file" \
-            -F "file2=@$additional_file"
-
-#      - name: Publish to CurseForge
-#        uses: CurseForgePublishing/release-action@v1
-#        with:
-#          api-key: ${{ secrets.CURSEFORGE_API_KEY }}
-#          game-id: "432"
-#          project-id: "your-curseforge-project-id"
-#          file: build/libs/*.jar
-#          changelog: ${{ env.FINAL_CHANGELOG }}
-#          version: ${{ github.ref_name }}
-#          release-type: release

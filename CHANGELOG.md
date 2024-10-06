@@ -1,19 +1,3 @@
-## 1.21.2-1.2.99
-
-### Added
-- The fog does not fill caves beneath the Pale Garden
-- The fog doesn’t hinder flying over the Pale Garden
-- Quilt support
-- 1
-
-### Changed
-- Improved the effect of entering and exiting the fog
-- 2
-
-### Fixed
-- Removed dependency on Fabric API
-- 3
-
 ## 1.21.2-1.2.1
 
 ### Fixed
