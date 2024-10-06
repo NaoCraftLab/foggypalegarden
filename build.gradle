@@ -15,8 +15,8 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraftFirstSnapshotVersion}"
-    mappings "net.fabricmc:yarn:${project.yarnMappingsVersion}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loaderMinVersion}"
+    mappings "net.fabricmc:yarn:${project.fabricYarnMappingsVersion}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.fabricLoaderMinVersion}"
 }
 
 processResources {
@@ -33,7 +33,7 @@ processResources {
                 modSources: project.findProperty("modSources"),
                 modIssueTracker: project.findProperty("modIssueTracker"),
                 modDiscord: project.findProperty("modDiscord"),
-                loaderMinVersion: project.findProperty("loaderMinVersion"),
+                fabricLoaderMinVersion: project.findProperty("fabricLoaderMinVersion"),
                 minecraftJavaVersion: project.findProperty("minecraftJavaVersion"),
                 minecraftFirstSnapshotFullVersion: project.findProperty("minecraftFirstSnapshotFullVersion")
         )

@@ -38,6 +38,15 @@ jobs:
       - name: Build project
         run: ./gradlew build
 
+      - name: Extract properties from gradle.properties
+        id: properties
+        run: |
+          minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2)
+          minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2)
+          fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2)
+          echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
+          echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
+
       - name: Get version changelog
         id: changelog
         run: |
@@ -48,12 +57,26 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
         shell: bash
 
+      - name: Combine release notes
+        id: combine
+        run: |
+          echo "${{ env.MINECRAFT_VERSIONS }}" > combined_changelog.txt
+          echo "${{ env.LOADERS }}" >> combined_changelog.txt
+          echo "" >> combined_changelog.txt
+          echo "## Changes" >> combined_changelog.txt
+          echo "" >> combined_changelog.txt
+          echo "${{ env.CHANGELOG }}" >> combined_changelog.txt
+          cat combined_changelog.txt
+          echo "FINAL_CHANGELOG<<EOF" >> $GITHUB_ENV
+          cat combined_changelog.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           name: "Foggy Pale Garden ${{ github.ref_name }}"
           files: build/libs/*.jar
-          body: ${{ env.CHANGELOG }}
+          body: ${{ env.FINAL_CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,7 +87,7 @@ jobs:
 #          project-id: "your-modrinth-project-id"
 #          version-number: ${{ github.ref_name }}
 #          file: build/libs/*.jar
-#          changelog: ${{ env.CHANGELOG }}
+#          changelog: ${{ env.FINAL_CHANGELOG }}
 #          version-type: release
 #          game-versions: "1.20.1"
 
@@ -75,6 +98,6 @@ jobs:
 #          game-id: "432"
 #          project-id: "your-curseforge-project-id"
 #          file: build/libs/*.jar
-#          changelog: ${{ env.CHANGELOG }}
+#          changelog: ${{ env.FINAL_CHANGELOG }}
 #          version: ${{ github.ref_name }}
 #          release-type: release
