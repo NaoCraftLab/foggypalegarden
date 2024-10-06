@@ -46,7 +46,7 @@ jobs:
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2 | xargs)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2 | xargs)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
-          loaders_for_modrinth=$(echo $fabricSupportedLoaders | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | jq -R . | jq -s .)
+          loaders_for_modrinth=$(echo $fabricSupportedLoaders | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | jq -R . | jq -s | tr -d '[:space:]')
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MOD_VERSION=$modVersion" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
