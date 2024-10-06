@@ -41,10 +41,10 @@ jobs:
       - name: Extract properties from gradle.properties
         id: properties
         run: |
-          modId=$(grep 'modId' gradle.properties | cut -d'=' -f2)
-          minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2)
-          minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2)
-          fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2)
+          modId=$(grep 'modId' gradle.properties | cut -d'=' -f2 | xargs)
+          minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2 | xargs)
+          minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2 | xargs)
+          fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
           loaders_for_modrinth=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | jq -R . | jq -s .)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
