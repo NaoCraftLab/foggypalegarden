@@ -98,15 +98,15 @@ jobs:
             --arg name "$VERSION" \
             --arg version_number "$VERSION" \
             --arg changelog "${{ env.CHANGELOG }}" \
-            --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --argjson loaders "[${{ env.LOADERS_FOR_MODRINTH }}]" \
+            --arg game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
+            --arg loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
             --arg project_id "${{ env.MOD_ID }}" \
             '{
               "name": $name,
               "version_number": $version_number,
               "changelog": $changelog,
-              "game_versions": $game_versions,
-              "loaders": $loaders,
+              "game_versions": ($game_versions | fromjson),
+              "loaders": ($loaders | fromjson),
               "version_type": "release",
               "featured": false,
               "project_id": $project_id,
