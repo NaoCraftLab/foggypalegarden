@@ -88,7 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Modrinth
-        uses: modrinth/modrinth-publish-action@v1
+        uses: modrinth/github-action@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project-id: ${{ env.MOD_ID }}
