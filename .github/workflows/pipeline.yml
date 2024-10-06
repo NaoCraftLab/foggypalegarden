@@ -29,6 +29,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          node-version: '20'
 
       - name: Cache Gradle packages
         uses: actions/cache@v4
@@ -66,6 +67,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          node-version: '20'
 
       - name: Cache Gradle packages
         uses: actions/cache@v4
@@ -83,14 +85,17 @@ jobs:
         run: |
           VERSION=$(basename ${{ github.ref }})
           CHANGELOG=$(sed -n "/^## $VERSION/,/^## /p" CHANGELOG.md | tail -n +2 | head -n -1)
-          echo "::set-output name=changelog::$CHANGELOG"
+          echo "changelog<<EOF" >> $GITHUB_ENV
+          echo "$CHANGELOG" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         shell: bash
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          name: "Foggy Pale Garden ${{ github.ref_name }}"
           files: build/libs/*.jar
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: ${{ env.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -101,7 +106,7 @@ jobs:
 #          project-id: "your-modrinth-project-id"
 #          version-number: ${{ github.ref_name }}
 #          file: build/libs/*.jar
-#          changelog: ${{ steps.changelog.outputs.changelog }}
+#          changelog: ${{ env.changelog }}
 #          version-type: release
 #          game-versions: "1.20.1"
 
@@ -112,6 +117,6 @@ jobs:
 #          game-id: "432"
 #          project-id: "your-curseforge-project-id"
 #          file: build/libs/*.jar
-#          changelog: ${{ steps.changelog.outputs.changelog }}
+#          changelog: ${{ env.changelog }}
 #          version: ${{ github.ref_name }}
 #          release-type: release
