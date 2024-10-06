@@ -1,9 +1,6 @@
 name: Build and Release Mod
 
 on:
-  push:
-    branches:
-      - main
   create:
     tags:
       - '*'
@@ -12,46 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          node-version: '20'
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Build project
-        run: ./gradlew build
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: mod-build
-          path: build/libs/*.jar
-
   release:
-    needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
 
     steps:
       - name: Checkout code
@@ -67,7 +26,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-          node-version: '20'
 
       - name: Cache Gradle packages
         uses: actions/cache@v4
@@ -85,7 +43,7 @@ jobs:
         run: |
           VERSION=$(basename ${{ github.ref }})
           CHANGELOG=$(sed -n "/^## $VERSION/,/^## /p" CHANGELOG.md | tail -n +2 | head -n -1)
-          echo "changelog<<EOF" >> $GITHUB_ENV
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "$CHANGELOG" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
         shell: bash
@@ -95,7 +53,7 @@ jobs:
         with:
           name: "Foggy Pale Garden ${{ github.ref_name }}"
           files: build/libs/*.jar
-          body: ${{ env.changelog }}
+          body: ${{ env.CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -106,7 +64,7 @@ jobs:
 #          project-id: "your-modrinth-project-id"
 #          version-number: ${{ github.ref_name }}
 #          file: build/libs/*.jar
-#          changelog: ${{ env.changelog }}
+#          changelog: ${{ env.CHANGELOG }}
 #          version-type: release
 #          game-versions: "1.20.1"
 
@@ -117,6 +75,6 @@ jobs:
 #          game-id: "432"
 #          project-id: "your-curseforge-project-id"
 #          file: build/libs/*.jar
-#          changelog: ${{ env.changelog }}
+#          changelog: ${{ env.CHANGELOG }}
 #          version: ${{ github.ref_name }}
 #          release-type: release
