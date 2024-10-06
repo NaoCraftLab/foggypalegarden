@@ -42,7 +42,7 @@ jobs:
         id: changelog
         run: |
           VERSION=$(basename ${{ github.ref }})
-          CHANGELOG=$(sed -n "/^## $VERSION/,/^## /p" CHANGELOG.md | tail -n +2 | head -n -1)
+          CHANGELOG=$(sed -n "/^## $VERSION/,/^## [0-9]/p" CHANGELOG.md | tail -n +2)
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "$CHANGELOG" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
