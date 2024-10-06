@@ -94,6 +94,8 @@ jobs:
           primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION.jar"
           additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION-sources.jar"
           
+          echo "Loaders JSON: ${{ env.LOADERS_FOR_MODRINTH }}"
+          
           VERSION_DATA=$(jq -n \
             --arg name "$VERSION" \
             --arg version_number "$VERSION" \
@@ -115,11 +117,14 @@ jobs:
             }'
           )
           
+          echo "Version Data JSON: $VERSION_DATA"
+          
           curl -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: $MODRINTH_TOKEN" \
             -F "data=$VERSION_DATA" \
             -F "primary_file=@$primary_file" \
-            -F "additional_file=@$additional_file"
+            -F "additional_file=@$additional_file" \
+            -v
 
 #      - name: Publish to CurseForge
 #        uses: CurseForgePublishing/release-action@v1
