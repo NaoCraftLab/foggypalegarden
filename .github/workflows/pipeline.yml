@@ -94,14 +94,12 @@ jobs:
           primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION.jar"
           additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION-sources.jar"
           
-          echo "Loaders JSON: ${{ env.LOADERS_FOR_MODRINTH }}"
-          
           VERSION_DATA=$(jq -n \
             --arg name "$VERSION" \
             --arg version_number "$VERSION" \
             --arg changelog "${{ env.CHANGELOG }}" \
             --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --argjson loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
+            --argjson loaders "$(echo '${{ env.LOADERS_FOR_MODRINTH }}')" \
             --arg project_id "${{ env.MOD_ID }}" \
             '{
               "name": $name,
