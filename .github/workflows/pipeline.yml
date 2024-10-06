@@ -41,11 +41,18 @@ jobs:
       - name: Extract properties from gradle.properties
         id: properties
         run: |
+          modId=$(grep 'modId' gradle.properties | cut -d'=' -f2)
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2)
+          # Преобразование списка загрузчиков в формат для Modrinth
+          loaders=$(echo $fabricSupportedLoaders | sed 's/, */,/g' | tr ',' '\n')
+          echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
+          echo "MINECRAFT_FIRST_SNAPSHOT_VERSION=$minecraftFirstSnapshotVersion" >> $GITHUB_ENV
+          echo "MINECRAFT_RELEASE_VERSION=$minecraftReleaseVersion" >> $GITHUB_ENV
+          echo "LOADERS_FOR_MODRINTH=$loaders" >> $GITHUB_ENV
 
       - name: Get version changelog
         id: changelog
@@ -80,16 +87,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Publish to Modrinth
-#        uses: modrinth/modrinth-publish-action@v1
-#        with:
-#          token: ${{ secrets.MODRINTH_TOKEN }}
-#          project-id: "your-modrinth-project-id"
-#          version-number: ${{ github.ref_name }}
-#          file: build/libs/*.jar
-#          changelog: ${{ env.FINAL_CHANGELOG }}
-#          version-type: release
-#          game-versions: "1.20.1"
+      - name: Publish to Modrinth
+        uses: modrinth/modrinth-publish-action@v1
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project-id: ${{ env.MOD_ID }}
+          version-name: ${{ github.ref_name }}
+          version-number: ${{ github.ref_name }}
+          changelog: ${{ env.CHANGELOG }}
+          game-versions: |
+            ${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}
+            ${{ env.MINECRAFT_RELEASE_VERSION }}
+          loaders: ${{ env.LOADERS_FOR_MODRINTH }}
+          release-channel: "release"
+          primary-file: "build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ github.ref_name }}.jar"
+          additional-files: "build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ github.ref_name }}-sources.jar"
 
 #      - name: Publish to CurseForge
 #        uses: CurseForgePublishing/release-action@v1
