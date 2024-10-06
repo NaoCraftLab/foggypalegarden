@@ -88,20 +88,39 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Modrinth
-        uses: modrinth/github-action@v2
-        with:
-          token: ${{ secrets.MODRINTH_TOKEN }}
-          project-id: ${{ env.MOD_ID }}
-          version-name: ${{ github.ref_name }}
-          version-number: ${{ github.ref_name }}
-          changelog: ${{ env.CHANGELOG }}
-          game-versions: |
-            ${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}
-            ${{ env.MINECRAFT_RELEASE_VERSION }}
-          loaders: ${{ env.LOADERS_FOR_MODRINTH }}
-          release-channel: "release"
-          primary-file: "build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ github.ref_name }}.jar"
-          additional-files: "build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-${{ github.ref_name }}-sources.jar"
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          VERSION=$(basename ${{ github.ref }})
+          primary_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION.jar"
+          additional_file="build/libs/${{ env.MOD_ID }}-${{ env.MINECRAFT_RELEASE_VERSION }}-$VERSION-sources.jar"
+          
+          VERSION_DATA=$(jq -n \
+            --arg name "$VERSION" \
+            --arg version_number "$VERSION" \
+            --arg changelog "${{ env.CHANGELOG }}" \
+            --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
+            --argjson loaders "[${{ env.LOADERS_FOR_MODRINTH }}]" \
+            --arg project_id "${{ env.MOD_ID }}" \
+            '{
+              "name": $name,
+              "version_number": $version_number,
+              "changelog": $changelog,
+              "game_versions": $game_versions,
+              "loaders": $loaders,
+              "version_type": "release",
+              "featured": false,
+              "project_id": $project_id,
+              "file_parts": ["primary_file", "additional_file"],
+              "primary_file": "primary_file"
+            }'
+          )
+          
+          curl -X POST https://api.modrinth.com/v2/version \
+            -H "Authorization: $MODRINTH_TOKEN" \
+            -F "data=$VERSION_DATA" \
+            -F "primary_file=@$primary_file" \
+            -F "additional_file=@$additional_file"
 
 #      - name: Publish to CurseForge
 #        uses: CurseForgePublishing/release-action@v1
