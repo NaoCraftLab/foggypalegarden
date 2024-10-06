@@ -46,7 +46,7 @@ jobs:
           minecraftFirstSnapshotVersion=$(grep 'minecraftFirstSnapshotVersion' gradle.properties | cut -d'=' -f2 | xargs)
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2 | xargs)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
-          loaders_for_modrinth=$(echo $fabricSupportedLoaders | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | jq -R . | jq -s -c)
+          loaders_for_modrinth=$(echo $fabricSupportedLoaders | tr ',' '\n' | tr '[:upper:]' '[:lower:]' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | jq -R . | jq -s -c)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MOD_VERSION=$modVersion" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
@@ -110,7 +110,7 @@ jobs:
             --arg version_number "${{ env.MOD_VERSION }}" \
             --arg changelog "${{ env.CHANGELOG }}" \
             --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --argjson loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
+            --argjson loaders "$(echo "${{ env.LOADERS_FOR_MODRINTH }}" | jq -c)" \
             --arg project_id "${{ env.MOD_ID }}" \
             '{
               "name": $name,
