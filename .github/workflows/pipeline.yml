@@ -99,7 +99,7 @@ jobs:
             --arg version_number "$VERSION" \
             --arg changelog "${{ env.CHANGELOG }}" \
             --argjson game_versions "[\"${{ env.MINECRAFT_FIRST_SNAPSHOT_VERSION }}\", \"${{ env.MINECRAFT_RELEASE_VERSION }}\"]" \
-            --argjson loaders "$(echo ${{ env.LOADERS_FOR_MODRINTH }} | jq -c .)" \
+            --argjson loaders "${{ env.LOADERS_FOR_MODRINTH }}" \
             --arg project_id "${{ env.MOD_ID }}" \
             '{
               "name": $name,
