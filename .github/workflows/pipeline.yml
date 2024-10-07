@@ -1,4 +1,4 @@
-name: Build and Release Mod ${{ github.ref_name }}
+name: Build and Release Mod
 
 on:
   create:
