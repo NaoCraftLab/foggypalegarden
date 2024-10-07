@@ -1,6 +1,9 @@
+import com.matthewprenger.cursegradle.CurseArtifact
+
 plugins {
     id("fabric-loom") version "1.7-SNAPSHOT"
     id("com.modrinth.minotaur") version "2.+"
+    id("com.matthewprenger.cursegradle") version "1.4.0"
 }
 
 version = project.property("modVersion").toString()
@@ -95,7 +98,38 @@ modrinth {
     versionType.set("release")
     uploadFile.set(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
     changelog.set(getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}"))
-    gameVersions.set(listOf(project.property("minecraftFirstSnapshotVersion").toString()))
+    gameVersions.set(
+        listOf(
+            project.property("minecraftFirstSnapshotVersion").toString(),
+            // TODO check versions
+            // project.property("minecraftReleaseVersion").toString()
+        )
+    )
     loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() })
     additionalFiles.set(listOf(File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")))
+}
+
+val curseForgeApiKey = project.findProperty("curseforgeApiKey")?.toString() ?: System.getenv("CURSEFORGE_API_KEY")
+if (curseForgeApiKey != null) {
+    curseforge {
+        apiKey = curseForgeApiKey
+        project(closureOf<com.matthewprenger.cursegradle.CurseProject> {
+            id = project.property("modCurseForgeId")
+            releaseType = "release"
+            changelogType = "markdown"
+            changelog = getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}")
+            gameVersionStrings.add(project.property("minecraftSnapshotVersion").toString())
+            // TODO check versions
+            // gameVersionStrings.add(project.property("minecraftReleaseVersion").toString())
+            gameVersionStrings.addAll(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim() })
+            // TODO side
+            // gameVersionStrings.add("Client")
+            gameVersionStrings.add("Java ${project.property("minecraftJavaVersion")}")
+            // TODO displayName
+            mainArtifact(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
+            additionalArtifacts.add(CurseArtifact().apply {
+                artifact = File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")
+            })
+        })
+    }
 }
