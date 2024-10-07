@@ -88,6 +88,10 @@ jobs:
 
       - name: Publish to Modrinth
         run: ./gradlew modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 
       - name: Publish to CurseForge
         run: ./gradlew curseforge
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
