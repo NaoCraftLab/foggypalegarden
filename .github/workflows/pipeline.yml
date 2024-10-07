@@ -47,7 +47,7 @@ jobs:
           minecraftReleaseVersion=$(grep 'minecraftReleaseVersion' gradle.properties | cut -d'=' -f2 | xargs)
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
-          echo "MOD_VERSION=$modVersion" >> $GITHUB_ENV
+          echo "MOD_VERSION=$minecraftReleaseVersion-$modVersion" >> $GITHUB_ENV
           echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
           echo "MINECRAFT_FIRST_SNAPSHOT_VERSION=$minecraftFirstSnapshotVersion" >> $GITHUB_ENV
@@ -56,7 +56,7 @@ jobs:
       - name: Get version changelog
         id: changelog
         run: |
-          VERSION=$(basename ${{ github.ref }})
+          VERSION=${{ env.MOD_VERSION }}
           CHANGELOG=$(sed -n "/^## $VERSION$/,/^## [0-9]/p" CHANGELOG.md | sed '$d' | tail -n +2)
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "$CHANGELOG" >> $GITHUB_ENV
@@ -80,8 +80,14 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          name: "Foggy Pale Garden ${{ github.ref_name }}"
+          name: "Foggy Pale Garden ${{ env.MOD_VERSION }}"
           files: build/libs/*.jar
           body: ${{ env.FINAL_CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Modrinth
+        run: ./gradlew modrinth
+
+      - name: Publish to CurseForge
+        run: ./gradlew curseforge

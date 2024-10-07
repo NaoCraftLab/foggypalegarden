@@ -49,6 +49,8 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
     withSourcesJar()
 }
 
