@@ -1,6 +1,6 @@
-package com.naocraftlab.foggypalegarden.util;
+package com.naocraftlab.foggypalegarden.exception;
 
-public class FoggyPaleGardenException extends RuntimeException {
+public abstract class FoggyPaleGardenException extends RuntimeException {
 
     public FoggyPaleGardenException(String message) {
         super(message);

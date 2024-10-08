@@ -1,19 +1,17 @@
 package com.naocraftlab.foggypalegarden.mixin;
 
-import com.naocraftlab.foggypalegarden.config.ModConfigV1;
-import com.naocraftlab.foggypalegarden.config.ModConfigV1.FogSettings;
-import com.naocraftlab.foggypalegarden.util.FoggyPaleGardenException;
+import com.naocraftlab.foggypalegarden.domain.model.Color;
+import com.naocraftlab.foggypalegarden.domain.model.Environment;
+import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
+import com.naocraftlab.foggypalegarden.domain.model.Weather;
+import com.naocraftlab.foggypalegarden.domain.service.FogService;
+import lombok.val;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.BackgroundRenderer.FogType;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.Fog;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.RaycastContext;
-import net.minecraft.world.biome.Biome;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -21,18 +19,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.naocraftlab.foggypalegarden.config.ConfigManager.CONFIG_PATH;
-import static com.naocraftlab.foggypalegarden.config.ConfigManager.FOG_PRESETS;
-import static com.naocraftlab.foggypalegarden.config.ConfigManager.currentConfig;
-import static com.naocraftlab.foggypalegarden.config.ModConfigV1.ForPreset.AMBIANCE;
-import static com.naocraftlab.foggypalegarden.config.ModConfigV1.ForPreset.CUSTOM;
-import static com.naocraftlab.foggypalegarden.config.ModConfigV1.ForPreset.DIFFICULTY_BASED;
-import static com.naocraftlab.foggypalegarden.config.ModConfigV1.ForPreset.I_AM_NOT_AFRAID_BUT;
-import static com.naocraftlab.foggypalegarden.config.ModConfigV1.ForPreset.STEPHEN_KING;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.CLEAR;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.RAIN;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.THUNDER;
 import static net.minecraft.client.render.FogShape.SPHERE;
-import static net.minecraft.world.Difficulty.EASY;
-import static net.minecraft.world.Difficulty.NORMAL;
-import static net.minecraft.world.Difficulty.PEACEFUL;
 import static net.minecraft.world.LightType.SKY;
 import static net.minecraft.world.RaycastContext.FluidHandling.NONE;
 import static net.minecraft.world.RaycastContext.ShapeType.COLLIDER;
@@ -53,68 +43,60 @@ public abstract class PaleGardenFogMixin {
             float tickDelta,
             CallbackInfoReturnable<Fog> cir
     ) {
-        final ClientWorld world = (ClientWorld) camera.getFocusedEntity().getWorld();
-        final ModConfigV1 config = currentConfig();
-        final FogSettings fogSettings = resolveFogSettings(config, world.getDifficulty());
-
-        final BlockPos blockPos = camera.getBlockPos();
-        final RegistryEntry<Biome> biomeEntry = world.getBiome(blockPos);
-        final BlockHitResult hitResult = world.raycast(new RaycastContext(
-                blockPos.toCenterPos(), blockPos.add(0, -256, 0).toCenterPos(), COLLIDER, NONE, camera.getFocusedEntity()
+        val focusedEntity = camera.getFocusedEntity();
+        val world = (ClientWorld) focusedEntity.getWorld();
+        val blockPos = camera.getBlockPos();
+        val biomeEntry = world.getBiome(blockPos);
+        val hitResult = world.raycast(new RaycastContext(
+                blockPos.toCenterPos(), blockPos.add(0, -256, 0).toCenterPos(), COLLIDER, NONE, focusedEntity
         ));
         final double relativeHeight = blockPos.getY() - hitResult.getPos().y;
 
-        final boolean playerFlying = relativeHeight > fogSettings.getSurfaceHeightEnd();
-        final boolean isSupportedBiome = config.getBiomes().contains(biomeEntry.getIdAsString());
-        final boolean isNotCave = world.getLightLevel(SKY, blockPos) > fogSettings.getSkyLightStartLevel();
-        if (isSupportedBiome && isNotCave && !playerFlying) {
-            fogDensity = Math.min(fogDensity + fogSettings.getEncapsulationSpeed() / 100f / 20f, 1.0f);
-        } else {
-            fogDensity = Math.max(fogDensity - fogSettings.getEncapsulationSpeed() / 100f / 20f, 0.0f);
-        }
-
+        val fogCharacteristics = FogService.calculateFogCharacteristics(
+                Environment.builder()
+                        .biome(biomeEntry.getIdAsString())
+                        .difficulty(world.getDifficulty())
+                        .weather(resolveWeather(world))
+                        .timeOfDay(world.getTimeOfDay())
+                        .skyLightLevel(world.getLightLevel(SKY, blockPos))
+                        .heightAboveSurface(relativeHeight)
+                        .gameFogColor(toColor(color))
+                        .fogDensity(fogDensity)
+                        .build()
+        );
+        fogDensity = fogCharacteristics.fogDensity();
         if (fogDensity > 0.0f) {
-            final Fog fog = createFog(fogSettings, color);
-            cir.setReturnValue(fog);
+            cir.setReturnValue(fogOf(fogCharacteristics));
             cir.cancel();
         }
     }
 
     @Unique
-    private static Fog createFog(FogSettings fogSettings, Vector4f color) {
-        final float brightness = (0.299f * color.x + 0.587f * color.y + 0.114f * color.z) * color.w;
-        final float alpha = (fogSettings.getOpacity() > 0f) ? fogDensity * ((fogSettings.getOpacity() - 0.001f) / 100f) : 0f;
-        final Fog fog = new Fog(
-                fogSettings.getStartDistance(),
-                fogSettings.getEndDistance(),
-                SPHERE,
-                brightness,
-                brightness,
-                brightness,
-                alpha
-        );
-        return fog;
+    private static Weather resolveWeather(ClientWorld world) {
+        if (world.isThundering()) {
+            return THUNDER;
+        } else if (world.isRaining()) {
+            return RAIN;
+        } else {
+            return CLEAR;
+        }
     }
 
     @Unique
-    private static FogSettings resolveFogSettings(ModConfigV1 config, Difficulty difficulty) {
-        final FogSettings fogSettings;
-        if (config.getFogPreset() == DIFFICULTY_BASED) {
-            if (difficulty == PEACEFUL || difficulty == EASY) {
-                fogSettings = FOG_PRESETS.get(AMBIANCE);
-            } else if (difficulty == NORMAL) {
-                fogSettings = FOG_PRESETS.get(I_AM_NOT_AFRAID_BUT);
-            } else {
-                fogSettings = FOG_PRESETS.get(STEPHEN_KING);
-            }
-        } else if (config.getFogPreset() == CUSTOM) {
-            fogSettings = config.getCustomFog();
-        } else {
-            fogSettings = FOG_PRESETS.get(config.getFogPreset());
-        }
-        if (fogSettings == null) {
-            throw new FoggyPaleGardenException("Incorrect fogPreset value in config file (" + CONFIG_PATH.toAbsolutePath() + ")");
-        }
-        return fogSettings;
+    private static Color toColor(Vector4f color) {
+        return Color.builder().red(color.x).green(color.y).blue(color.z).alpha(color.w).build();
+    }
+
+    @Unique
+    private static Fog fogOf(FogCharacteristics fogCharacteristics) {
+        return new Fog(
+                fogCharacteristics.startDistance(),
+                fogCharacteristics.endDistance(),
+                SPHERE,
+                fogCharacteristics.color().red(),
+                fogCharacteristics.color().green(),
+                fogCharacteristics.color().blue(),
+                fogCharacteristics.color().alpha()
+        );
     }
 }
