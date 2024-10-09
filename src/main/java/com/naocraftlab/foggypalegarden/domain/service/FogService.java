@@ -46,6 +46,7 @@ public class FogService {
                 .startDistance(currentBinding.startDistance())
                 .endDistance(currentBinding.endDistance())
                 .color(calculateColor(environment.gameFogColor(), currentBinding, fogDensity))
+                .shape(currentBinding.shape())
                 .fogDensity(fogDensity)
                 .build();
     }

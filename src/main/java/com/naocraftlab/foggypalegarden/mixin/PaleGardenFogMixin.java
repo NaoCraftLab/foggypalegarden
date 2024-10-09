@@ -22,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.CLEAR;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.RAIN;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.THUNDER;
-import static net.minecraft.client.render.FogShape.SPHERE;
 import static net.minecraft.world.LightType.SKY;
 import static net.minecraft.world.RaycastContext.FluidHandling.NONE;
 import static net.minecraft.world.RaycastContext.ShapeType.COLLIDER;
@@ -109,7 +108,7 @@ public abstract class PaleGardenFogMixin {
         return new Fog(
                 fogCharacteristics.startDistance(),
                 fogCharacteristics.endDistance(),
-                SPHERE,
+                fogCharacteristics.shape(),
                 fogCharacteristics.color().red(),
                 fogCharacteristics.color().green(),
                 fogCharacteristics.color().blue(),

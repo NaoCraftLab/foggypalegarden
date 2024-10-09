@@ -98,6 +98,7 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 - Speed of fog dispersal when entering or leaving it
 - Sky light brightness below which the fog disperses (allows excluding fog in caves)
 - Player's height above the surface after which the fog disperses (allows excluding fog while flying)
+- Fog shape (available options: SPHERE and CYLINDER)
 
 ### Fog Conditions
 
@@ -147,10 +148,10 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             // incorrect - { "biomeIdIn": ["minecraft:desert"], "difficultyIn": ["HARD"] }
             "condition": {
             
-                // (optional) list of dimensions where this binding is applied
+                // (optional) list of dimensions where this binding is applied (for example, "minecraft:overworld")
                 "dimensionIn": [""],
             
-                // (optional) list of biomes where this binding is applied
+                // (optional) list of biomes where this binding is applied (for example, "minecraft:desert")
                 "biomeIdIn": [""],
               
                 // (optional) biome temperature range where this binding is applied
@@ -163,10 +164,10 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
                   "max": 0.0
                 },
                 
-                // (optional) list of difficulty levels where this binding is applied
+                // (optional) list of difficulty levels where this binding is applied ("PEACEFUL", "EASY", "NORMAL", "HARD")
                 "difficultyIn": [""],
                 
-                // (optional) list of weather conditions where this binding is applied
+                // (optional) list of weather conditions where this binding is applied ("CLEAR", "RAIN", "THUNDER")
                 "weatherIn": [""],
                 
                 // (optional) time range during which this binding is applied (start can be greater than end)
@@ -223,7 +224,10 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
                 
                 // (required for FIXED mode) fog color in HEX format (without #)
                 "fixedHex": "f0f0f0"
-            }
+            },
+            
+            // (optional) fog shape ("SPHERE", "CYLINDER")
+            "shape": "CYLINDER"
         },
         {
           // another binding
@@ -249,8 +253,8 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 ✅ Add configurations<br/>
 ✅ Apply fog conditions depending on player’s current dimension<br/>
 ✅ Apply fog conditions based on biome temperature<br/>
+✅ Control the shape of fog<br/>
 🚀 Disable fog based on game mode<br/>
-🚀 Control the shape of fog<br/>
 🚀 (After the Winter Drop release) Port to NeoForge<br/>
 🚀 (After the Winter Drop release) Add visual configuration<br/>
 🚀 Port to previous game versions and add support for mods backporting the Pale Garden

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.val;
+import net.minecraft.client.render.FogShape;
 import net.minecraft.world.Difficulty;
 
 import java.util.List;
@@ -48,7 +49,8 @@ public final class FogPresetV2 extends FogPreset {
             Float opacity,
             Float encapsulationSpeed,
             Brightness brightness,
-            Color color
+            Color color,
+            FogShape shape
     ) {
 
         @Builder
@@ -282,6 +284,11 @@ public final class FogPresetV2 extends FogPreset {
         @Override
         public Color color() {
             return color == null ? new Color(ColorMode.BY_GAME_FOG, null) : color;
+        }
+
+        @Override
+        public FogShape shape() {
+            return shape == null ? FogShape.SPHERE : shape;
         }
 
         public void validate() {
