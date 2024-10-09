@@ -50,7 +50,6 @@ public abstract class PaleGardenFogMixin {
         val hitResult = world.raycast(new RaycastContext(
                 blockPos.toCenterPos(), blockPos.add(0, -256, 0).toCenterPos(), COLLIDER, NONE, focusedEntity
         ));
-        final double relativeHeight = blockPos.getY() - hitResult.getPos().y;
 
         val fogCharacteristics = FogService.calculateFogCharacteristics(
                 Environment.builder()
@@ -59,7 +58,7 @@ public abstract class PaleGardenFogMixin {
                         .weather(resolveWeather(world))
                         .timeOfDay(world.getTimeOfDay())
                         .skyLightLevel(world.getLightLevel(SKY, blockPos))
-                        .heightAboveSurface(relativeHeight)
+                        .heightAboveSurface(blockPos.getY() - hitResult.getPos().y)
                         .gameFogColor(toColor(color))
                         .fogDensity(fogDensity)
                         .build()
