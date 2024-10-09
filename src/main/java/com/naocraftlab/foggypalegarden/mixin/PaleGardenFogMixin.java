@@ -63,8 +63,24 @@ public abstract class PaleGardenFogMixin {
                         .fogDensity(fogDensity)
                         .build()
         );
+
+        assert fogCharacteristics.fogDensity() >= 0.0f : "FPG: Fog density is negative";
+        assert fogCharacteristics.fogDensity() <= 1.0f : "FPG: Fog density is greater than 1.0";
+
         fogDensity = fogCharacteristics.fogDensity();
         if (fogDensity > 0.0f) {
+            assert fogCharacteristics.startDistance() >= 0.0f : "FPG: Start distance is negative";
+            assert fogCharacteristics.endDistance() >= fogCharacteristics.startDistance()
+                    : "FPG: End distance is less than start distance";
+            assert fogCharacteristics.color().red() >= 0.0f : "FPG: Red color component is negative";
+            assert fogCharacteristics.color().red() <= 1.0f : "FPG: Red color component is greater than 1.0";
+            assert fogCharacteristics.color().green() >= 0.0f : "FPG: Green color component is negative";
+            assert fogCharacteristics.color().green() <= 1.0f : "FPG: Green color component is greater than 1.0";
+            assert fogCharacteristics.color().blue() >= 0.0f : "FPG: Blue color component is negative";
+            assert fogCharacteristics.color().blue() <= 1.0f : "FPG: Blue color component is greater than 1.0";
+            assert fogCharacteristics.color().alpha() >= 0.0f : "FPG: Alpha color component is negative";
+            assert fogCharacteristics.color().alpha() <= 1.0f : "FPG: Alpha color component is greater than 1.0";
+
             cir.setReturnValue(fogOf(fogCharacteristics));
             cir.cancel();
         }

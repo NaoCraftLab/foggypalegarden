@@ -180,7 +180,7 @@ public final class FogPresetV2 extends FogPreset {
             }
 
             public void validate() {
-                if (mode == BrightnessMode.FIXED && (fixedBrightness == null || fixedBrightness < 0.0f || fixedBrightness > 1.0f)) {
+                if (mode == BrightnessMode.FIXED && (fixedBrightness == null || fixedBrightness < 0.0f || fixedBrightness > 100.0f)) {
                     throw new FoggyPaleGardenConfigurationException(
                             "Binding fixedBrightness is not defined or out of range [0.0, 1.0]"
                     );

@@ -57,7 +57,7 @@ public class FogService {
         val brightnessMode = binding.brightness().mode();
         val colorMode = binding.color().mode();
         if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.FIXED) {
-            val brightness = binding.brightness().fixedBrightness();
+            val brightness = binding.brightness().fixedBrightness() / 100.0f;
             red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
             green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
             blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
@@ -67,7 +67,7 @@ public class FogService {
             green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
             blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
         } else if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.BY_GAME_FOG) {
-            val targetBrightness = binding.brightness().fixedBrightness();
+            val targetBrightness = binding.brightness().fixedBrightness() / 100.0f;
             val currentBrightness = calculateBrightness(gameFogColor);
             float scale = targetBrightness / currentBrightness;
             red = Math.min(gameFogColor.red() * scale, 1.0f);
