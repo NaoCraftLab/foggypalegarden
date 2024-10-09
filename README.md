@@ -105,9 +105,10 @@ They can be used in any combination thanks to AND, OR, and NOT conditions
 
 - Dimension the player is in
 - Biome the player is in
-- World difficulty level
+- Biome temperature
 - Weather
 - Time of day
+- World difficulty level
 
 ### Full Configuration
 
@@ -151,6 +152,16 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             
                 // (optional) list of biomes where this binding is applied
                 "biomeIdIn": [""],
+              
+                // (optional) biome temperature range where this binding is applied
+                "biomeTemperature": {
+                  
+                  // (optional) minimum temperature (inclusive)
+                  "min": 0.0,
+                  
+                  // (optional) maximum temperature (exclusive)
+                  "max": 0.0
+                },
                 
                 // (optional) list of difficulty levels where this binding is applied
                 "difficultyIn": [""],
@@ -237,8 +248,8 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 ✅ Add fog to the Pale Garden<br/>
 ✅ Add configurations<br/>
 ✅ Apply fog conditions depending on player’s current dimension<br/>
+✅ Apply fog conditions based on biome temperature<br/>
 🚀 Disable fog based on game mode<br/>
-🚀 Apply fog conditions based on biome temperature<br/>
 🚀 Control the shape of fog<br/>
 🚀 (After the Winter Drop release) Port to NeoForge<br/>
 🚀 (After the Winter Drop release) Add visual configuration<br/>

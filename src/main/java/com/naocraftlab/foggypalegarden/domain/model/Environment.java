@@ -7,6 +7,7 @@ import net.minecraft.world.Difficulty;
 public record Environment(
         String dimension,
         String biome,
+        Float biomeTemperature,
         Difficulty difficulty,
         Weather weather,
         long timeOfDay,

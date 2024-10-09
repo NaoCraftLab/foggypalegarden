@@ -55,6 +55,7 @@ public abstract class PaleGardenFogMixin {
                 Environment.builder()
                         .dimension(world.getRegistryKey().getValue().toString())
                         .biome(biomeEntry.getIdAsString())
+                        .biomeTemperature(biomeEntry.value().getTemperature())
                         .difficulty(world.getDifficulty())
                         .weather(resolveWeather(world))
                         .timeOfDay(world.getTimeOfDay())
