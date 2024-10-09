@@ -1,3 +1,14 @@
+1.21.2-2.0.0
+
+### Added
+- New fog preset format allowing you to add different fog based on selected conditions
+- Automatic migration from configuration v1 to v2
+- Ability to save any number of fog presets and select the active one through the mod’s config
+- Presets can apply different fog settings based on biome, difficulty level, weather, and time
+- Preset application conditions support logical operations AND, OR, and NOT
+- When configuring fog, you can set the color based on in-game fog or a custom HEX value
+- When configuring fog, you can set the brightness based on in-game fog or a custom value
+
 ## 1.21.2-1.2.1
 
 ### Fixed

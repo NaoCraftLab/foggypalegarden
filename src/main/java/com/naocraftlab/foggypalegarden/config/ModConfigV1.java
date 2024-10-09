@@ -1,101 +1,82 @@
 package com.naocraftlab.foggypalegarden.config;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.Set;
 
-public class ModConfigV1 extends ModConfig {
+@Data
+@Builder
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public final class ModConfigV1 extends ModConfig {
 
-    // enable fog in biomes
+    /**
+     * List of biomes for activating fog.
+     */
     private final Set<String> biomes;
-    // fog preset
-    private final ForPreset fogPreset;
-    // custom fog settings
+
+    /**
+     * Fog preset.
+     */
+    private final FogPreset fogPreset;
+
+    /**
+     * Custom fog settings.
+     */
     private final FogSettings customFog;
 
-    public ModConfigV1(int version, Set<String> biomes, ForPreset fogPreset, FogSettings customFog) {
-        super(version);
+    public ModConfigV1(Set<String> biomes, FogPreset fogPreset, FogSettings customFog) {
+        super(1);
         this.biomes = biomes;
         this.fogPreset = fogPreset;
         this.customFog = customFog;
     }
 
-    public Set<String> getBiomes() {
-        return biomes;
-    }
+    public enum FogPreset {
 
-    public ForPreset getFogPreset() {
-        return fogPreset;
-    }
-
-    public FogSettings getCustomFog() {
-        return customFog;
-    }
-
-    public enum ForPreset {
-        // preset by game difficulty
+        /**
+         * Preset by game difficulty.
+         */
         DIFFICULTY_BASED,
-        // low
+
+        /**
+         * Low.
+         */
         AMBIANCE,
-        // medium
+
+        /**
+         * Medium.
+         */
         I_AM_NOT_AFRAID_BUT,
-        // hard
+
+        /**
+         * Hard.
+         */
         STEPHEN_KING,
-        // use custom fog settings
+
+        /**
+         * Use custom fog settings.
+         */
         CUSTOM
     }
 
-    public static class FogSettings {
-
-        // blocks
-        private final float startDistance;
-        // 0 - 15 points
-        private final int skyLightStartLevel;
-        // blocks
-        private final float endDistance;
-        // in blocks
-        private final float surfaceHeightEnd;
-        // persent
-        private final float opacity;
-        // percent/sec
-        private final float encapsulationSpeed;
-
-        public FogSettings(
-                float startDistance,
-                int skyLightStartLevel,
-                float endDistance,
-                float surfaceHeightEnd,
-                float opacity,
-                float encapsulationSpeed
-        ) {
-            this.startDistance = startDistance;
-            this.skyLightStartLevel = skyLightStartLevel;
-            this.endDistance = endDistance;
-            this.surfaceHeightEnd = surfaceHeightEnd;
-            this.opacity = opacity;
-            this.encapsulationSpeed = encapsulationSpeed;
-        }
-
-        public float getStartDistance() {
-            return startDistance;
-        }
-
-        public int getSkyLightStartLevel() {
-            return skyLightStartLevel;
-        }
-
-        public float getEndDistance() {
-            return endDistance;
-        }
-
-        public float getSurfaceHeightEnd() {
-            return surfaceHeightEnd;
-        }
-
-        public float getOpacity() {
-            return opacity;
-        }
-
-        public float getEncapsulationSpeed() {
-            return encapsulationSpeed;
-        }
-    }
+    /**
+     * @param startDistance         fog start distance (in blocks)
+     * @param skyLightStartLevel    level of light from sky to start fog (0 - 15)
+     * @param endDistance           fog end distance (in blocks)
+     * @param surfaceHeightEnd      height above the surface to turn off fog (in blocks)
+     * @param opacity               fog opacity (0.0 - 1.0)
+     * @param encapsulationSpeed    fog encapsulation speed (percent/sec)
+     */
+    public record FogSettings(
+        float startDistance,
+        int skyLightStartLevel,
+        float endDistance,
+        float surfaceHeightEnd,
+        float opacity,
+        float encapsulationSpeed
+    ) {}
 }

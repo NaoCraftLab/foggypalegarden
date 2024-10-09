@@ -40,3 +40,7 @@ bin/
 
 ### Eclipse ###
 *.launch
+
+### Project ###
+logs/
+local/

@@ -1,8 +1,8 @@
 package com.naocraftlab.foggypalegarden;
 
+import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import net.fabricmc.api.ClientModInitializer;
-
-import static com.naocraftlab.foggypalegarden.config.ConfigManager.reloadConfig;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class FoggyPaleGardenClientMod implements ClientModInitializer {
 
@@ -10,6 +10,7 @@ public class FoggyPaleGardenClientMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        reloadConfig();
+        ConfigManager.init(FabricLoader.getInstance().getConfigDir(), MOD_ID);
+        ConfigManager.reloadConfigs();
     }
 }

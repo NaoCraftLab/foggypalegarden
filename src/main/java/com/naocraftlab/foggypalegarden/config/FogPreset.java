@@ -6,20 +6,20 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class ModConfig {
+public class FogPreset {
 
     /**
-     * Config schema version.
+     * Preset schema version.
      */
     private final int version;
 
-    protected ModConfig() {
+    protected FogPreset() {
         this(-1);
     }
 
     public void validate() {
-        if (version < 1 || version > 2) {
-            throw new FoggyPaleGardenConfigurationException("Unsupported config version (" + version + ")");
+        if (version != 2) {
+            throw new FoggyPaleGardenConfigurationException("Unsupported preset version (" + version + ")");
         }
     }
 }

@@ -18,14 +18,19 @@ repositories {
 }
 
 dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
     minecraft("com.mojang:minecraft:${project.property("minecraftFirstSnapshotVersion")}")
     mappings("net.fabricmc:yarn:${project.property("fabricYarnMappingsVersion")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabricLoaderMinVersion")}")
 
+    testCompileOnly("org.projectlombok:lombok:1.18.34")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.mockito:mockito-core:4.0.0")
     testImplementation("org.assertj:assertj-core:3.21.0")
+    testImplementation("org.skyscreamer:jsonassert:1.5.0")
 }
 
 tasks.processResources {
@@ -49,14 +54,17 @@ tasks.processResources {
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(project.property("minecraftJavaVersion").toString().toInt())
+java {
+    withSourcesJar()
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(project.property("minecraftJavaVersion").toString().toInt())
+    options.annotationProcessorPath = configurations.annotationProcessor.get()
+}
 
-    withSourcesJar()
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.jar {
@@ -97,23 +105,26 @@ fun getChangelogForVersion(version: String): String {
     }
 }
 
-modrinth {
-    token.set(project.findProperty("modrinthToken")?.toString() ?: System.getenv("MODRINTH_TOKEN"))
-    projectId.set(project.property("modId").toString())
-    versionNumber.set(project.version.toString())
-    versionName.set("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}")
-    versionType.set("release")
-    uploadFile.set(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
-    changelog.set(getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}"))
-    gameVersions.set(
-        listOf(
-            project.property("minecraftFirstSnapshotVersion").toString(),
-            // TODO check versions
-            // project.property("minecraftReleaseVersion").toString()
+val modrinthToken = project.findProperty("modrinthToken")?.toString() ?: System.getenv("MODRINTH_TOKEN")
+if (modrinthToken != null) {
+    modrinth {
+        token.set(modrinthToken)
+        projectId.set(project.property("modId").toString())
+        versionNumber.set(project.version.toString())
+        versionName.set("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}")
+        versionType.set("release")
+        uploadFile.set(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
+        changelog.set(getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}"))
+        gameVersions.set(
+            listOf(
+                project.property("minecraftFirstSnapshotVersion").toString(),
+                // TODO check versions
+                // project.property("minecraftReleaseVersion").toString()
+            )
         )
-    )
-    loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() })
-    additionalFiles.set(listOf(File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")))
+        loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() })
+        additionalFiles.set(listOf(File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")))
+    }
 }
 
 val curseForgeApiKey = project.findProperty("curseforgeApiKey")?.toString() ?: System.getenv("CURSEFORGE_API_KEY")

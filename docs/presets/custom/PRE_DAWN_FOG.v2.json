@@ -1,0 +1,26 @@
+{
+  "code": "PRE_DAWN_FOG",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "timeIn": { "start": 22500, "end": 23800 } },
+          { "weatherIn": ["CLEAR"] }
+        ]
+      },
+      "startDistance": 0.0,
+      "skyLightStartLevel": 4,
+      "endDistance": 15.0,
+      "surfaceHeightEnd": 15.0,
+      "opacity": 50.0,
+      "encapsulationSpeed": 16.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      }
+    }
+  ],
+  "version": 2
+}
