@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 @Data
 @Builder
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 public final class FogPresetV2 extends FogPreset {
 
     /**

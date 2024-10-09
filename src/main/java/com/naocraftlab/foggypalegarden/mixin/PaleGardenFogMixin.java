@@ -1,16 +1,19 @@
 package com.naocraftlab.foggypalegarden.mixin;
 
+import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
 import com.naocraftlab.foggypalegarden.domain.model.Weather;
 import com.naocraftlab.foggypalegarden.domain.service.FogService;
 import lombok.val;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.BackgroundRenderer.FogType;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.Fog;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.RaycastContext;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +45,12 @@ public abstract class PaleGardenFogMixin {
             float tickDelta,
             CallbackInfoReturnable<Fog> cir
     ) {
-        val focusedEntity = camera.getFocusedEntity();
+        val focusedEntity = (ClientPlayerEntity) camera.getFocusedEntity();
+        val gameMode = resolveGameMode(focusedEntity);
+        if (ConfigManager.currentConfig().getNoFogGameModes().contains(gameMode)) {
+            fogDensity = 0.0f;
+            return;
+        }
         val world = (ClientWorld) focusedEntity.getWorld();
         val blockPos = camera.getBlockPos();
         val biomeEntry = world.getBiome(blockPos);
@@ -85,6 +93,19 @@ public abstract class PaleGardenFogMixin {
             cir.setReturnValue(fogOf(fogCharacteristics));
             cir.cancel();
         }
+    }
+
+    @Unique
+    private static GameMode resolveGameMode(ClientPlayerEntity player) {
+        val attributes = player.getAbilities();
+        if (attributes.creativeMode) {
+            return GameMode.CREATIVE;
+        } else if (attributes.allowFlying && attributes.invulnerable && attributes.flying) {
+            return GameMode.SPECTATOR;
+        } else if (attributes.allowModifyWorld) {
+            return GameMode.SURVIVAL;
+        }
+        return GameMode.ADVENTURE;
     }
 
     @Unique

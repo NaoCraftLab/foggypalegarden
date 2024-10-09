@@ -3,6 +3,7 @@ package com.naocraftlab.foggypalegarden.config;
 import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Brightness.BrightnessMode;
 import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Color.ColorMode;
 import lombok.val;
+import net.minecraft.client.render.FogShape;
 import net.minecraft.world.Difficulty;
 import org.assertj.core.api.WithAssertions;
 import org.json.JSONException;
@@ -174,7 +175,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         }
                       ],
                       "version": 2
@@ -205,7 +207,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         }
                       ],
                       "version": 2
@@ -236,7 +239,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         }
                       ],
                       "version": 2
@@ -277,7 +281,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         },
                         {
                           "condition": {
@@ -305,7 +310,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         },
                         {
                           "condition": {
@@ -333,7 +339,8 @@ class ConfigManagerTest implements WithAssertions {
                           },
                           "color": {
                             "mode": "BY_GAME_FOG"
-                          }
+                          },
+                          "shape": "SPHERE"
                         }
                       ],
                       "version": 2
@@ -502,7 +509,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -533,7 +541,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -564,7 +573,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -605,7 +615,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 },
                                 {
                                   "condition": {
@@ -633,7 +644,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 },
                                 {
                                   "condition": {
@@ -661,7 +673,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -1047,7 +1060,7 @@ class ConfigManagerTest implements WithAssertions {
                                                     FogPresetV2.Binding.Color.builder()
                                                             .mode(ColorMode.BY_GAME_FOG)
                                                             .build()
-                                            ).build()
+                                            ).shape(FogShape.SPHERE).build()
                             )).build()
             );
             assertThat(currentPresets.get("FPG_I_AM_NOT_AFRAID_BUT").second()).usingRecursiveComparison().isEqualTo(
@@ -1064,6 +1077,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build()
                             )).build()
             );
@@ -1081,6 +1095,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build()
                             )).build()
             );
@@ -1098,6 +1113,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build()
                             )).build()
             );
@@ -1119,6 +1135,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build(),
                                     FogPresetV2.Binding.builder()
                                             .condition(
@@ -1134,6 +1151,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build(),
                                     FogPresetV2.Binding.builder()
                                             .condition(
@@ -1149,6 +1167,7 @@ class ConfigManagerTest implements WithAssertions {
                                             .encapsulationSpeed(6.0f)
                                             .brightness(FogPresetV2.Binding.Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(FogPresetV2.Binding.Color.builder().mode(ColorMode.BY_GAME_FOG).build())
+                                            .shape(FogShape.SPHERE)
                                             .build()
                             )).build()
             );
@@ -1176,7 +1195,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -1207,7 +1227,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -1238,7 +1259,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -1269,7 +1291,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2
@@ -1310,7 +1333,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 },
                                 {
                                   "condition": {
@@ -1338,7 +1362,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 },
                                 {
                                   "condition": {
@@ -1366,7 +1391,8 @@ class ConfigManagerTest implements WithAssertions {
                                   },
                                   "color": {
                                     "mode": "BY_GAME_FOG"
-                                  }
+                                  },
+                                  "shape": "SPHERE"
                                 }
                               ],
                               "version": 2

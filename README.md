@@ -78,6 +78,15 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 
 </details>
 
+<details>
+    <summary>⛔️ Disable fog based on the game mode</summary>
+
+![no-fog-game-modes.gif](docs/images/no-fog-game-modes.gif)
+
+In the config `config/foggy-pale-garden.json`, the value `"noFogGameModes": ["SPECTATOR"]` is set.
+
+</details>
+
 ## 📥 Installation
 
 1. Install Minecraft version `24w40a` or newer
@@ -122,6 +131,9 @@ The configuration file is located at `config/foggy-pale-garden.json` and allows 
 {
     // active fog preset
     "preset": "FPG_STEPHEN_KING",
+
+    // (optional) list of game modes where fog is disabled ("SURVIVAL", "CREATIVE", "ADVENTURE", "SPECTATOR")
+    "noFogGameModes": [""],
     
     // config schema version (do not change this value)
     "version": 2
@@ -254,7 +266,7 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 ✅ Apply fog conditions depending on player’s current dimension<br/>
 ✅ Apply fog conditions based on biome temperature<br/>
 ✅ Control the shape of fog<br/>
-🚀 Disable fog based on game mode<br/>
+✅ Disable fog based on game mode<br/>
 🚀 (After the Winter Drop release) Port to NeoForge<br/>
 🚀 (After the Winter Drop release) Add visual configuration<br/>
 🚀 Port to previous game versions and add support for mods backporting the Pale Garden
