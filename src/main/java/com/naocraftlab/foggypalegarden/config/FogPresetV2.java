@@ -53,6 +53,7 @@ public final class FogPresetV2 extends FogPreset {
 
         @Builder
         public record Condition(
+                Set<String> dimensionIn,
                 Set<String> biomeIdIn,
                 Set<Difficulty> difficultyIn,
                 Set<Weather> weatherIn,
@@ -86,6 +87,9 @@ public final class FogPresetV2 extends FogPreset {
 
             public void validate() {
                 int filledFields = 0;
+                if (dimensionIn != null && !dimensionIn.isEmpty()) {
+                    filledFields++;
+                }
                 if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
                     filledFields++;
                 }
@@ -142,6 +146,9 @@ public final class FogPresetV2 extends FogPreset {
                     return not.toPredicate().negate();
                 } else {
                     Predicate<Environment> predicate = env -> true;
+                    if (dimensionIn != null && !dimensionIn.isEmpty()) {
+                        predicate = predicate.and(env -> dimensionIn.contains(env.dimension()));
+                    }
                     if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
                         predicate = predicate.and(env -> biomeIdIn.contains(env.biome()));
                     }

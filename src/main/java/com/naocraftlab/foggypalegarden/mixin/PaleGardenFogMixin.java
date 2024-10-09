@@ -53,6 +53,7 @@ public abstract class PaleGardenFogMixin {
 
         val fogCharacteristics = FogService.calculateFogCharacteristics(
                 Environment.builder()
+                        .dimension(world.getRegistryKey().getValue().toString())
                         .biome(biomeEntry.getIdAsString())
                         .difficulty(world.getDifficulty())
                         .weather(resolveWeather(world))

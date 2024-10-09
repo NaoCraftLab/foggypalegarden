@@ -5,6 +5,7 @@ import net.minecraft.world.Difficulty;
 
 @Builder
 public record Environment(
+        String dimension,
         String biome,
         Difficulty difficulty,
         Weather weather,

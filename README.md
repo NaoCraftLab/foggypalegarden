@@ -2,7 +2,6 @@
 
 # Foggy Pale Garden
 
----
 A Minecraft mod that adds fog to the Pale Garden biome. But you can customize any kind of fog anywhere you like!
 
 ---
@@ -89,6 +88,28 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 
 ## 🛠️ Configuration
 
+### Fog Parameters
+
+- Distance at which the fog starts
+- Distance at which the fog ends
+- Fog density
+- Fog brightness
+- Fog color
+- Speed of fog dispersal when entering or leaving it
+- Sky light brightness below which the fog disperses (allows excluding fog in caves)
+- Player's height above the surface after which the fog disperses (allows excluding fog while flying)
+
+### Fog Conditions
+
+They can be used in any combination thanks to AND, OR, and NOT conditions
+
+- Dimension the player is in
+- Biome the player is in
+- World difficulty level
+- Weather
+- Time of day
+
+### Full Configuration
 
 <details>
   <summary>Available configuration options</summary>
@@ -124,6 +145,9 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             // correct - { "and": [{ "biomeIdIn": ["minecraft:desert"] }, { "difficultyIn": ["HARD"] }] }
             // incorrect - { "biomeIdIn": ["minecraft:desert"], "difficultyIn": ["HARD"] }
             "condition": {
+            
+                // (optional) list of dimensions where this binding is applied
+                "dimensionIn": [""],
             
                 // (optional) list of biomes where this binding is applied
                 "biomeIdIn": [""],
@@ -210,15 +234,16 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 
 ## 🚀 Plans
 
-- [x] Add fog to the Pale Garden
-- [x] Add configurations
-- [ ] Disable fog based on game mode
-- [ ] Apply fog conditions depending on player’s current dimension
-- [ ] Apply fog conditions based on biome temperature
-- [ ] Control the shape of fog
-- [ ] (After the Winter Drop release) Port to NeoForge
-- [ ] (After the Winter Drop release) Add visual configuration
-- [ ] Port to previous game versions and add support for mods backporting the Pale Garden
+✅ Add fog to the Pale Garden<br/>
+✅ Add configurations<br/>
+✅ Apply fog conditions depending on player’s current dimension<br/>
+🚀 Disable fog based on game mode<br/>
+🚀 Apply fog conditions based on biome temperature<br/>
+🚀 Control the shape of fog<br/>
+🚀 (After the Winter Drop release) Port to NeoForge<br/>
+🚀 (After the Winter Drop release) Add visual configuration<br/>
+🚀 Port to previous game versions and add support for mods backporting the Pale Garden
+❓Could there be support for Iris Shaders?
 
 ## 🤗 Modpacks
 
