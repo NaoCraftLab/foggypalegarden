@@ -3,6 +3,7 @@
 ### Added
 
 - Condition for applying fog based on the dimension the player is in
+- Condition for applying fog based on the temperature of the biome the player is in
 
 ## 1.21.2-2.0.0
 
