@@ -269,7 +269,7 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 ✅ Disable fog based on game mode<br/>
 🚀 (After the Winter Drop release) Port to NeoForge<br/>
 🚀 (After the Winter Drop release) Add visual configuration<br/>
-🚀 Port to previous game versions and add support for mods backporting the Pale Garden
+🚀 Port to previous game versions and add support for mods backporting the Pale Garden<br/>
 ❓Could there be support for Iris Shaders?
 
 ## 🤗 Modpacks
