@@ -1,4 +1,4 @@
-1.21.2-2.0.0
+## 1.21.2-2.0.0
 
 ### Added
 - New fog preset format allowing you to add different fog based on selected conditions
