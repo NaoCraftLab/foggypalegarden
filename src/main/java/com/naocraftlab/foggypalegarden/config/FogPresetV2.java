@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.val;
+import net.minecraft.client.render.FogShape;
 import net.minecraft.world.Difficulty;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 @Data
 @Builder
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 public final class FogPresetV2 extends FogPreset {
 
     /**
@@ -48,12 +49,15 @@ public final class FogPresetV2 extends FogPreset {
             Float opacity,
             Float encapsulationSpeed,
             Brightness brightness,
-            Color color
+            Color color,
+            FogShape shape
     ) {
 
         @Builder
         public record Condition(
+                Set<String> dimensionIn,
                 Set<String> biomeIdIn,
+                Temperature biomeTemperature,
                 Set<Difficulty> difficultyIn,
                 Set<Weather> weatherIn,
                 TimePeriod timeIn,
@@ -76,16 +80,41 @@ public final class FogPresetV2 extends FogPreset {
 
                 public void validate() {
                     if (start == null || end == null) {
-                        throw new IllegalStateException("TimePeriod start and end cannot be null");
+                        throw new FoggyPaleGardenConfigurationException("TimePeriod start and end cannot be null");
                     }
                     if (start < 0 || start >= 24000 || end < 0 || end >= 24000) {
-                        throw new IllegalStateException("TimePeriod start and end must be in the range [0, 24000)");
+                        throw new FoggyPaleGardenConfigurationException(
+                                "TimePeriod start and end must be in the range [0, 24000)"
+                        );
+                    }
+                }
+            }
+
+            @Builder
+            public record Temperature(
+                    Float min,
+                    Float max
+            ) {
+
+                public void validate() {
+                    if (min == null && max == null) {
+                        throw new FoggyPaleGardenConfigurationException("Temperature min and max cannot be both null");
+                    }
+                    if (min != null && max != null && min >= max) {
+                        throw new FoggyPaleGardenConfigurationException("Temperature min must be less than max");
                     }
                 }
             }
 
             public void validate() {
                 int filledFields = 0;
+                if (dimensionIn != null && !dimensionIn.isEmpty()) {
+                    filledFields++;
+                }
+                if (biomeTemperature != null) {
+                    filledFields++;
+                    biomeTemperature.validate();
+                }
                 if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
                     filledFields++;
                 }
@@ -103,7 +132,7 @@ public final class FogPresetV2 extends FogPreset {
                     filledFields++;
                     for (Condition condition : and) {
                         if (condition == null) {
-                            throw new IllegalStateException("AND list contains a null condition");
+                            throw new FoggyPaleGardenConfigurationException("AND list contains a null condition");
                         }
                         condition.validate();
                     }
@@ -112,7 +141,7 @@ public final class FogPresetV2 extends FogPreset {
                     filledFields++;
                     for (Condition condition : or) {
                         if (condition == null) {
-                            throw new IllegalStateException("OR list contains a null condition");
+                            throw new FoggyPaleGardenConfigurationException("OR list contains a null condition");
                         }
                         condition.validate();
                     }
@@ -123,7 +152,9 @@ public final class FogPresetV2 extends FogPreset {
                 }
 
                 if (filledFields != 1) {
-                    throw new IllegalStateException("In one instance of condition, only one of the fields should be filled");
+                    throw new FoggyPaleGardenConfigurationException(
+                            "In one instance of condition, only one of the fields should be filled"
+                    );
                 }
             }
 
@@ -142,8 +173,25 @@ public final class FogPresetV2 extends FogPreset {
                     return not.toPredicate().negate();
                 } else {
                     Predicate<Environment> predicate = env -> true;
+                    if (dimensionIn != null && !dimensionIn.isEmpty()) {
+                        predicate = predicate.and(env -> dimensionIn.contains(env.dimension()));
+                    }
                     if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
                         predicate = predicate.and(env -> biomeIdIn.contains(env.biome()));
+                    }
+                    if (biomeTemperature != null) {
+                        val min = biomeTemperature.min();
+                        val max = biomeTemperature.max();
+                        predicate = predicate.and(env -> {
+                            val temperature = env.biomeTemperature();
+                            if (min != null && max != null) {
+                                return temperature >= min && temperature <= max;
+                            } else if (min != null) {
+                                return temperature >= min;
+                            } else {
+                                return temperature <= max;
+                            }
+                        });
                     }
                     if (difficultyIn != null && !difficultyIn.isEmpty()) {
                         predicate = predicate.and(env -> difficultyIn.contains(env.difficulty()));
@@ -236,6 +284,11 @@ public final class FogPresetV2 extends FogPreset {
         @Override
         public Color color() {
             return color == null ? new Color(ColorMode.BY_GAME_FOG, null) : color;
+        }
+
+        @Override
+        public FogShape shape() {
+            return shape == null ? FogShape.SPHERE : shape;
         }
 
         public void validate() {

@@ -1,3 +1,12 @@
+## 1.21.2-2.1.0
+
+### Added
+
+- Condition for applying fog based on the dimension the player is in
+- Condition for applying fog based on the temperature of the biome the player is in
+- Fog shape control (available options: SPHERE and CYLINDER)
+- Disable fog for selected game modes
+
 ## 1.21.2-2.0.0
 
 ### Added

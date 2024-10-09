@@ -4,6 +4,7 @@
     {
       "condition": {
         "and": [
+          { "dimensionIn": ["minecraft:overworld"] },
           { "timeIn": { "start": 22500, "end": 23800 } },
           { "weatherIn": ["CLEAR"] }
         ]

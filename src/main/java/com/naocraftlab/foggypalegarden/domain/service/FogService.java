@@ -37,17 +37,26 @@ public class FogService {
         }
         currentBinding = candidate.orElse(currentBinding);
 
-        val fogDensity = candidate.isPresent() && (
-                currentBinding.surfaceHeightEnd() == null || environment.heightAboveSurface() <= currentBinding.surfaceHeightEnd()
-        ) && (currentBinding.skyLightStartLevel() == null || environment.skyLightLevel() >= currentBinding.skyLightStartLevel())
+        val fogDensity = candidate.isPresent()
+                         && isWithinSurfaceHeight(currentBinding, environment)
+                         && isSkyLightLevelValid(currentBinding, environment)
                 ? Math.min(environment.fogDensity() + currentBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
                 : Math.max(environment.fogDensity() - currentBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
         return FogCharacteristics.builder()
                 .startDistance(currentBinding.startDistance())
                 .endDistance(currentBinding.endDistance())
                 .color(calculateColor(environment.gameFogColor(), currentBinding, fogDensity))
+                .shape(currentBinding.shape())
                 .fogDensity(fogDensity)
                 .build();
+    }
+
+    private static boolean isWithinSurfaceHeight(FogPresetV2.Binding binding, Environment environment) {
+        return binding.surfaceHeightEnd() == null || environment.heightAboveSurface() <= binding.surfaceHeightEnd();
+    }
+
+    private static boolean isSkyLightLevelValid(FogPresetV2.Binding binding, Environment environment) {
+        return binding.skyLightStartLevel() == null || environment.skyLightLevel() >= binding.skyLightStartLevel();
     }
 
     private static Color calculateColor(Color gameFogColor, FogPresetV2.Binding binding, float fogDensity) {
