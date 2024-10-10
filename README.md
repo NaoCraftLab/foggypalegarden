@@ -79,7 +79,7 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 </details>
 
 <details>
-    <summary>⛔️ Disable fog based on the game mode</summary>
+    <summary>⛔️ Disable fog for specific game modes</summary>
 
 ![no-fog-game-modes.gif](docs/images/no-fog-game-modes.gif)
 
@@ -223,7 +223,10 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
                 "mode": "FIXED",
                 
                 // (required for FIXED mode) fog brightness level in percent (0.0, 100.0]
-                "fixedBrightness": 0.0
+                "fixedBrightness": 0.0,
+              
+                // (optional for BY_GAME_FOG mode) brightness adjustment [-1.0, 1.0]
+                "adjustment": 0.0
             },
             
             // (optional) fog color settings

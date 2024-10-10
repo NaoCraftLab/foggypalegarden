@@ -1,3 +1,9 @@
+## 1.21.2-2.2.0
+
+### Added
+
+- Brightness adjustment based on in-game fog brightness (you can increase or decrease the brightness calculated by the game)
+
 ## 1.21.2-2.1.0
 
 ### Added

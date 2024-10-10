@@ -115,14 +115,8 @@ if (modrinthToken != null) {
         versionType.set("release")
         uploadFile.set(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
         changelog.set(getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}"))
-        gameVersions.set(
-            listOf(
-                project.property("minecraftFirstSnapshotVersion").toString(),
-                // TODO check versions
-                // project.property("minecraftReleaseVersion").toString()
-            )
-        )
-        loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() })
+        gameVersions.set(project.property("fabricModrinthGameVersions").toString().split(',').map { it.trim() })
+        loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() }.toSet())
         additionalFiles.set(listOf(File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")))
     }
 }
@@ -136,9 +130,7 @@ if (curseForgeApiKey != null) {
             releaseType = "release"
             changelogType = "markdown"
             changelog = getChangelogForVersion("${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}")
-            gameVersionStrings.add(project.property("minecraftSnapshotVersion").toString())
-            // TODO check versions
-            // gameVersionStrings.add(project.property("minecraftReleaseVersion").toString())
+            gameVersionStrings.addAll(project.property("fabricCurseForgeGameVersions").toString().split(',').map { it.trim() }.toSet())
             gameVersionStrings.addAll(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim() })
             // TODO side
             // gameVersionStrings.add("Client")

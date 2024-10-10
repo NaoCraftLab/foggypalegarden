@@ -219,7 +219,8 @@ public final class FogPresetV2 extends FogPreset {
         @Builder
         public record Brightness(
                 BrightnessMode mode,
-                Float fixedBrightness
+                Float fixedBrightness,
+                Float adjustment
         ) {
 
             public enum BrightnessMode {
@@ -230,8 +231,12 @@ public final class FogPresetV2 extends FogPreset {
             public void validate() {
                 if (mode == BrightnessMode.FIXED && (fixedBrightness == null || fixedBrightness < 0.0f || fixedBrightness > 100.0f)) {
                     throw new FoggyPaleGardenConfigurationException(
-                            "Binding fixedBrightness is not defined or out of range [0.0, 1.0]"
+                            "Binding brightness fixedBrightness is not defined or out of range [0.0, 1.0]"
                     );
+                }
+                if (mode == BrightnessMode.BY_GAME_FOG && adjustment != null
+                    && (adjustment < -1.0f || adjustment > 1.0f)) {
+                    throw new FoggyPaleGardenConfigurationException("Binding brightness adjustment is out of range [-1.0, 1.0]");
                 }
             }
         }
@@ -278,7 +283,7 @@ public final class FogPresetV2 extends FogPreset {
 
         @Override
         public Brightness brightness() {
-            return brightness == null ? new Brightness(BrightnessMode.BY_GAME_FOG, null) : brightness;
+            return brightness == null ? new Brightness(BrightnessMode.BY_GAME_FOG, null, null) : brightness;
         }
 
         @Override

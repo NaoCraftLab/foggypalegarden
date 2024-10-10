@@ -1,0 +1,52 @@
+{
+  "code": "SNOWY_VEIL",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "weatherIn": ["RAIN"] },
+          { "dimensionIn": ["minecraft:overworld"] },
+          { "biomeTemperature": { "max": 0.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "skyLightStartLevel": 4,
+      "endDistance": 15.0,
+      "surfaceHeightEnd": 128.0,
+      "opacity": 95.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG",
+        "adjustment": 0.5
+      },
+      "color": {
+        "mode": "BY_GAME_FOG",
+        "fixedHex": "E9E7F8"
+      }
+    },
+    {
+      "condition": {
+        "and": [
+          { "weatherIn": ["THUNDER"] },
+          { "dimensionIn": ["minecraft:overworld"] },
+          { "biomeTemperature": { "max": 0.0 } }
+        ]
+      },
+      "startDistance": 0.0,
+      "skyLightStartLevel": 4,
+      "endDistance": 10.0,
+      "surfaceHeightEnd": 128.0,
+      "opacity": 100.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG",
+        "adjustment": 0.5
+      },
+      "color": {
+        "mode": "BY_GAME_FOG",
+        "fixedHex": "E9E7F8"
+      }
+    }
+  ],
+  "version": 2
+}

@@ -75,6 +75,30 @@ public class FogService {
             red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
             green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
             blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
+            if (binding.brightness().adjustment() != null) {
+                float adjustment = binding.brightness().adjustment();
+
+                if (adjustment >= 0) {
+                    red = red + adjustment * (1.0f - red);
+                } else {
+                    red = red + adjustment * red;
+                }
+                red = Math.max(0.0f, Math.min(red, 1.0f));
+
+                if (adjustment >= 0) {
+                    green = green + adjustment * (1.0f - green);
+                } else {
+                    green = green + adjustment * green;
+                }
+                green = Math.max(0.0f, Math.min(green, 1.0f));
+
+                if (adjustment >= 0) {
+                    blue = blue + adjustment * (1.0f - blue);
+                } else {
+                    blue = blue + adjustment * blue;
+                }
+                blue = Math.max(0.0f, Math.min(blue, 1.0f));
+            }
         } else if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.BY_GAME_FOG) {
             val targetBrightness = binding.brightness().fixedBrightness() / 100.0f;
             val currentBrightness = calculateBrightness(gameFogColor);
@@ -86,6 +110,30 @@ public class FogService {
             red = gameFogColor.red();
             green = gameFogColor.green();
             blue = gameFogColor.blue();
+            if (binding.brightness().adjustment() != null) {
+                float adjustment = binding.brightness().adjustment();
+
+                if (adjustment >= 0) {
+                    red = red + adjustment * (1.0f - red);
+                } else {
+                    red = red + adjustment * red;
+                }
+                red = Math.max(0.0f, Math.min(red, 1.0f));
+
+                if (adjustment >= 0) {
+                    green = green + adjustment * (1.0f - green);
+                } else {
+                    green = green + adjustment * green;
+                }
+                green = Math.max(0.0f, Math.min(green, 1.0f));
+
+                if (adjustment >= 0) {
+                    blue = blue + adjustment * (1.0f - blue);
+                } else {
+                    blue = blue + adjustment * blue;
+                }
+                blue = Math.max(0.0f, Math.min(blue, 1.0f));
+            }
         }
         val alpha = (binding.opacity() > 0f) ? fogDensity * (binding.opacity() / 100f - 0.001f) : 0f;
         return Color.builder()
