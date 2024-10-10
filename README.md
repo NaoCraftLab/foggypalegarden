@@ -303,7 +303,7 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 
 🚀 (After 1.21.2 release) Port to NeoForge<br/>
 🚀 (After 1.21.2 release) Add visual configuration<br/>
-❓Maybe it will be possible to implement support for Iris Shaders?
+❓Maybe it will be possible to implement support for Iris Shaders?<br/>
 ❓Maybe port to previous versions to support mods backporting the Winter Drop?
 
 ## 🤗 Modpacks
