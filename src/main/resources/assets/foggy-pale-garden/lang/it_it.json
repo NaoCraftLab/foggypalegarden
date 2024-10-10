@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Comandi di gestione del mod Foggy Pale Garden:\n%s",
+  "fpg.command.preset.current": "Preset di nebbia corrente: %s",
+  "fpg.command.preset.applied": "Preset di nebbia applicato con successo: %s",
+  "fpg.command.preset.not_found": "Preset di nebbia non trovato: %s\nPreset disponibili:\n%s",
+  "fpg.command.preset.exception": "Impossibile applicare il preset: %s",
+  "fpg.command.reloadConfig.succsess": "Configurazione e preset di nebbia ricaricati con successo\nPreset di nebbia corrente: %s\nPreset disponibili:\n%s",
+  "fpg.command.reloadConfig.exception": "Impossibile ricaricare la configurazione e i preset di nebbia: %s"
+}

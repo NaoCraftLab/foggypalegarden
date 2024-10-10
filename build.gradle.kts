@@ -1,5 +1,3 @@
-import com.matthewprenger.cursegradle.CurseArtifact
-
 plugins {
     id("fabric-loom") version "1.7-SNAPSHOT"
     id("com.modrinth.minotaur") version "2.+"
@@ -23,6 +21,7 @@ dependencies {
     minecraft("com.mojang:minecraft:${project.property("minecraftFirstSnapshotVersion")}")
     mappings("net.fabricmc:yarn:${project.property("fabricYarnMappingsVersion")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabricLoaderMinVersion")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabricApiVersion")}")
 
     testCompileOnly("org.projectlombok:lombok:1.18.34")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
@@ -48,6 +47,7 @@ tasks.processResources {
             "modIssueTracker" to project.property("modIssueTracker"),
             "modDiscord" to project.property("modDiscord"),
             "fabricLoaderMinVersion" to project.property("fabricLoaderMinVersion"),
+            "fabricApiVersion" to project.property("fabricApiVersion"),
             "minecraftJavaVersion" to project.property("minecraftJavaVersion"),
             "minecraftFirstSnapshotFullVersion" to project.property("minecraftFirstSnapshotFullVersion")
         )
@@ -118,6 +118,10 @@ if (modrinthToken != null) {
         gameVersions.set(project.property("fabricModrinthGameVersions").toString().split(',').map { it.trim() })
         loaders.set(project.property("fabricSupportedLoaders").toString().split(',').map { it.trim().lowercase() }.toSet())
         additionalFiles.set(listOf(File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")))
+
+        dependencies {
+            required.project("fabric-api")
+        }
     }
 }
 
@@ -135,10 +139,18 @@ if (curseForgeApiKey != null) {
             // TODO side
             // gameVersionStrings.add("Client")
             gameVersionStrings.add("Java ${project.property("minecraftJavaVersion")}")
-            // TODO displayName
-            mainArtifact(File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"))
-            additionalArtifacts.add(CurseArtifact().apply {
-                artifact = File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar")
+            mainArtifact(
+                File("build/libs/${project.base.archivesName.get()}-${project.version}.jar"),
+                    closureOf<com.matthewprenger.cursegradle.CurseArtifact> {
+                    displayName = "${project.property("minecraftReleaseVersion")}-${project.property("modVersion")}"
+                }
+            )
+            addArtifact(
+                File("build/libs/${project.base.archivesName.get()}-${project.version}-sources.jar"),
+                closureOf<com.matthewprenger.cursegradle.CurseArtifact> {}
+            )
+            relations(closureOf<com.matthewprenger.cursegradle.CurseRelation> {
+                requiredDependency("fabric-api")
             })
         })
     }

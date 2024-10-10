@@ -1,3 +1,29 @@
+## 1.21.2-2.3.0
+
+### Added
+
+- Mod configuration management commands (even without operator permissions)
+  - `/fpg preset` will display the name of the current preset
+  - `/fpg preset FPG_DIFFICULTY_BASED` will switch the preset to FPG_DIFFICULTY_BASED (the command itself suggests a list of available presets)
+  - `/fpg reloadConfig` re-reads the mod configuration and available fog preset files from disk
+- The mod has been translated into multiple languages
+  - 🇸🇦 Arabic
+  - 🇧🇾 Belarusian
+  - 🇨🇳 Chinese (Simplified)
+  - 🇺🇸 English (US)
+  - 🇫🇷 French
+  - 🇬🇪 Georgian
+  - 🇩🇪 German
+  - 🇮🇹 Italian
+  - 🇯🇵 Japanese
+  - 🇰🇿 Kazakh
+  - 🇰🇷 Korean
+  - 🇧🇷 Portuguese (Brazil)
+  - 🇷🇺 Russian
+  - 🇪🇸 Spanish (Mexico)
+  - 🇸🇪 Swedish
+  - 🇺🇦 Ukrainian
+
 ## 1.21.2-2.2.0
 
 ### Added

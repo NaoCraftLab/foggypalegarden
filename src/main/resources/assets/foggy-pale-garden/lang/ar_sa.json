@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "أوامر إدارة مود Foggy Pale Garden:\n%s",
+  "fpg.command.preset.current": "الإعداد الحالي للضباب: %s",
+  "fpg.command.preset.applied": "تم تطبيق إعداد الضباب بنجاح: %s",
+  "fpg.command.preset.not_found": "لم يتم العثور على إعداد الضباب: %s\nالإعدادات المتاحة:\n%s",
+  "fpg.command.preset.exception": "تعذّر تطبيق الإعداد: %s",
+  "fpg.command.reloadConfig.succsess": "تم إعادة تحميل التكوين وإعدادات الضباب بنجاح\nالإعداد الحالي للضباب: %s\nالإعدادات المتاحة:\n%s",
+  "fpg.command.reloadConfig.exception": "تعذّر إعادة تحميل التكوين وإعدادات الضباب: %s"
+}

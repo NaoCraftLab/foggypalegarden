@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Foggy Pale Garden 모드 관리 명령어:\n%s",
+  "fpg.command.preset.current": "현재 안개 프리셋: %s",
+  "fpg.command.preset.applied": "안개 프리셋이 성공적으로 적용되었습니다: %s",
+  "fpg.command.preset.not_found": "안개 프리셋을 찾을 수 없습니다: %s\n사용 가능한 프리셋:\n%s",
+  "fpg.command.preset.exception": "프리셋을 적용하지 못했습니다: %s",
+  "fpg.command.reloadConfig.succsess": "구성 및 안개 프리셋이 성공적으로 다시 로드되었습니다\n현재 안개 프리셋: %s\n사용 가능한 프리셋:\n%s",
+  "fpg.command.reloadConfig.exception": "구성 및 안개 프리셋을 다시 로드하지 못했습니다: %s"
+}

@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Foggy Pale Garden მოდის მართვის ბრძანებები:\n%s",
+  "fpg.command.preset.current": "მიმდინარე ნისლის პრესეტი: %s",
+  "fpg.command.preset.applied": "ნისლის პრესეტი წარმატებით გამოყენებულია: %s",
+  "fpg.command.preset.not_found": "ნისლის პრესეტი ვერ მოიძებნა: %s\nხელმისაწვდომი პრესეტები:\n%s",
+  "fpg.command.preset.exception": "პრესეტის გამოყენება ვერ მოხერხდა: %s",
+  "fpg.command.reloadConfig.succsess": "კონფიგურაცია და ნისლის პრესეტები წარმატებით გადაიტვირთა\nმიმდინარე ნისლის პრესეტი: %s\nხელმისაწვდომი პრესეტები:\n%s",
+  "fpg.command.reloadConfig.exception": "კონფიგურაციისა და ნისლის პრესეტების გადატვირთვა ვერ მოხერხდა: %s"
+}

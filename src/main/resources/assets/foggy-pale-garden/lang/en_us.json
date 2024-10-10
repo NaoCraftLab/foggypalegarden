@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Foggy Pale Garden mod management commands:\n%s",
+  "fpg.command.preset.current": "Current fog preset: %s",
+  "fpg.command.preset.applied": "Fog preset successfully applied: %s",
+  "fpg.command.preset.not_found": "Fog preset not found: %s\nAvailable presets:\n%s",
+  "fpg.command.preset.exception": "Failed to apply preset: %s",
+  "fpg.command.reloadConfig.succsess": "Configuration and fog presets successfully reloaded\nCurrent fog preset: %s\nAvailable presets:\n%s",
+  "fpg.command.reloadConfig.exception": "Failed to reload configuration and fog presets: %s"
+}

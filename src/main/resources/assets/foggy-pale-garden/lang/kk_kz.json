@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Foggy Pale Garden модын басқару командалары:\n%s",
+  "fpg.command.preset.current": "Ағымдағы тұман пресеті: %s",
+  "fpg.command.preset.applied": "Тұман пресеті сәтті қолданылды: %s",
+  "fpg.command.preset.not_found": "Тұман пресеті табылмады: %s\nҚол жетімді пресеттер:\n%s",
+  "fpg.command.preset.exception": "Пресетті қолдану мүмкін болмады: %s",
+  "fpg.command.reloadConfig.succsess": "Конфигурация және тұман пресеттері сәтті қайта жүктелді\nАғымдағы тұман пресеті: %s\nҚол жетімді пресеттер:\n%s",
+  "fpg.command.reloadConfig.exception": "Конфигурация және тұман пресеттерін қайта жүктеу мүмкін болмады: %s"
+}

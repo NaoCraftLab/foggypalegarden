@@ -1,9 +1,9 @@
 package com.naocraftlab.foggypalegarden.domain.service;
 
-import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import com.naocraftlab.foggypalegarden.config.FogPresetV2;
 import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Brightness.BrightnessMode;
 import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Color.ColorMode;
+import com.naocraftlab.foggypalegarden.config.ModConfigV2;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
@@ -11,7 +11,9 @@ import com.naocraftlab.foggypalegarden.util.Pair;
 import lombok.experimental.UtilityClass;
 import lombok.val;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 @UtilityClass
@@ -19,13 +21,14 @@ public class FogService {
 
     private static List<Pair<Predicate<Environment>, FogPresetV2.Binding>> presetBindings;
 
-    static {
-        presetBindings = ConfigManager.currentPreset().getBindings().stream()
+    private static FogPresetV2.Binding currentBinding = null;
+
+    public static void onConfigChange(ModConfigV2 config, Map<String, Pair<Path, FogPresetV2>> presets) {
+        val currentPreset = presets.get(config.getPreset()).second();
+        presetBindings = currentPreset.getBindings().stream()
                 .map(binding -> new Pair<>(binding.condition().toPredicate(), binding))
                 .toList();
     }
-
-    private static FogPresetV2.Binding currentBinding = null;
 
     public static FogCharacteristics calculateFogCharacteristics(Environment environment) {
         val candidate = presetBindings.stream()

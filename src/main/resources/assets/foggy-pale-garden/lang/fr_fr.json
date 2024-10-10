@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Commandes de gestion du mod Foggy Pale Garden :\n%s",
+  "fpg.command.preset.current": "Preset de brouillard actuel : %s",
+  "fpg.command.preset.applied": "Preset de brouillard appliqué avec succès : %s",
+  "fpg.command.preset.not_found": "Preset de brouillard non trouvé : %s\nPresets disponibles :\n%s",
+  "fpg.command.preset.exception": "Impossible d'appliquer le preset : %s",
+  "fpg.command.reloadConfig.succsess": "Configuration et presets de brouillard rechargés avec succès\nPreset de brouillard actuel : %s\nPresets disponibles :\n%s",
+  "fpg.command.reloadConfig.exception": "Impossible de recharger la configuration et les presets de brouillard : %s"
+}

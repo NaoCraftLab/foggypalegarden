@@ -25,9 +25,10 @@
     "foggypalegarden.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${fabricLoaderMinVersion}",
+    "java": ">=${minecraftJavaVersion}",
     "minecraft": ">=${minecraftFirstSnapshotFullVersion}",
-    "java": ">=${minecraftJavaVersion}"
+    "fabricloader": ">=${fabricLoaderMinVersion}",
+    "fabric-api": ">=${fabricApiVersion}"
   },
   "suggests": {}
 }

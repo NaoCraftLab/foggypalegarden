@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Команды управления модом Foggy Pale Garden:\n%s",
+  "fpg.command.preset.current": "Текущий пресет тумана: %s",
+  "fpg.command.preset.applied": "Пресет тумана успешно установлен: %s",
+  "fpg.command.preset.not_found": "Пресет тумана не найден: %s\nДоступные пресеты:\n%s",
+  "fpg.command.preset.exception": "Не удалось установить пресет: %s",
+  "fpg.command.reloadConfig.succsess": "Конфигурация и пресеты тумана успешно перезагружены\nТекущий пресет тумана: %s\nДоступные пресеты:\n%s",
+  "fpg.command.reloadConfig.exception": "Не удалось перезагрузить конфигурацию и пресеты тумана: %s"
+}

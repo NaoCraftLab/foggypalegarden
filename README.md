@@ -79,6 +79,43 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 </details>
 
 <details>
+  <summary>💬 Change settings via chat even if you're not an operator!</summary>
+
+Available commands:
+- `/fpg preset` will display the name of the current preset
+- `/fpg preset FPG_DIFFICULTY_BASED` will switch the preset to FPG_DIFFICULTY_BASED (the command itself suggests a list of available presets)
+- `/fpg reloadConfig` re-reads the mod configuration and available fog preset files from disk
+
+![console-commands.gif](docs/images/console-commands.gif)
+
+</details>
+
+<details>
+  <summary>🌎 The mod supports multiple languages</summary>
+
+Supported languages:
+- 🇸🇦 Arabic
+- 🇧🇾 Belarusian
+- 🇨🇳 Chinese (Simplified)
+- 🇺🇸 English (US)
+- 🇫🇷 French
+- 🇬🇪 Georgian
+- 🇩🇪 German
+- 🇮🇹 Italian
+- 🇯🇵 Japanese
+- 🇰🇿 Kazakh
+- 🇰🇷 Korean
+- 🇧🇷 Portuguese (Brazil)
+- 🇷🇺 Russian
+- 🇪🇸 Spanish (Mexico)
+- 🇸🇪 Swedish
+- 🇺🇦 Ukrainian
+
+You can request a translation into your language or report a translation error on [GitHub](https://github.com/NaoCraftLab/foggy-pale-garden/issues).
+
+</details>
+
+<details>
     <summary>⛔️ Disable fog for specific game modes</summary>
 
 ![no-fog-game-modes.gif](docs/images/no-fog-game-modes.gif)
@@ -264,16 +301,10 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 
 ## 🚀 Plans
 
-✅ Add fog to the Pale Garden<br/>
-✅ Add configurations<br/>
-✅ Apply fog conditions depending on player’s current dimension<br/>
-✅ Apply fog conditions based on biome temperature<br/>
-✅ Control the shape of fog<br/>
-✅ Disable fog based on game mode<br/>
-🚀 (After the Winter Drop release) Port to NeoForge<br/>
-🚀 (After the Winter Drop release) Add visual configuration<br/>
-🚀 Port to previous game versions and add support for mods backporting the Pale Garden<br/>
-❓Could there be support for Iris Shaders?
+🚀 (After 1.21.2 release) Port to NeoForge<br/>
+🚀 (After 1.21.2 release) Add visual configuration<br/>
+❓Maybe it will be possible to implement support for Iris Shaders?
+❓Maybe port to previous versions to support mods backporting the Winter Drop?
 
 ## 🤗 Modpacks
 

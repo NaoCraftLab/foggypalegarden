@@ -23,11 +23,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -145,6 +147,8 @@ public final class ConfigManager {
     private static ModConfigV2 currentConfig = null;
     private static Map<String, Pair<Path, FogPresetV2>> allPresets = null;
 
+    private static List<BiConsumer<ModConfigV2, Map<String, Pair<Path, FogPresetV2>>>> listeners = new ArrayList<>();
+
 
     public static void init(Path configDirectory, String modId) {
         configFilePtah = configDirectory.resolve(Paths.get(modId + ".json"));
@@ -180,6 +184,7 @@ public final class ConfigManager {
                 ));
 
         validate();
+        notifyListeners();
     }
 
 
@@ -193,10 +198,7 @@ public final class ConfigManager {
     public static void saveConfig(ModConfigV2 config) {
         currentConfig = config;
         FpgFiles.writeString(configFilePtah, GSON.toJson(currentConfig));
-    }
-
-    public static FogPresetV2 currentPreset() {
-        return allPresets().get(currentConfig().getPreset()).second();
+        notifyListeners();
     }
 
     public static Map<String, Pair<Path, FogPresetV2>> allPresets() {
@@ -215,6 +217,7 @@ public final class ConfigManager {
         FpgFiles.createDirectories(presetDirectoryPath);
         removeAllPresets();
         ConfigManager.allPresets.forEach((code, pair) -> FpgFiles.writeString(pair.first(), GSON.toJson(pair.second())));
+        notifyListeners();
     }
 
 
@@ -318,5 +321,15 @@ public final class ConfigManager {
         } catch (IOException e) {
             throw new FoggyPaleGardenEnvironmentException("Failed to process files in directory (" + presetDirectoryPath + ")", e);
         }
+    }
+
+    private static void notifyListeners() {
+        for (val listener : listeners) {
+            listener.accept(currentConfig, allPresets);
+        }
+    }
+
+    public static void registerListener(BiConsumer<ModConfigV2, Map<String, Pair<Path, FogPresetV2>>> listener) {
+        listeners.add(listener);
     }
 }

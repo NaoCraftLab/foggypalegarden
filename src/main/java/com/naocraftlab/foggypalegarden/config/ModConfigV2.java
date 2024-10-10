@@ -4,11 +4,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.With;
 import net.minecraft.world.GameMode;
 
 import java.util.Set;
 
 @Data
+@With
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

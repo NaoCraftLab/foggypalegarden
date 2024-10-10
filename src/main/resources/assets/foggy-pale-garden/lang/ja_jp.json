@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Foggy Pale Garden モッドの管理コマンド:\n%s",
+  "fpg.command.preset.current": "現在の霧プリセット: %s",
+  "fpg.command.preset.applied": "霧プリセットが正常に適用されました: %s",
+  "fpg.command.preset.not_found": "霧プリセットが見つかりません: %s\n利用可能なプリセット:\n%s",
+  "fpg.command.preset.exception": "プリセットを適用できませんでした: %s",
+  "fpg.command.reloadConfig.succsess": "設定と霧プリセットが正常に再読み込みされました\n現在の霧プリセット: %s\n利用可能なプリセット:\n%s",
+  "fpg.command.reloadConfig.exception": "設定と霧プリセットを再読み込みできませんでした: %s"
+}

@@ -1,0 +1,9 @@
+{
+  "fpg.command.help": "Comandos de gerenciamento do mod Foggy Pale Garden:\n%s",
+  "fpg.command.preset.current": "Preset de névoa atual: %s",
+  "fpg.command.preset.applied": "Preset de névoa aplicado com sucesso: %s",
+  "fpg.command.preset.not_found": "Preset de névoa não encontrado: %s\nPresets disponíveis:\n%s",
+  "fpg.command.preset.exception": "Falha ao aplicar o preset: %s",
+  "fpg.command.reloadConfig.succsess": "Configuração e presets de névoa recarregados com sucesso\nPreset de névoa atual: %s\nPresets disponíveis:\n%s",
+  "fpg.command.reloadConfig.exception": "Falha ao recarregar a configuração e os presets de névoa: %s"
+}
