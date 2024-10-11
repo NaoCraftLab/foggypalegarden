@@ -85,6 +85,7 @@ Available commands:
 - `/fpg preset` will display the name of the current preset
 - `/fpg preset FPG_DIFFICULTY_BASED` will switch the preset to FPG_DIFFICULTY_BASED (the command itself suggests a list of available presets)
 - `/fpg reloadConfig` re-reads the mod configuration and available fog preset files from disk
+- `/fpg noFogGameMode <gameMode>` allows you to disable or enable the application of fog settings for the selected game mode
 
 ![console-commands.gif](docs/images/console-commands.gif)
 

@@ -53,7 +53,7 @@ public class FpgPresetCommand implements FpgCommand {
             }
         } else {
             val allPresets = String.join("\n", ConfigManager.allPresets().keySet());
-            context.getSource().sendError(Text.translatable("fpg.command.preset.not_found", preset, allPresets).formatted(RED));
+            context.getSource().sendError(Text.translatable("fpg.command.preset.notFound", preset, allPresets).formatted(RED));
             return 0;
         }
     }

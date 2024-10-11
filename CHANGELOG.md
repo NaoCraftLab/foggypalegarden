@@ -1,3 +1,9 @@
+## 1.21.2-2.4.0
+
+### Added
+
+- The command `/fpg noFogGameMode <gameMode>` allows you to disable or enable the application of fog settings for the selected game mode
+
 ## 1.21.2-2.3.0
 
 ### Added

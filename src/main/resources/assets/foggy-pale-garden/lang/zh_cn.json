@@ -2,8 +2,11 @@
   "fpg.command.help": "Foggy Pale Garden 模组管理命令：\n%s",
   "fpg.command.preset.current": "当前雾预设：%s",
   "fpg.command.preset.applied": "雾预设已成功应用：%s",
-  "fpg.command.preset.not_found": "未找到雾预设：%s\n可用的预设：\n%s",
+  "fpg.command.preset.notFound": "未找到雾预设：%s\n可用的预设：\n%s",
   "fpg.command.preset.exception": "无法应用预设：%s",
-  "fpg.command.reloadConfig.succsess": "配置和雾预设已成功重新加载\n当前雾预设：%s\n可用的预设：\n%s",
-  "fpg.command.reloadConfig.exception": "无法重新加载配置和雾预设：%s"
+  "fpg.command.reloadConfig.success": "配置和雾预设已成功重新加载\n当前雾预设：%s\n可用的预设：\n%s",
+  "fpg.command.reloadConfig.exception": "无法重新加载配置和雾预设：%s",
+  "fpg.command.noFogGameMode.on": "已为游戏模式启用雾：%s",
+  "fpg.command.noFogGameMode.off": "已为游戏模式禁用雾：%s",
+  "fpg.command.noFogGameMode.notFound": "不支持的游戏模式：%s\n可用于控制雾的游戏模式列表：\n%s"
 }

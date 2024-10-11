@@ -2,8 +2,11 @@
   "fpg.command.help": "Foggy Pale Garden mod management commands:\n%s",
   "fpg.command.preset.current": "Current fog preset: %s",
   "fpg.command.preset.applied": "Fog preset successfully applied: %s",
-  "fpg.command.preset.not_found": "Fog preset not found: %s\nAvailable presets:\n%s",
+  "fpg.command.preset.notFound": "Fog preset not found: %s\nAvailable presets:\n%s",
   "fpg.command.preset.exception": "Failed to apply preset: %s",
-  "fpg.command.reloadConfig.succsess": "Configuration and fog presets successfully reloaded\nCurrent fog preset: %s\nAvailable presets:\n%s",
-  "fpg.command.reloadConfig.exception": "Failed to reload configuration and fog presets: %s"
+  "fpg.command.reloadConfig.success": "Configuration and fog presets successfully reloaded\nCurrent fog preset: %s\nAvailable presets:\n%s",
+  "fpg.command.reloadConfig.exception": "Failed to reload configuration and fog presets: %s",
+  "fpg.command.noFogGameMode.on": "Fog enabled for game mode: %s",
+  "fpg.command.noFogGameMode.off": "Fog disabled for game mode: %s",
+  "fpg.command.noFogGameMode.notFound": "Game mode %s is not supported\nAvailable game modes for fog control:\n%s"
 }

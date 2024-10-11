@@ -2,8 +2,11 @@
   "fpg.command.help": "Каманды кіравання модам Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Бягучы прэсет туману: %s",
   "fpg.command.preset.applied": "Прэсет туману паспяхова прымяніўся: %s",
-  "fpg.command.preset.not_found": "Прэсет туману не знойдзены: %s\nДаступныя прэсеты:\n%s",
+  "fpg.command.preset.notFound": "Прэсет туману не знойдзены: %s\nДаступныя прэсеты:\n%s",
   "fpg.command.preset.exception": "Не ўдалося прымяніць прэсет: %s",
-  "fpg.command.reloadConfig.succsess": "Канфігурацыя і прэсеты туману паспяхова перазагружаны\nБягучы прэсет туману: %s\nДаступныя прэсеты:\n%s",
-  "fpg.command.reloadConfig.exception": "Не ўдалося перазагрузіць канфігурацыю і прэсеты туману: %s"
+  "fpg.command.reloadConfig.success": "Канфігурацыя і прэсеты туману паспяхова перазагружаны\nБягучы прэсет туману: %s\nДаступныя прэсеты:\n%s",
+  "fpg.command.reloadConfig.exception": "Не ўдалося перазагрузіць канфігурацыю і прэсеты туману: %s",
+  "fpg.command.noFogGameMode.on": "Туман уключаны для рэжыму гульні: %s",
+  "fpg.command.noFogGameMode.off": "Туман выключаны для рэжыму гульні: %s",
+  "fpg.command.noFogGameMode.notFound": "Рэжым гульні %s не падтрымліваецца\nСпіс даступных рэжымаў гульні для кіравання туманам:\n%s"
 }

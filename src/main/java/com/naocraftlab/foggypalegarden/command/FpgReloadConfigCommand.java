@@ -26,7 +26,7 @@ public class FpgReloadConfigCommand implements FpgCommand {
             val currentPreset = ConfigManager.currentConfig().getPreset();
             val allPresets = String.join("\n", ConfigManager.allPresets().keySet());
             context.getSource().sendFeedback(
-                    Text.translatable("fpg.command.reloadConfig.succsess", currentPreset, allPresets).formatted(GREEN)
+                    Text.translatable("fpg.command.reloadConfig.success", currentPreset, allPresets).formatted(GREEN)
             );
             return 1;
         } catch (Exception e) {

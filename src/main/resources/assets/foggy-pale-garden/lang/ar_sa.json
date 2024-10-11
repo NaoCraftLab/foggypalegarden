@@ -2,8 +2,11 @@
   "fpg.command.help": "أوامر إدارة مود Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "الإعداد الحالي للضباب: %s",
   "fpg.command.preset.applied": "تم تطبيق إعداد الضباب بنجاح: %s",
-  "fpg.command.preset.not_found": "لم يتم العثور على إعداد الضباب: %s\nالإعدادات المتاحة:\n%s",
+  "fpg.command.preset.notFound": "لم يتم العثور على إعداد الضباب: %s\nالإعدادات المتاحة:\n%s",
   "fpg.command.preset.exception": "تعذّر تطبيق الإعداد: %s",
-  "fpg.command.reloadConfig.succsess": "تم إعادة تحميل التكوين وإعدادات الضباب بنجاح\nالإعداد الحالي للضباب: %s\nالإعدادات المتاحة:\n%s",
-  "fpg.command.reloadConfig.exception": "تعذّر إعادة تحميل التكوين وإعدادات الضباب: %s"
+  "fpg.command.reloadConfig.success": "تم إعادة تحميل التكوين وإعدادات الضباب بنجاح\nالإعداد الحالي للضباب: %s\nالإعدادات المتاحة:\n%s",
+  "fpg.command.reloadConfig.exception": "تعذّر إعادة تحميل التكوين وإعدادات الضباب: %s",
+  "fpg.command.noFogGameMode.on": "تم تمكين الضباب لوضع اللعبة: %s",
+  "fpg.command.noFogGameMode.off": "تم تعطيل الضباب لوضع اللعبة: %s",
+  "fpg.command.noFogGameMode.notFound": "وضع اللعبة %s غير مدعوم\nأوضاع اللعبة المتاحة للتحكم في الضباب:\n%s"
 }

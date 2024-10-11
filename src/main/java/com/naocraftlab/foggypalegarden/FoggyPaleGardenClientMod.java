@@ -1,5 +1,6 @@
 package com.naocraftlab.foggypalegarden;
 
+import com.naocraftlab.foggypalegarden.command.FpgNoFogGameModeCommand;
 import com.naocraftlab.foggypalegarden.command.FpgPresetCommand;
 import com.naocraftlab.foggypalegarden.command.FpgReloadConfigCommand;
 import com.naocraftlab.foggypalegarden.config.ConfigManager;
@@ -21,6 +22,7 @@ public class FoggyPaleGardenClientMod implements ClientModInitializer {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             FpgPresetCommand.register(dispatcher);
             FpgReloadConfigCommand.register(dispatcher);
+            FpgNoFogGameModeCommand.register(dispatcher);
         });
     }
 }

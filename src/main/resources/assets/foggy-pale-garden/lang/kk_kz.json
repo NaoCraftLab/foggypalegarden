@@ -2,8 +2,11 @@
   "fpg.command.help": "Foggy Pale Garden модын басқару командалары:\n%s",
   "fpg.command.preset.current": "Ағымдағы тұман пресеті: %s",
   "fpg.command.preset.applied": "Тұман пресеті сәтті қолданылды: %s",
-  "fpg.command.preset.not_found": "Тұман пресеті табылмады: %s\nҚол жетімді пресеттер:\n%s",
+  "fpg.command.preset.notFound": "Тұман пресеті табылмады: %s\nҚол жетімді пресеттер:\n%s",
   "fpg.command.preset.exception": "Пресетті қолдану мүмкін болмады: %s",
-  "fpg.command.reloadConfig.succsess": "Конфигурация және тұман пресеттері сәтті қайта жүктелді\nАғымдағы тұман пресеті: %s\nҚол жетімді пресеттер:\n%s",
-  "fpg.command.reloadConfig.exception": "Конфигурация және тұман пресеттерін қайта жүктеу мүмкін болмады: %s"
+  "fpg.command.reloadConfig.success": "Конфигурация және тұман пресеттері сәтті қайта жүктелді\nАғымдағы тұман пресеті: %s\nҚол жетімді пресеттер:\n%s",
+  "fpg.command.reloadConfig.exception": "Конфигурация және тұман пресеттерін қайта жүктеу мүмкін болмады: %s",
+  "fpg.command.noFogGameMode.on": "Тұман ойын режимі үшін қосылды: %s",
+  "fpg.command.noFogGameMode.off": "Тұман ойын режимі үшін өшірілді: %s",
+  "fpg.command.noFogGameMode.notFound": "Ойын режимі %s қолдау көрсетілмейді\nТұманды басқару үшін қол жетімді ойын режимдері:\n%s"
 }

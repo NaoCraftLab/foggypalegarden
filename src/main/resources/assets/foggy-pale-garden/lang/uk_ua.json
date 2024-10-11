@@ -2,8 +2,11 @@
   "fpg.command.help": "Команди керування модом Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Поточний пресет туману: %s",
   "fpg.command.preset.applied": "Пресет туману успішно застосовано: %s",
-  "fpg.command.preset.not_found": "Пресет туману не знайдено: %s\nДоступні пресети:\n%s",
+  "fpg.command.preset.notFound": "Пресет туману не знайдено: %s\nДоступні пресети:\n%s",
   "fpg.command.preset.exception": "Не вдалося застосувати пресет: %s",
-  "fpg.command.reloadConfig.succsess": "Конфігурацію та пресети туману успішно перезавантажено\nПоточний пресет туману: %s\nДоступні пресети:\n%s",
-  "fpg.command.reloadConfig.exception": "Не вдалося перезавантажити конфігурацію та пресети туману: %s"
+  "fpg.command.reloadConfig.success": "Конфігурацію та пресети туману успішно перезавантажено\nПоточний пресет туману: %s\nДоступні пресети:\n%s",
+  "fpg.command.reloadConfig.exception": "Не вдалося перезавантажити конфігурацію та пресети туману: %s",
+  "fpg.command.noFogGameMode.on": "Туман увімкнено для ігрового режиму: %s",
+  "fpg.command.noFogGameMode.off": "Туман вимкнено для ігрового режиму: %s",
+  "fpg.command.noFogGameMode.notFound": "Ігровий режим %s не підтримується\nДоступні ігрові режими для керування туманом:\n%s"
 }

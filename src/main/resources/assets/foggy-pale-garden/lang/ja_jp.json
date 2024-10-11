@@ -2,8 +2,11 @@
   "fpg.command.help": "Foggy Pale Garden モッドの管理コマンド:\n%s",
   "fpg.command.preset.current": "現在の霧プリセット: %s",
   "fpg.command.preset.applied": "霧プリセットが正常に適用されました: %s",
-  "fpg.command.preset.not_found": "霧プリセットが見つかりません: %s\n利用可能なプリセット:\n%s",
+  "fpg.command.preset.notFound": "霧プリセットが見つかりません: %s\n利用可能なプリセット:\n%s",
   "fpg.command.preset.exception": "プリセットを適用できませんでした: %s",
-  "fpg.command.reloadConfig.succsess": "設定と霧プリセットが正常に再読み込みされました\n現在の霧プリセット: %s\n利用可能なプリセット:\n%s",
-  "fpg.command.reloadConfig.exception": "設定と霧プリセットを再読み込みできませんでした: %s"
+  "fpg.command.reloadConfig.success": "設定と霧プリセットが正常に再読み込みされました\n現在の霧プリセット: %s\n利用可能なプリセット:\n%s",
+  "fpg.command.reloadConfig.exception": "設定と霧プリセットを再読み込みできませんでした: %s",
+  "fpg.command.noFogGameMode.on": "ゲームモードの霧が有効になりました: %s",
+  "fpg.command.noFogGameMode.off": "ゲームモードの霧が無効になりました: %s",
+  "fpg.command.noFogGameMode.notFound": "ゲームモード %s はサポートされていません\n霧の制御が可能なゲームモード一覧:\n%s"
 }

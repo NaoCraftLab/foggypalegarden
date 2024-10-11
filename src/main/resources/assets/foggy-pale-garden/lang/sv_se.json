@@ -2,8 +2,11 @@
   "fpg.command.help": "Kommandon för att hantera modden Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Aktuell dimmapreset: %s",
   "fpg.command.preset.applied": "Dimmapreset har tillämpats framgångsrikt: %s",
-  "fpg.command.preset.not_found": "Dimmapreset hittades inte: %s\nTillgängliga presets:\n%s",
+  "fpg.command.preset.notFound": "Dimmapreset hittades inte: %s\nTillgängliga presets:\n%s",
   "fpg.command.preset.exception": "Kunde inte tillämpa preset: %s",
-  "fpg.command.reloadConfig.succsess": "Konfiguration och dimmapresets har lästs in igen framgångsrikt\nAktuell dimmapreset: %s\nTillgängliga presets:\n%s",
-  "fpg.command.reloadConfig.exception": "Kunde inte läsa in konfiguration och dimmapresets igen: %s"
+  "fpg.command.reloadConfig.success": "Konfiguration och dimmapresets har lästs in igen framgångsrikt\nAktuell dimmapreset: %s\nTillgängliga presets:\n%s",
+  "fpg.command.reloadConfig.exception": "Kunde inte läsa in konfiguration och dimmapresets igen: %s",
+  "fpg.command.noFogGameMode.on": "Dimma aktiverad för spelläge: %s",
+  "fpg.command.noFogGameMode.off": "Dimma inaktiverad för spelläge: %s",
+  "fpg.command.noFogGameMode.notFound": "Spelläge %s stöds inte\nTillgängliga spellägen för dimkontroll:\n%s"
 }

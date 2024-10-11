@@ -2,8 +2,11 @@
   "fpg.command.help": "Comandos de gerenciamento do mod Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Preset de névoa atual: %s",
   "fpg.command.preset.applied": "Preset de névoa aplicado com sucesso: %s",
-  "fpg.command.preset.not_found": "Preset de névoa não encontrado: %s\nPresets disponíveis:\n%s",
+  "fpg.command.preset.notFound": "Preset de névoa não encontrado: %s\nPresets disponíveis:\n%s",
   "fpg.command.preset.exception": "Falha ao aplicar o preset: %s",
-  "fpg.command.reloadConfig.succsess": "Configuração e presets de névoa recarregados com sucesso\nPreset de névoa atual: %s\nPresets disponíveis:\n%s",
-  "fpg.command.reloadConfig.exception": "Falha ao recarregar a configuração e os presets de névoa: %s"
+  "fpg.command.reloadConfig.success": "Configuração e presets de névoa recarregados com sucesso\nPreset de névoa atual: %s\nPresets disponíveis:\n%s",
+  "fpg.command.reloadConfig.exception": "Falha ao recarregar a configuração e os presets de névoa: %s",
+  "fpg.command.noFogGameMode.on": "Névoa habilitada para o modo de jogo: %s",
+  "fpg.command.noFogGameMode.off": "Névoa desabilitada para o modo de jogo: %s",
+  "fpg.command.noFogGameMode.notFound": "Modo de jogo %s não é suportado\nModos de jogo disponíveis para controle de névoa:\n%s"
 }
