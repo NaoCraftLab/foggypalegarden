@@ -90,6 +90,11 @@ public abstract class PaleGardenFogMixin {
             assert fogCharacteristics.color().alpha() >= 0.0f : "FPG: Alpha color component is negative";
             assert fogCharacteristics.color().alpha() <= 1.0f : "FPG: Alpha color component is greater than 1.0";
 
+            color.x = color.x * (1.0f - fogDensity) + fogCharacteristics.color().red() * fogDensity;
+            color.y = color.y * (1.0f - fogDensity) + fogCharacteristics.color().green() * fogDensity;
+            color.z = color.z * (1.0f - fogDensity) + fogCharacteristics.color().blue() * fogDensity;
+            color.w = color.w * (1.0f - fogDensity) + fogCharacteristics.color().alpha() * fogDensity;
+
             cir.setReturnValue(fogOf(fogCharacteristics));
             cir.cancel();
         }

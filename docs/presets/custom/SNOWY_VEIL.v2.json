@@ -16,8 +16,7 @@
       "opacity": 95.0,
       "encapsulationSpeed": 6.0,
       "brightness": {
-        "mode": "BY_GAME_FOG",
-        "adjustment": 0.5
+        "mode": "BY_GAME_FOG"
       },
       "color": {
         "mode": "BY_GAME_FOG",
@@ -39,8 +38,7 @@
       "opacity": 100.0,
       "encapsulationSpeed": 6.0,
       "brightness": {
-        "mode": "BY_GAME_FOG",
-        "adjustment": 0.5
+        "mode": "BY_GAME_FOG"
       },
       "color": {
         "mode": "BY_GAME_FOG",

@@ -1,3 +1,9 @@
+## 1.21.2-2.4.1
+
+### Fixed
+
+- Incorrect sky color causing the horizon to be visible through the fog
+
 ## 1.21.2-2.4.0
 
 ### Added
