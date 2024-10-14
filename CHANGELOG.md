@@ -1,3 +1,9 @@
+## 1.21.2-2.5.0
+
+### Added
+
+- Basic support for ModMenu with mod description translation into all supported languages
+
 ## 1.21.2-2.4.1
 
 ### Fixed

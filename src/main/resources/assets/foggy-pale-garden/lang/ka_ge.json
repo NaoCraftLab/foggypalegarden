@@ -1,4 +1,6 @@
 {
+  "modmenu.summaryTranslation.foggy-pale-garden": "ამატებს ნისლს ფერმკრთალ ბაღში და საერთოდ სადაც გინდათ!",
+  "modmenu.descriptionTranslation.foggy-pale-garden": "შეისწავლეთ მოდის გვერდი და შეძლებთ დაამატოთ ნებისმიერი ნისლი თამაშში ნებისმიერ ადგილას მოქნილი კონფიგურაციის სისტემის წყალობით.",
   "fpg.command.help": "Foggy Pale Garden მოდის მართვის ბრძანებები:\n%s",
   "fpg.command.preset.current": "მიმდინარე ნისლის პრესეტი: %s",
   "fpg.command.preset.applied": "ნისლის პრესეტი წარმატებით გამოყენებულია: %s",

@@ -1,4 +1,6 @@
 {
+  "modmenu.summaryTranslation.foggy-pale-garden": "Aggiunge nebbia al Giardino Pallido e ovunque tu voglia!",
+  "modmenu.descriptionTranslation.foggy-pale-garden": "Esplora la pagina della mod e potrai aggiungere qualsiasi nebbia in qualsiasi luogo del gioco grazie a un sistema di configurazione flessibile.",
   "fpg.command.help": "Comandi di gestione del mod Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Preset di nebbia corrente: %s",
   "fpg.command.preset.applied": "Preset di nebbia applicato con successo: %s",

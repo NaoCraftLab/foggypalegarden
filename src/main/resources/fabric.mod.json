@@ -30,5 +30,19 @@
     "fabricloader": ">=${fabricLoaderMinVersion}",
     "fabric-api": ">=${fabricApiVersion}"
   },
-  "suggests": {}
+  "suggests": {},
+  "custom": {
+    "modmenu": {
+      "update_checker": true,
+      "modmenu.credits.role.author": "NaoCraftLab",
+      "links": {
+        "modmenu.curseforge": "${modCurseForge}",
+        "modmenu.modrinth": "${modModrinth}",
+        "modmenu.github_releases": "${modGitHubReleases}",
+        "modmenu.discord": "${modDiscord}",
+        "modmenu.kofi": "${modKoFi}",
+        "modmenu.youtube": "${modAuthorYouTube}"
+      }
+    }
+  }
 }

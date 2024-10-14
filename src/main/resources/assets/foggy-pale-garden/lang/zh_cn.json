@@ -1,4 +1,6 @@
 {
+  "modmenu.summaryTranslation.foggy-pale-garden": "在苍白花园和任何地方添加雾！",
+  "modmenu.descriptionTranslation.foggy-pale-garden": "浏览模组页面，您可以通过灵活的配置系统在游戏中的任何地方添加任何雾。",
   "fpg.command.help": "Foggy Pale Garden 模组管理命令：\n%s",
   "fpg.command.preset.current": "当前雾预设：%s",
   "fpg.command.preset.applied": "雾预设已成功应用：%s",

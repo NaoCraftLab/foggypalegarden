@@ -1,4 +1,6 @@
 {
+  "modmenu.summaryTranslation.foggy-pale-garden": "ペイルガーデンや他のどこにでも霧を追加します！",
+  "modmenu.descriptionTranslation.foggy-pale-garden": "モッドのページをチェックして、柔軟な設定システムによりゲーム内のどこにでも任意の霧を追加できます。",
   "fpg.command.help": "Foggy Pale Garden モッドの管理コマンド:\n%s",
   "fpg.command.preset.current": "現在の霧プリセット: %s",
   "fpg.command.preset.applied": "霧プリセットが正常に適用されました: %s",
