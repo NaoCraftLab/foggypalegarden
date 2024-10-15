@@ -1,6 +1,5 @@
 package com.naocraftlab.foggypalegarden.mixin;
 
-import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
@@ -22,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.naocraftlab.foggypalegarden.FoggyPaleGardenClientMod.configFacade;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.CLEAR;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.RAIN;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.THUNDER;
@@ -47,7 +47,7 @@ public abstract class PaleGardenFogMixin {
     ) {
         val focusedEntity = (ClientPlayerEntity) camera.getFocusedEntity();
         val gameMode = resolveGameMode(focusedEntity);
-        if (ConfigManager.currentConfig().getNoFogGameModes().contains(gameMode)) {
+        if (configFacade().isNoFogGameMode(gameMode)) {
             fogDensity = 0.0f;
             return;
         }
@@ -67,6 +67,7 @@ public abstract class PaleGardenFogMixin {
                         .weather(resolveWeather(world))
                         .timeOfDay(world.getTimeOfDay())
                         .skyLightLevel(world.getLightLevel(SKY, blockPos))
+                        .height(blockPos.getY())
                         .heightAboveSurface(blockPos.getY() - hitResult.getPos().y)
                         .gameFogColor(toColor(color))
                         .fogDensity(fogDensity)

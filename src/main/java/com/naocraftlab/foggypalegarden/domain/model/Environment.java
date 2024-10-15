@@ -12,6 +12,7 @@ public record Environment(
         Weather weather,
         long timeOfDay,
         int skyLightLevel,
+        double height,
         double heightAboveSurface,
         Color gameFogColor,
         float fogDensity

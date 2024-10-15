@@ -1,0 +1,69 @@
+{
+  "code": "FPG_DIFFICULTY_BASED",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "difficultyIn": ["EASY", "PEACEFUL"] },
+          { "biomeIdIn": ["minecraft:pale_garden"] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 15.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "endDistance": 15.0,
+      "opacity": 95.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    },
+    {
+      "condition": {
+        "and": [
+          { "difficultyIn": [ "NORMAL" ] },
+          { "biomeIdIn": [ "minecraft:pale_garden" ] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 15.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "endDistance": 15.0,
+      "opacity": 100.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    },
+    {
+      "condition": {
+        "and": [
+          { "difficultyIn": [ "HARD" ] },
+          { "biomeIdIn": [ "minecraft:pale_garden" ] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 15.0 } }
+        ]
+      },
+      "startDistance": 0.0,
+      "endDistance": 10.0,
+      "opacity": 100.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    }
+  ],
+  "version": 3
+}

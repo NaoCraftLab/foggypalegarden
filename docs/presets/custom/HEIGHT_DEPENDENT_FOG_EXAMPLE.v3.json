@@ -1,0 +1,69 @@
+{
+  "code": "HEIGHT_DEPENDENT_FOG_EXAMPLE",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "dimensionIn": ["minecraft:overworld"] },
+          { "weatherIn": ["CLEAR"] },
+          { "height": { "min": 188.0, "max": 200.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "endDistance": 15.0,
+      "opacity": 95.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "FIXED",
+        "fixedHex": "f3f3f3"
+      },
+      "shape": "SPHERE"
+    },
+    {
+      "condition": {
+        "and": [
+          { "dimensionIn": ["minecraft:overworld"] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 5.0 } },
+          { "height": { "min": 64.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "endDistance": 15.0,
+      "opacity": 95.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    },
+    {
+      "condition": {
+        "and": [
+          {"dimensionIn": ["minecraft:overworld"]},
+          {"height": { "max": -57.0 } }
+        ]
+      },
+      "startDistance": 0.0,
+      "endDistance": 10.0,
+      "opacity": 90.0,
+      "encapsulationSpeed": 120.0,
+      "brightness": {
+        "mode": "FIXED",
+        "fixedBrightness": 30.0
+      },
+      "color": {
+        "mode": "FIXED",
+        "fixedHex": "ff9c42"
+      },
+      "shape": "SPHERE"
+    }
+  ],
+  "version": 3
+}

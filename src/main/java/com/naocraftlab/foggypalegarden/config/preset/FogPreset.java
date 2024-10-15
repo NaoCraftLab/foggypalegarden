@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.config;
+package com.naocraftlab.foggypalegarden.config.preset;
 
 import com.naocraftlab.foggypalegarden.exception.FoggyPaleGardenConfigurationException;
 import lombok.Data;
@@ -18,7 +18,7 @@ public class FogPreset {
     }
 
     public void validate() {
-        if (version != 2) {
+        if (version < 2 || version > 3) {
             throw new FoggyPaleGardenConfigurationException("Unsupported preset version (" + version + ")");
         }
     }

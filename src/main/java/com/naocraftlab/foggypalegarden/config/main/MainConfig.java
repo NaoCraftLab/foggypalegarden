@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.config;
+package com.naocraftlab.foggypalegarden.config.main;
 
 import com.naocraftlab.foggypalegarden.exception.FoggyPaleGardenConfigurationException;
 import lombok.Data;
@@ -6,19 +6,19 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class ModConfig {
+public class MainConfig {
 
     /**
      * Config schema version.
      */
     private final int version;
 
-    protected ModConfig() {
+    protected MainConfig() {
         this(-1);
     }
 
     public void validate() {
-        if (version < 1 || version > 2) {
+        if (version < 1 || version > 3) {
             throw new FoggyPaleGardenConfigurationException("Unsupported config version (" + version + ")");
         }
     }

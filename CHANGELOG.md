@@ -1,3 +1,14 @@
+## 1.21.2-2.6.0
+
+### Added
+
+- Fog conditions based on height (idea by Discord member Ko3leta)
+  - Minimum and maximum Y height
+  - Player's height above the surface moved to conditions
+  - Sky light level moved to conditions (allows detecting if the player is in a cave)
+
+⚠️ Config and preset migration from version 2 to version 3 is performed automatically
+
 ## 1.21.2-2.5.0
 
 ### Added

@@ -1,0 +1,28 @@
+{
+  "code": "PRE_DAWN_FOG",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "dimensionIn": [ "minecraft:overworld" ] },
+          { "timeIn": { "start": 22500, "end": 23800 } },
+          { "weatherIn": [ "CLEAR" ] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 15.0 } }
+        ]
+      },
+      "startDistance": 0.0,
+      "endDistance": 15.0,
+      "opacity": 50.0,
+      "encapsulationSpeed": 16.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    }
+  ],
+  "version": 3
+}

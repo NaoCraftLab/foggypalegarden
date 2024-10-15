@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.config;
+package com.naocraftlab.foggypalegarden.config.main;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.Set;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class ModConfigV1 extends ModConfig {
+public final class MainConfigV1 extends MainConfig {
 
     /**
      * List of biomes for activating fog.
@@ -28,7 +28,7 @@ public final class ModConfigV1 extends ModConfig {
      */
     private final FogSettings customFog;
 
-    public ModConfigV1(Set<String> biomes, FogPreset fogPreset, FogSettings customFog) {
+    public MainConfigV1(Set<String> biomes, FogPreset fogPreset, FogSettings customFog) {
         super(1);
         this.biomes = biomes;
         this.fogPreset = fogPreset;

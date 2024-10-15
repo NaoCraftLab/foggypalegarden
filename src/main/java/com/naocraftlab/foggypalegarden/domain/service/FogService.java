@@ -1,9 +1,8 @@
 package com.naocraftlab.foggypalegarden.domain.service;
 
-import com.naocraftlab.foggypalegarden.config.FogPresetV2;
-import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Brightness.BrightnessMode;
-import com.naocraftlab.foggypalegarden.config.FogPresetV2.Binding.Color.ColorMode;
-import com.naocraftlab.foggypalegarden.config.ModConfigV2;
+import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3;
+import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3.Binding.Brightness.BrightnessMode;
+import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3.Binding.Color.ColorMode;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
@@ -11,20 +10,17 @@ import com.naocraftlab.foggypalegarden.util.Pair;
 import lombok.experimental.UtilityClass;
 import lombok.val;
 
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 @UtilityClass
 public class FogService {
 
-    private static List<Pair<Predicate<Environment>, FogPresetV2.Binding>> presetBindings;
+    private static List<Pair<Predicate<Environment>, FogPresetV3.Binding>> presetBindings;
 
-    private static FogPresetV2.Binding currentBinding = null;
+    private static FogPresetV3.Binding currentBinding = null;
 
-    public static void onConfigChange(ModConfigV2 config, Map<String, Pair<Path, FogPresetV2>> presets) {
-        val currentPreset = presets.get(config.getPreset()).second();
+    public static void onCurrentPresetChange(FogPresetV3 currentPreset) {
         presetBindings = currentPreset.getBindings().stream()
                 .map(binding -> new Pair<>(binding.condition().toPredicate(), binding))
                 .toList();
@@ -41,8 +37,6 @@ public class FogService {
         currentBinding = candidate.orElse(currentBinding);
 
         val fogDensity = candidate.isPresent()
-                         && isWithinSurfaceHeight(currentBinding, environment)
-                         && isSkyLightLevelValid(currentBinding, environment)
                 ? Math.min(environment.fogDensity() + currentBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
                 : Math.max(environment.fogDensity() - currentBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
         return FogCharacteristics.builder()
@@ -54,15 +48,7 @@ public class FogService {
                 .build();
     }
 
-    private static boolean isWithinSurfaceHeight(FogPresetV2.Binding binding, Environment environment) {
-        return binding.surfaceHeightEnd() == null || environment.heightAboveSurface() <= binding.surfaceHeightEnd();
-    }
-
-    private static boolean isSkyLightLevelValid(FogPresetV2.Binding binding, Environment environment) {
-        return binding.skyLightStartLevel() == null || environment.skyLightLevel() >= binding.skyLightStartLevel();
-    }
-
-    private static Color calculateColor(Color gameFogColor, FogPresetV2.Binding binding, float fogDensity) {
+    private static Color calculateColor(Color gameFogColor, FogPresetV3.Binding binding, float fogDensity) {
         float red;
         float green;
         float blue;

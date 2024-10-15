@@ -4,21 +4,21 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
-import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import lombok.val;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.command.CommandSource;
 import net.minecraft.text.Text;
 
+import static com.naocraftlab.foggypalegarden.FoggyPaleGardenClientMod.configFacade;
 import static net.minecraft.util.Formatting.GREEN;
 import static net.minecraft.util.Formatting.RED;
 
 public class FpgPresetCommand implements FpgCommand {
 
     private static final SuggestionProvider<FabricClientCommandSource> PRESET_SUGGESTIONS = (context, builder) -> {
-        val presets = ConfigManager.allPresets();
-        return CommandSource.suggestMatching(presets.keySet(), builder);
+        val presets = configFacade().getAvailablePresetCodes();
+        return CommandSource.suggestMatching(presets, builder);
     };
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
@@ -28,7 +28,7 @@ public class FpgPresetCommand implements FpgCommand {
                                 .suggests(PRESET_SUGGESTIONS)
                                 .executes(FpgPresetCommand::setPreset))
                         .executes(context -> {
-                            val currentPreset = ConfigManager.currentConfig().getPreset();
+                            val currentPreset = configFacade().getCurrentPreset().getCode();
                             context.getSource().sendFeedback(Text.translatable("fpg.command.preset.current", currentPreset));
                             return 1;
                         })
@@ -42,18 +42,18 @@ public class FpgPresetCommand implements FpgCommand {
 
     private static int setPreset(CommandContext<FabricClientCommandSource> context) {
         val preset = StringArgumentType.getString(context, PRESET_ARGUMENT);
-        if (ConfigManager.allPresets().containsKey(preset)) {
-            try {
-                ConfigManager.saveConfig(ConfigManager.currentConfig().withPreset(preset));
+        try {
+            if (configFacade().setCurrentPreset(preset)) {
                 context.getSource().sendFeedback(Text.translatable("fpg.command.preset.applied", preset).formatted(GREEN));
+                configFacade().save();
                 return 1;
-            } catch (Exception e) {
-                context.getSource().sendError(Text.translatable("fpg.command.preset.exception", e.getMessage()).formatted(RED));
+            } else {
+                val allPresets = String.join("\n", configFacade().getAvailablePresetCodes());
+                context.getSource().sendError(Text.translatable("fpg.command.preset.notFound", preset, allPresets).formatted(RED));
                 return 0;
             }
-        } else {
-            val allPresets = String.join("\n", ConfigManager.allPresets().keySet());
-            context.getSource().sendError(Text.translatable("fpg.command.preset.notFound", preset, allPresets).formatted(RED));
+        } catch (Exception e) {
+            context.getSource().sendError(Text.translatable("fpg.command.preset.exception", e.getMessage()).formatted(RED));
             return 0;
         }
     }

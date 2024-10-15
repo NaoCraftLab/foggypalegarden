@@ -2,12 +2,12 @@ package com.naocraftlab.foggypalegarden.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import com.naocraftlab.foggypalegarden.config.ConfigManager;
 import lombok.val;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.Text;
 
+import static com.naocraftlab.foggypalegarden.FoggyPaleGardenClientMod.configFacade;
 import static net.minecraft.util.Formatting.GREEN;
 import static net.minecraft.util.Formatting.RED;
 
@@ -22,9 +22,9 @@ public class FpgReloadConfigCommand implements FpgCommand {
 
     private static int reloadConfig(CommandContext<FabricClientCommandSource> context) {
         try {
-            ConfigManager.reloadConfigs();
-            val currentPreset = ConfigManager.currentConfig().getPreset();
-            val allPresets = String.join("\n", ConfigManager.allPresets().keySet());
+            configFacade().load();
+            val currentPreset = configFacade().getCurrentPreset().getCode();
+            val allPresets = String.join("\n", configFacade().getAvailablePresetCodes());
             context.getSource().sendFeedback(
                     Text.translatable("fpg.command.reloadConfig.success", currentPreset, allPresets).formatted(GREEN)
             );

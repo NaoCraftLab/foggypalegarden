@@ -1,0 +1,26 @@
+{
+  "code": "FPG_AMBIANCE",
+  "bindings": [
+    {
+      "condition": {
+        "and": [
+          { "biomeIdIn": ["minecraft:pale_garden"] },
+          { "skyLightLevel": { "min": 4 } },
+          { "surfaceHeight": { "max": 15.0 } }
+        ]
+      },
+      "startDistance": 2.0,
+      "endDistance": 15.0,
+      "opacity": 95.0,
+      "encapsulationSpeed": 6.0,
+      "brightness": {
+        "mode": "BY_GAME_FOG"
+      },
+      "color": {
+        "mode": "BY_GAME_FOG"
+      },
+      "shape": "SPHERE"
+    }
+  ],
+  "version": 3
+}

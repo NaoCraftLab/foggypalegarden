@@ -14,19 +14,6 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 @UtilityClass
 public class FpgFiles {
 
-    public static boolean createDirectories(Path path) {
-        if (Files.exists(path)) {
-            return false;
-        }
-
-        try {
-            Files.createDirectories(path);
-        } catch (IOException e) {
-            throw new FoggyPaleGardenEnvironmentException("Failed to create directory (" + path.toAbsolutePath() + ")", e);
-        }
-        return true;
-    }
-
     public static String readString(Path path) {
         try {
             return Files.readString(path, UTF_8);
@@ -43,5 +30,18 @@ public class FpgFiles {
             throw new FoggyPaleGardenEnvironmentException("Failed to write file (" + path.toAbsolutePath() + ")", e);
         }
         return path;
+    }
+
+    private static boolean createDirectories(Path path) {
+        if (Files.exists(path)) {
+            return false;
+        }
+
+        try {
+            Files.createDirectories(path);
+        } catch (IOException e) {
+            throw new FoggyPaleGardenEnvironmentException("Failed to create directory (" + path.toAbsolutePath() + ")", e);
+        }
+        return true;
     }
 }

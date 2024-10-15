@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.config;
+package com.naocraftlab.foggypalegarden.config.main;
 
 import lombok.Builder;
 import lombok.Data;
@@ -14,14 +14,14 @@ import java.util.Set;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class ModConfigV2 extends ModConfig {
+public final class MainConfigV3 extends MainConfig {
 
     private final String preset;
 
     private final Set<GameMode> noFogGameModes;
 
-    public ModConfigV2(String preset, Set<GameMode> noFogGameModes) {
-        super(2);
+    public MainConfigV3(String preset, Set<GameMode> noFogGameModes) {
+        super(3);
         this.preset = preset;
         this.noFogGameModes = noFogGameModes;
     }

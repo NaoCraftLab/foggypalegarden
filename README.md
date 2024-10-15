@@ -30,9 +30,18 @@ A Minecraft mod that adds fog to the Pale Garden biome. But you can customize an
 </details>
 
 <details>
-  <summary>🎨 Fog presets feature allows you to choose from predefined options, create a custom preset, or have the fog adjust based on the game’s difficulty.</summary>
+  <summary>🎨 Fog presets feature allows you to choose from predefined options, create a custom preset, or have the fog adjust based on the game’s difficulty</summary>
 
 ![fog-presets.gif](docs/images/fog-presets.gif)
+
+</details>
+
+<details>
+  <summary>🧗‍♀️ The conditions for fog formation will allow for creating different types of fog even in the same location</summary>
+
+![different-fog-at-different-heights.gif](docs/images/different-fog-at-different-heights.gif)
+
+[You can download this example on GitHub](docs/presets/custom/HEIGHT_DEPENDENT_FOG_EXAMPLE.v3.json)
 
 </details>
 
@@ -143,8 +152,6 @@ In the config `config/foggy-pale-garden.json`, the value `"noFogGameModes": ["SP
 - Fog brightness
 - Fog color
 - Speed of fog dispersal when entering or leaving it
-- Sky light brightness below which the fog disperses (allows excluding fog in caves)
-- Player's height above the surface after which the fog disperses (allows excluding fog while flying)
 - Fog shape (available options: SPHERE and CYLINDER)
 
 ### Fog Conditions
@@ -157,6 +164,9 @@ They can be used in any combination thanks to AND, OR, and NOT conditions
 - Weather
 - Time of day
 - World difficulty level
+- Sky brightness (allows detecting if the player is in a cave)
+- Player's height above the surface
+- Player's position on the Y-axis
 
 ### Full Configuration
 
@@ -168,13 +178,13 @@ The configuration file is located at `config/foggy-pale-garden.json` and allows 
 ```json
 {
     // active fog preset
-    "preset": "FPG_STEPHEN_KING",
+    "preset": "MY_PRESET",
 
     // (optional) list of game modes where fog is disabled ("SURVIVAL", "CREATIVE", "ADVENTURE", "SPECTATOR")
     "noFogGameModes": [""],
     
     // config schema version (do not change this value)
-    "version": 2
+    "version": 3
 }
 ```
 
@@ -222,6 +232,15 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
                 
                 // (optional) time range during which this binding is applied (start can be greater than end)
                 "timeIn": { "start": 0, "end": 0 },
+              
+                // (optional) sky light level [0, 15]
+                "skyLightLevel": { "min": 0, "max": 0 },
+
+                // (optional) player's position on the Y-axis
+                "height": { "min": 0.0, "max": 0.0 },
+
+                // (optional) player's height above the surface (cannot be negative)
+                "surfaceHeight": { "min": 0.0, "max": 0.0 },
                 
                 // (optional) group of conditions that must all be met for this binding to be applied
                 "and": [{}],
@@ -234,18 +253,10 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             
             // (optional) distance (in blocks) at which the fog starts (cannot be negative)
             "startDistance": 0.0,
-            
-            // (optional) sky light level [0, 15] below which the fog dissipates. The lower the value, the deeper the fog will descend into caves
-            // if not set, the fog extends down to bedrock
-            "skyLightStartLevel": 0,
-            
+
             // (optional) distance (in blocks) at which the fog ends (cannot be negative)
             "endDistance": 0.0,
-            
-            // (optional) player height above the surface after which the fog dissipates (cannot be negative)
-            // if not set, the fog extends up to the top of the world
-            "surfaceHeightEnd": 0.0,
-            
+
             // (optional) fog density in percent (0.0, 100.0]
             "opacity": 0.0,
             
@@ -288,7 +299,7 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
     ],
     
     // preset schema version (do not change this value)
-    "version": 2
+    "version": 3
 }
 ```
 
