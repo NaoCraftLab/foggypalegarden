@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "設定と霧プリセットを再読み込みできませんでした: %s",
   "fpg.command.noFogGameMode.on": "ゲームモードの霧が有効になりました: %s",
   "fpg.command.noFogGameMode.off": "ゲームモードの霧が無効になりました: %s",
-  "fpg.command.noFogGameMode.notFound": "ゲームモード %s はサポートされていません\n霧の制御が可能なゲームモード一覧:\n%s"
+  "fpg.command.noFogGameMode.notFound": "ゲームモード %s はサポートされていません\n霧の制御が可能なゲームモード一覧:\n%s",
+  "fpg.command.noFogGameMode.list": "霧が無効になっているゲームモード:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "霧が無効になっているゲームモードはありません"
 }

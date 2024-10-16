@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Impossibile ricaricare la configurazione e i preset di nebbia: %s",
   "fpg.command.noFogGameMode.on": "Nebbia abilitata per la modalità di gioco: %s",
   "fpg.command.noFogGameMode.off": "Nebbia disabilitata per la modalità di gioco: %s",
-  "fpg.command.noFogGameMode.notFound": "Modalità di gioco %s non supportata\nModalità di gioco disponibili per il controllo della nebbia:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Modalità di gioco %s non supportata\nModalità di gioco disponibili per il controllo della nebbia:\n%s",
+  "fpg.command.noFogGameMode.list": "Modalità di gioco per le quali la nebbia è disattivata:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Non ci sono modalità di gioco con la nebbia disattivata"
 }

@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "구성 및 안개 프리셋을 다시 로드하지 못했습니다: %s",
   "fpg.command.noFogGameMode.on": "게임 모드에 안개가 활성화되었습니다: %s",
   "fpg.command.noFogGameMode.off": "게임 모드에 안개가 비활성화되었습니다: %s",
-  "fpg.command.noFogGameMode.notFound": "게임 모드 %s(은)는 지원되지 않습니다\n안개 제어를 위한 사용 가능한 게임 모드:\n%s"
+  "fpg.command.noFogGameMode.notFound": "게임 모드 %s(은)는 지원되지 않습니다\n안개 제어를 위한 사용 가능한 게임 모드:\n%s",
+  "fpg.command.noFogGameMode.list": "안개가 비활성화된 게임 모드:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "안개가 비활성화된 게임 모드가 없습니다"
 }

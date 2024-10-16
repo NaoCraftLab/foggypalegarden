@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Impossible de recharger la configuration et les presets de brouillard : %s",
   "fpg.command.noFogGameMode.on": "Brouillard activé pour le mode de jeu : %s",
   "fpg.command.noFogGameMode.off": "Brouillard désactivé pour le mode de jeu : %s",
-  "fpg.command.noFogGameMode.notFound": "Mode de jeu %s non pris en charge\nModes de jeu disponibles pour le contrôle du brouillard :\n%s"
+  "fpg.command.noFogGameMode.notFound": "Mode de jeu %s non pris en charge\nModes de jeu disponibles pour le contrôle du brouillard :\n%s",
+  "fpg.command.noFogGameMode.list": "Modes de jeu pour lesquels le brouillard est désactivé :\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Aucun mode de jeu avec le brouillard désactivé"
 }

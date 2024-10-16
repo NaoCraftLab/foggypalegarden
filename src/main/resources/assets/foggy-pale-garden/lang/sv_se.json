@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Kunde inte läsa in konfiguration och dimmapresets igen: %s",
   "fpg.command.noFogGameMode.on": "Dimma aktiverad för spelläge: %s",
   "fpg.command.noFogGameMode.off": "Dimma inaktiverad för spelläge: %s",
-  "fpg.command.noFogGameMode.notFound": "Spelläge %s stöds inte\nTillgängliga spellägen för dimkontroll:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Spelläge %s stöds inte\nTillgängliga spellägen för dimkontroll:\n%s",
+  "fpg.command.noFogGameMode.list": "Spellägen där dimman är avstängd:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Det finns inga spellägen där dimman är avstängd"
 }

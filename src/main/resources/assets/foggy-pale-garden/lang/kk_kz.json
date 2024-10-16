@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Конфигурация және тұман пресеттерін қайта жүктеу мүмкін болмады: %s",
   "fpg.command.noFogGameMode.on": "Тұман ойын режимі үшін қосылды: %s",
   "fpg.command.noFogGameMode.off": "Тұман ойын режимі үшін өшірілді: %s",
-  "fpg.command.noFogGameMode.notFound": "Ойын режимі %s қолдау көрсетілмейді\nТұманды басқару үшін қол жетімді ойын режимдері:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Ойын режимі %s қолдау көрсетілмейді\nТұманды басқару үшін қол жетімді ойын режимдері:\n%s",
+  "fpg.command.noFogGameMode.list": "Тұман өшірілген ойын режимдері:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Тұман өшірілген ойын режимдері жоқ"
 }

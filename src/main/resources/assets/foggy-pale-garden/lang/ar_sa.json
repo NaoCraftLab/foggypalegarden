@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "تعذّر إعادة تحميل التكوين وإعدادات الضباب: %s",
   "fpg.command.noFogGameMode.on": "تم تمكين الضباب لوضع اللعبة: %s",
   "fpg.command.noFogGameMode.off": "تم تعطيل الضباب لوضع اللعبة: %s",
-  "fpg.command.noFogGameMode.notFound": "وضع اللعبة %s غير مدعوم\nأوضاع اللعبة المتاحة للتحكم في الضباب:\n%s"
+  "fpg.command.noFogGameMode.notFound": "وضع اللعبة %s غير مدعوم\nأوضاع اللعبة المتاحة للتحكم في الضباب:\n%s",
+  "fpg.command.noFogGameMode.list": "أوضاع اللعبة التي تم تعطيل الضباب لها:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "لا توجد أوضاع لعبة تم تعطيل الضباب فيها"
 }

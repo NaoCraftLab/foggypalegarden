@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Falha ao recarregar a configuração e os presets de névoa: %s",
   "fpg.command.noFogGameMode.on": "Névoa habilitada para o modo de jogo: %s",
   "fpg.command.noFogGameMode.off": "Névoa desabilitada para o modo de jogo: %s",
-  "fpg.command.noFogGameMode.notFound": "Modo de jogo %s não é suportado\nModos de jogo disponíveis para controle de névoa:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Modo de jogo %s não é suportado\nModos de jogo disponíveis para controle de névoa:\n%s",
+  "fpg.command.noFogGameMode.list": "Modos de jogo nos quais a névoa está desativada:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Não há modos de jogo com a névoa desativada"
 }

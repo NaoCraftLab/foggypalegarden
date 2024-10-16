@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.8-SNAPSHOT"
+    id("fabric-loom")
     id("com.modrinth.minotaur") version "2.+"
     id("com.matthewprenger.cursegradle") version "1.4.0"
 }
@@ -126,6 +126,7 @@ if (modrinthToken != null) {
 
         dependencies {
             required.project("fabric-api")
+            optional.project("modmenu")
         }
     }
 }
@@ -156,6 +157,7 @@ if (curseForgeApiKey != null) {
             )
             relations(closureOf<com.matthewprenger.cursegradle.CurseRelation> {
                 requiredDependency("fabric-api")
+                optionalDependency("modmenu")
             })
         })
     }

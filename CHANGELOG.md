@@ -1,3 +1,9 @@
+## 1.21.2-2.7.0
+
+### Added
+
+- The command `/fpg noFogGameMode` now outputs to chat a list of game modes where the fog is disabled
+
 ## 1.21.2-2.6.0
 
 ### Added

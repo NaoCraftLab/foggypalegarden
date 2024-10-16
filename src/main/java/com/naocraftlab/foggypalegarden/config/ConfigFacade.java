@@ -47,6 +47,11 @@ public final class ConfigFacade {
 
     // config
 
+    @NotNull
+    public List<GameMode> noFogGameModes() {
+        return mainConfig.getNoFogGameModes().stream().sorted().toList();
+    }
+
     public boolean isNoFogGameMode(@NotNull GameMode gameMode) {
         return mainConfig.getNoFogGameModes().contains(gameMode);
     }

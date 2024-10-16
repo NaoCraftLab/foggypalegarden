@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Failed to reload configuration and fog presets: %s",
   "fpg.command.noFogGameMode.on": "Fog enabled for game mode: %s",
   "fpg.command.noFogGameMode.off": "Fog disabled for game mode: %s",
-  "fpg.command.noFogGameMode.notFound": "Game mode %s is not supported\nAvailable game modes for fog control:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Game mode %s is not supported\nAvailable game modes for fog control:\n%s",
+  "fpg.command.noFogGameMode.list": "Game modes for which fog is disabled:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "There are no game modes with fog disabled"
 }

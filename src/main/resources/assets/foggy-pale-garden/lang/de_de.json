@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Konnte Konfiguration und Nebel-Presets nicht neu laden: %s",
   "fpg.command.noFogGameMode.on": "Nebel aktiviert für Spielmodus: %s",
   "fpg.command.noFogGameMode.off": "Nebel deaktiviert für Spielmodus: %s",
-  "fpg.command.noFogGameMode.notFound": "Spielmodus %s wird nicht unterstützt\nVerfügbare Spielmodi zur Nebelsteuerung:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Spielmodus %s wird nicht unterstützt\nVerfügbare Spielmodi zur Nebelsteuerung:\n%s",
+  "fpg.command.noFogGameMode.list": "Spielmodi, für die der Nebel deaktiviert ist:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Es gibt keine Spielmodi mit deaktiviertem Nebel"
 }

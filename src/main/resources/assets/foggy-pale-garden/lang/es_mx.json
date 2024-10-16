@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "No se pudo recargar la configuración y los presets de niebla: %s",
   "fpg.command.noFogGameMode.on": "Niebla habilitada para el modo de juego: %s",
   "fpg.command.noFogGameMode.off": "Niebla deshabilitada para el modo de juego: %s",
-  "fpg.command.noFogGameMode.notFound": "Modo de juego %s no soportado\nModos de juego disponibles para control de niebla:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Modo de juego %s no soportado\nModos de juego disponibles para control de niebla:\n%s",
+  "fpg.command.noFogGameMode.list": "Modos de juego en los que la niebla está desactivada:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "No hay modos de juego con la niebla desactivada"
 }

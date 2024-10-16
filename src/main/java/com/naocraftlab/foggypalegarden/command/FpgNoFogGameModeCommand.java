@@ -26,8 +26,9 @@ public class FpgNoFogGameModeCommand implements FpgCommand {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(
-                ClientCommandManager.literal(BASE_COMMAND).then(ClientCommandManager.literal(NO_FOG_GAME_MODE_ARGUMENT).then(
-                        ClientCommandManager.argument(NO_FOG_GAME_MODE_ARGUMENT, StringArgumentType.string())
+                ClientCommandManager.literal(BASE_COMMAND).then(ClientCommandManager.literal(NO_FOG_GAME_MODE_ARGUMENT)
+                        .executes(FpgNoFogGameModeCommand::listNoFogGameModes)
+                        .then(ClientCommandManager.argument(NO_FOG_GAME_MODE_ARGUMENT, StringArgumentType.string())
                                 .suggests(GAME_MODE_SUGGESTIONS)
                                 .executes(FpgNoFogGameModeCommand::toggleFogForGameMode)
                         )
@@ -53,5 +54,17 @@ public class FpgNoFogGameModeCommand implements FpgCommand {
             );
             return 0;
         }
+    }
+
+    private static int listNoFogGameModes(CommandContext<FabricClientCommandSource> context) {
+        if (!configFacade().noFogGameModes().isEmpty()) {
+            val noFogGameModes = configFacade().noFogGameModes().stream()
+                    .map(GameMode::name)
+                    .collect(joining("\n"));
+            context.getSource().sendFeedback(Text.translatable("fpg.command.noFogGameMode.list", noFogGameModes).formatted(GREEN));
+        } else {
+            context.getSource().sendFeedback(Text.translatable("fpg.command.noFogGameMode.listEmpty").formatted(GREEN));
+        }
+        return 1;
     }
 }

@@ -10,5 +10,7 @@
   "fpg.command.reloadConfig.exception": "Не удалось перезагрузить конфигурацию и пресеты тумана: %s",
   "fpg.command.noFogGameMode.on": "Туман включен для игрового режима: %s",
   "fpg.command.noFogGameMode.off": "Туман выключен для игрового режима: %s",
-  "fpg.command.noFogGameMode.notFound": "Игровой режим %s не поддерживается\nСписок доступных игровых режимов для управления туманом:\n%s"
+  "fpg.command.noFogGameMode.notFound": "Игровой режим %s не поддерживается\nСписок доступных игровых режимов для управления туманом:\n%s",
+  "fpg.command.noFogGameMode.list": "Игровые режимы, для которых выключен туман:\n%s",
+  "fpg.command.noFogGameMode.listEmpty": "Игровые режимы с отключенным туманом отсутствуют"
 }
