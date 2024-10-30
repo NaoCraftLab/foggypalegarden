@@ -1,4 +1,4 @@
-<img src="fabric/src/main/resources/assets/foggy-pale-garden/icon.png" width="128">
+<img src="src/main/resources/assets/foggy-pale-garden/icon.png" width="128">
 
 # Foggy Pale Garden
 
