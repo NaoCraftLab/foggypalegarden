@@ -135,7 +135,7 @@ if (modrinthToken != null) {
 
         dependencies {
             required.project("fabric-api")
-            required.project("cloth-config")
+            optional.project("cloth-config")
             optional.project("modmenu")
         }
     }

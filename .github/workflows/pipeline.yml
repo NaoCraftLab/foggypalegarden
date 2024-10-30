@@ -101,7 +101,7 @@ jobs:
           fabricSupportedLoaders=$(grep 'fabricSupportedLoaders' gradle.properties | cut -d'=' -f2 | xargs)
           echo "MOD_ID=$modId" >> $GITHUB_ENV
           echo "MOD_VERSION=$minecraftReleaseVersion-$modVersion" >> $GITHUB_ENV
-          echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion-$minecraftReleaseVersion" >> $GITHUB_ENV
+          echo "MINECRAFT_VERSIONS=Minecraft: $minecraftFirstSnapshotVersion+" >> $GITHUB_ENV
           echo "LOADERS=Loaders: $fabricSupportedLoaders" >> $GITHUB_ENV
           echo "MINECRAFT_FIRST_SNAPSHOT_VERSION=$minecraftFirstSnapshotVersion" >> $GITHUB_ENV
           echo "MINECRAFT_RELEASE_VERSION=$minecraftReleaseVersion" >> $GITHUB_ENV
