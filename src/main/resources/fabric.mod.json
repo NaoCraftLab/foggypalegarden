@@ -14,7 +14,7 @@
     "discord": "${modDiscord}"
   },
   "license": "${modLicense}",
-  "icon": "assets/foggy-pale-garden/icon.png",
+  "icon": "assets/foggypalegarden/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [

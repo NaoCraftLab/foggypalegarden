@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Ajoute du brouillard au Jardin Pâle et partout ailleurs !",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Explorez la page du mod et vous pourrez ajouter n'importe quel brouillard n'importe où dans le jeu grâce à un système de configuration flexible.",
+  "modmenu.summaryTranslation.foggypalegarden": "Ajoute du brouillard au Jardin Pâle et partout ailleurs !",
+  "modmenu.descriptionTranslation.foggypalegarden": "Explorez la page du mod et vous pourrez ajouter n'importe quel brouillard n'importe où dans le jeu grâce à un système de configuration flexible.",
   "fpg.command.help": "Commandes de gestion du mod Foggy Pale Garden :\n%s",
   "fpg.command.preset.current": "Preset de brouillard actuel : %s",
   "fpg.command.preset.applied": "Preset de brouillard appliqué avec succès : %s",

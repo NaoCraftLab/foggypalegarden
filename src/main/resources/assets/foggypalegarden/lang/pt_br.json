@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Adiciona névoa ao Jardim Pálido e a qualquer outro lugar!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Explore a página do mod e você poderá adicionar qualquer névoa a qualquer lugar do jogo graças a um sistema de configuração flexível.",
+  "modmenu.summaryTranslation.foggypalegarden": "Adiciona névoa ao Jardim Pálido e a qualquer outro lugar!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Explore a página do mod e você poderá adicionar qualquer névoa a qualquer lugar do jogo graças a um sistema de configuração flexível.",
   "fpg.command.help": "Comandos de gerenciamento do mod Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Preset de névoa atual: %s",
   "fpg.command.preset.applied": "Preset de névoa aplicado com sucesso: %s",

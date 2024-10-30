@@ -1,4 +1,4 @@
-<img src="src/main/resources/assets/foggy-pale-garden/icon.png" width="128">
+<img src="src/main/resources/assets/foggypalegarden/icon.png" width="128">
 
 # Foggy Pale Garden
 
@@ -81,7 +81,7 @@ For example, this preset will create pre-dawn fog during clear weather in all bi
 }
 ```
 
-To apply it, create a file `PRE_DAWN_FOG.json` with this content in the `config/foggypalegarden` folder and set the value `"preset": "PRE_DAWN_FOG"` in `config/foggy-pale-garden.json`.
+To apply it, create a file `PRE_DAWN_FOG.json` with this content in the `config/foggypalegarden` folder and set the value `"preset": "PRE_DAWN_FOG"` in `config/foggypalegarden.json`.
 
 Read more about the available features in the [🛠️ Configuration](#-configuration) section.
 
@@ -129,7 +129,7 @@ Supported languages:
 - 🇸🇪 Swedish
 - 🇺🇦 Ukrainian
 
-You can request a translation into your language or report a translation error on [GitHub](https://github.com/NaoCraftLab/foggy-pale-garden/issues).
+You can request a translation into your language or report a translation error on [GitHub](https://github.com/NaoCraftLab/foggypalegarden/issues).
 
 </details>
 
@@ -138,7 +138,7 @@ You can request a translation into your language or report a translation error o
 
 <img src="docs/images/no-fog-game-modes.gif" width="600px">
 
-In the config `config/foggy-pale-garden.json`, the value `"noFogGameModes": ["SPECTATOR"]` is set.
+In the config `config/foggypalegarden.json`, the value `"noFogGameModes": ["SPECTATOR"]` is set.
 
 </details>
 
@@ -181,7 +181,7 @@ They can be used in any combination thanks to AND, OR, and NOT conditions
 <details>
   <summary>Available configuration options</summary>
 
-The configuration file is located at `config/foggy-pale-garden.json` and allows you to set one of the available fog presets.
+The configuration file is located at `config/foggypalegarden.json` and allows you to set one of the available fog presets.
 
 ```json
 {
@@ -201,7 +201,7 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
 ```json
 {
         
-    // preset code (you need to specify this value in config/foggy-pale-garden.json to apply the preset)
+    // preset code (you need to specify this value in config/foggypalegarden.json to apply the preset)
     "code": "MY_PRESET",
     
     // a set of bindings, each responsible for your configured fog appearance and applied based on specified conditions
@@ -317,7 +317,7 @@ Examples of presets can be found in the [GitHub repository](docs/presets).
 
 ## 💥 Compatibility with Other Mods
 
-If you encounter compatibility issues between Foggy Pale Garden and other mods, please open an [issue on GitHub](https://github.com/NaoCraftLab/foggy-pale-garden/issues) or [contact us on Discord](https://discord.gg/NmzHNyrGK4).
+If you encounter compatibility issues between Foggy Pale Garden and other mods, please open an [issue on GitHub](https://github.com/NaoCraftLab/foggypalegarden/issues) or [contact us on Discord](https://discord.gg/NmzHNyrGK4).
 
 ## 🚀 Plans
 

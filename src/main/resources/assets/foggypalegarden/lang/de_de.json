@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Fügt Nebel zum Blassen Garten und überall sonst hinzu!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Erkunde die Mod-Seite und du kannst dank eines flexiblen Konfigurationssystems jeden Nebel an jeden Ort im Spiel hinzufügen.",
+  "modmenu.summaryTranslation.foggypalegarden": "Fügt Nebel zum Blassen Garten und überall sonst hinzu!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Erkunde die Mod-Seite und du kannst dank eines flexiblen Konfigurationssystems jeden Nebel an jeden Ort im Spiel hinzufügen.",
   "fpg.command.help": "Befehle zur Verwaltung des Foggy Pale Garden Mods:\n%s",
   "fpg.command.preset.current": "Aktuelles Nebel-Preset: %s",
   "fpg.command.preset.applied": "Nebel-Preset erfolgreich angewendet: %s",

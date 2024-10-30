@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Добавляет туман в Бледный Сад и вообще куда угодно!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Изучите страницу мода и вы сможете добавить любой туман в любое место в игре благодаря гибкой системе конфигурации.",
+  "modmenu.summaryTranslation.foggypalegarden": "Добавляет туман в Бледный Сад и вообще куда угодно!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Изучите страницу мода и вы сможете добавить любой туман в любое место в игре благодаря гибкой системе конфигурации.",
   "fpg.command.help": "Команды управления модом Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Текущий пресет тумана: %s",
   "fpg.command.preset.applied": "Пресет тумана успешно установлен: %s",

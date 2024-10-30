@@ -2,6 +2,7 @@ package com.naocraftlab.foggypalegarden.util;
 
 import com.naocraftlab.foggypalegarden.exception.FoggyPaleGardenEnvironmentException;
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +15,8 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 @UtilityClass
 public class FpgFiles {
 
-    public static String readString(Path path) {
+    @NotNull
+    public static String readString(@NotNull Path path) {
         try {
             return Files.readString(path, UTF_8);
         } catch (Exception e) {
@@ -22,7 +24,8 @@ public class FpgFiles {
         }
     }
 
-    public static Path writeString(Path path, CharSequence charSequence) {
+    @NotNull
+    public static Path writeString(@NotNull Path path, @NotNull CharSequence charSequence) {
         try {
             createDirectories(path.getParent());
             Files.writeString(path, charSequence, UTF_8, CREATE, TRUNCATE_EXISTING);
@@ -32,7 +35,20 @@ public class FpgFiles {
         return path;
     }
 
-    private static boolean createDirectories(Path path) {
+    @NotNull
+    public static Path move(@NotNull Path source, @NotNull Path target) {
+        try {
+            createDirectories(target.getParent());
+            return Files.move(source, target);
+        } catch (IOException e) {
+            throw new FoggyPaleGardenEnvironmentException(
+                    "Failed to move file (" + source.toAbsolutePath() + " -> " + target.toAbsolutePath() + ")",
+                    e
+            );
+        }
+    }
+
+    private static boolean createDirectories(@NotNull Path path) {
         if (Files.exists(path)) {
             return false;
         }

@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static java.nio.file.Files.exists;
+import static java.nio.file.Files.isRegularFile;
 import static java.util.stream.Collectors.toMap;
 import static net.minecraft.world.Difficulty.EASY;
 import static net.minecraft.world.Difficulty.HARD;
@@ -190,24 +191,39 @@ public final class ConfigMigrator {
             @Nullable MainConfig mainConfig,
             @NotNull Map<Path, FogPreset> sourcePresetByPath
     ) {
-        val migratedConfig = mainConfig != null ? migrateMainConfig(configPath, mainConfig) : DEFAULT_CONFIG;
+        final MainConfigV3 migratedConfig;
+        if (mainConfig != null) {
+            migratedConfig = migrateMainConfig(configPath, mainConfig);
+        } else {
+            val oldModIdConfigPath = configPath.resolveSibling("foggy-pale-garden.json");
+            if (exists(oldModIdConfigPath) && isRegularFile(oldModIdConfigPath)) {
+                FpgFiles.move(oldModIdConfigPath, configPath);
+                val oldModIdConfig = GSON.fromJson(FpgFiles.readString(configPath), MainConfig.class);
+                migratedConfig = migrateMainConfig(configPath, oldModIdConfig);
+            } else {
+                migratedConfig = DEFAULT_CONFIG;
+            }
+        }
         val presetByPath = new HashMap<>(sourcePresetByPath);
+
+        if (mainConfig != null && mainConfig.getVersion() == 1) {
+            val mainConfigV1 = GSON.fromJson(FpgFiles.readString(configPath), MainConfigV1.class);
+            val generatedPresetsV2 = mainConfigV1ToFogPresetsV2Converter.convert(mainConfigV1);
+            for (val generatedPresetV2Entry : generatedPresetsV2.entrySet()) {
+                FpgFiles.writeString(generatedPresetV2Entry.getKey(), GSON.toJson(generatedPresetV2Entry.getValue()));
+            }
+            presetByPath.putAll(generatedPresetsV2);
+        }
+
         final Map<Path, FogPresetV3> migratedPresetByPath;
         if (!presetByPath.isEmpty()) {
-            if (mainConfig.getVersion() == 1) {
-                val mainConfigV1 = GSON.fromJson(FpgFiles.readString(configPath), MainConfigV1.class);
-                val generatedPresetsV2 = mainConfigV1ToFogPresetsV2Converter.convert(mainConfigV1);
-                for (val generatedPresetV2Entry : generatedPresetsV2.entrySet()) {
-                    FpgFiles.writeString(generatedPresetV2Entry.getKey(), GSON.toJson(generatedPresetV2Entry.getValue()));
-                }
-                presetByPath.putAll(generatedPresetsV2);
-            }
             migratedPresetByPath = migratePresets(presetByPath);
         } else {
             migratedPresetByPath = DEFAULT_PRESETS.stream()
                     .map(preset -> new Pair<>(presetDirectoryPath.resolve(preset.getCode() + ".json"), (FogPreset) preset))
                     .collect(toMap(Pair::first, pair -> (FogPresetV3) pair.second()));
         }
+
         return MigrationResult.<MainConfigV3, FogPresetV3>builder()
                 .configPath(configPath)
                 .mainConfig(migratedConfig)
@@ -215,11 +231,8 @@ public final class ConfigMigrator {
                 .build();
     }
 
-    private @Nullable MainConfigV3 migrateMainConfig(@NotNull Path configPath, @NotNull MainConfig mainConfig) {
-        if (!exists(configPath)) {
-            return null;
-        }
-        MainConfig migratedConfig = readMainConfig(configPath, mainConfig.getVersion());
+    private @NotNull MainConfigV3 migrateMainConfig(@NotNull Path configPath, @NotNull MainConfig mainConfig) {
+        var migratedConfig = readMainConfig(configPath, mainConfig.getVersion());
         while (!(migratedConfig instanceof MainConfigV3)) {
             migratedConfig = mainConfigConverters.get(migratedConfig.getVersion()).convert(migratedConfig);
         }

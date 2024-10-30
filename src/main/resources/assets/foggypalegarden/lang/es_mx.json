@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "¡Agrega niebla al Jardín Pálido y a cualquier otro lugar!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Explora la página del mod y podrás agregar cualquier niebla a cualquier lugar del juego gracias a un sistema de configuración flexible.",
+  "modmenu.summaryTranslation.foggypalegarden": "¡Agrega niebla al Jardín Pálido y a cualquier otro lugar!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Explora la página del mod y podrás agregar cualquier niebla a cualquier lugar del juego gracias a un sistema de configuración flexible.",
   "fpg.command.help": "Comandos de gestión del mod Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Preset de niebla actual: %s",
   "fpg.command.preset.applied": "Preset de niebla aplicado con éxito: %s",

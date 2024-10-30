@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Lägger till dimma i Bleka Trädgården och var som helst!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Utforska moddens sida så kan du lägga till vilken dimma som helst var som helst i spelet tack vare ett flexibelt konfigurationssystem.",
+  "modmenu.summaryTranslation.foggypalegarden": "Lägger till dimma i Bleka Trädgården och var som helst!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Utforska moddens sida så kan du lägga till vilken dimma som helst var som helst i spelet tack vare ett flexibelt konfigurationssystem.",
   "fpg.command.help": "Kommandon för att hantera modden Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "Aktuell dimmapreset: %s",
   "fpg.command.preset.applied": "Dimmapreset har tillämpats framgångsrikt: %s",

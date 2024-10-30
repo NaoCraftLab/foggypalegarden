@@ -9,6 +9,8 @@
 
 - `modId` replaced with `foggypalegarden` for compatibility with other loaders during porting
 
+⚠️ The configuration file `config/foggy-pale-garden.json` will be renamed to `config/foggypalegarden.json` on the first mod launch.
+
 ## 1.21.2-2.7.0
 
 ### Added

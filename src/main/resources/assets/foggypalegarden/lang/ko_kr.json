@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "창백한 정원과 어디든지 안개를 추가합니다!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "모드 페이지를 탐색하여 유연한 구성 시스템으로 게임 내 어디든 원하는 안개를 추가할 수 있습니다.",
+  "modmenu.summaryTranslation.foggypalegarden": "창백한 정원과 어디든지 안개를 추가합니다!",
+  "modmenu.descriptionTranslation.foggypalegarden": "모드 페이지를 탐색하여 유연한 구성 시스템으로 게임 내 어디든 원하는 안개를 추가할 수 있습니다.",
   "fpg.command.help": "Foggy Pale Garden 모드 관리 명령어:\n%s",
   "fpg.command.preset.current": "현재 안개 프리셋: %s",
   "fpg.command.preset.applied": "안개 프리셋이 성공적으로 적용되었습니다: %s",

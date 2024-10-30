@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Ақ баққа және кез келген жерге тұман қосады!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Мод бетімен танысып, икемді конфигурация жүйесінің арқасында ойынның кез келген жеріне кез келген тұманды қоса аласыз.",
+  "modmenu.summaryTranslation.foggypalegarden": "Ақ баққа және кез келген жерге тұман қосады!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Мод бетімен танысып, икемді конфигурация жүйесінің арқасында ойынның кез келген жеріне кез келген тұманды қоса аласыз.",
   "fpg.command.help": "Foggy Pale Garden модын басқару командалары:\n%s",
   "fpg.command.preset.current": "Ағымдағы тұман пресеті: %s",
   "fpg.command.preset.applied": "Тұман пресеті сәтті қолданылды: %s",

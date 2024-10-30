@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "يضيف الضباب إلى الحديقة الشاحبة وأي مكان آخر!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "استكشف صفحة المود ويمكنك إضافة أي ضباب إلى أي مكان في اللعبة بفضل نظام التكوين المرن.",
+  "modmenu.summaryTranslation.foggypalegarden": "يضيف الضباب إلى الحديقة الشاحبة وأي مكان آخر!",
+  "modmenu.descriptionTranslation.foggypalegarden": "استكشف صفحة المود ويمكنك إضافة أي ضباب إلى أي مكان في اللعبة بفضل نظام التكوين المرن.",
   "fpg.command.help": "أوامر إدارة مود Foggy Pale Garden:\n%s",
   "fpg.command.preset.current": "الإعداد الحالي للضباب: %s",
   "fpg.command.preset.applied": "تم تطبيق إعداد الضباب بنجاح: %s",

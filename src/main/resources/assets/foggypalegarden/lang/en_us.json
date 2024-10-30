@@ -1,6 +1,6 @@
 {
-  "modmenu.summaryTranslation.foggy-pale-garden": "Adds fog to the Pale Garden and anywhere else!",
-  "modmenu.descriptionTranslation.foggy-pale-garden": "Explore the mod's page and you can add any fog to any place in the game thanks to a flexible configuration system.",
+  "modmenu.summaryTranslation.foggypalegarden": "Adds fog to the Pale Garden and anywhere else!",
+  "modmenu.descriptionTranslation.foggypalegarden": "Explore the mod's page and you can add any fog to any place in the game thanks to a flexible configuration system.",
   "fpg.command.help": "Foggy Pale Garden mod management commands:\n%s",
   "fpg.command.preset.current": "Current fog preset: %s",
   "fpg.command.preset.applied": "Fog preset successfully applied: %s",
