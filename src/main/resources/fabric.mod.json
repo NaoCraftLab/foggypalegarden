@@ -19,6 +19,9 @@
   "entrypoints": {
     "client": [
       "com.naocraftlab.foggypalegarden.FoggyPaleGardenClientMod"
+    ],
+    "modmenu": [
+      "com.naocraftlab.foggypalegarden.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -30,7 +33,10 @@
     "fabricloader": ">=${fabricLoaderMinVersion}",
     "fabric-api": ">=${fabricApiVersion}"
   },
-  "suggests": {},
+  "suggests": {
+    "cloth-config": ">=${clothConfigVersion}",
+    "modmenu": ">=${fabricModMenuVersion}"
+  },
   "custom": {
     "modmenu": {
       "update_checker": true,

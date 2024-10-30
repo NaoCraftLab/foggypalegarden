@@ -11,35 +11,35 @@ A Minecraft mod that adds fog to the Pale Garden biome. But you can customize an
 <details>
   <summary>😱 Envelops the Pale Garden in fog</summary>
 
-![immersion-in-thick-fog.gif](docs/images/immersion-in-thick-fog.gif)
+<img src="docs/images/immersion-in-thick-fog.gif" width="600px">
 
 </details>
 
 <details>
   <summary>🕳️ The fog does not fill caves beneath the Pale Garden</summary>
 
-![no-fog-in-caves.gif](docs/images/no-fog-in-caves.gif)
+<img src="docs/images/no-fog-in-caves.gif" width="600px">
 
 </details>
 
 <details>
   <summary>🪽The fog doesn’t hinder flying over the Pale Garden</summary>
 
-![fog-doesn’t-hinder-flying.gif](docs/images/fog-doesn%E2%80%99t-hinder-flying.gif)
+<img src="docs/images/fog-doesn%E2%80%99t-hinder-flying.gif" width="600px">
 
 </details>
 
 <details>
   <summary>🎨 Fog presets feature allows you to choose from predefined options, create a custom preset, or have the fog adjust based on the game’s difficulty</summary>
 
-![fog-presets.gif](docs/images/fog-presets.gif)
+<img src="docs/images/fog-presets.gif" width="600px">
 
 </details>
 
 <details>
   <summary>🧗‍♀️ The conditions for fog formation will allow for creating different types of fog even in the same location</summary>
 
-![different-fog-at-different-heights.gif](docs/images/different-fog-at-different-heights.gif)
+<img src="docs/images/different-fog-at-different-heights.gif" width="600px">
 
 [You can download this example on GitHub](docs/presets/custom/HEIGHT_DEPENDENT_FOG_EXAMPLE.v3.json)
 
@@ -50,7 +50,7 @@ A Minecraft mod that adds fog to the Pale Garden biome. But you can customize an
 
 For example, this preset will create pre-dawn fog during clear weather in all biomes.
 
-![custom-preset-pre-dawn-fog.gif](docs/images/custom-preset-pre-dawn-fog.gif)
+<img src="docs/images/custom-preset-pre-dawn-fog.gif" width="600px">
 
 ```json
 {
@@ -88,6 +88,13 @@ Read more about the available features in the [🛠️ Configuration](#-configur
 </details>
 
 <details>
+  <summary>👁️ Adjust settings in the visual menu</summary>
+
+<img src="docs/images/settings-screen.png" width="600px">
+
+</details>
+
+<details>
   <summary>💬 Change settings via chat even if you're not an operator!</summary>
 
 Available commands:
@@ -97,7 +104,7 @@ Available commands:
 - `/fpg noFogGameMode` displays a list of game modes where the fog is disabled
 - `/fpg noFogGameMode <gameMode>` allows you to disable or enable the application of fog settings for the selected game mode
 
-![console-commands.gif](docs/images/console-commands.gif)
+<img src="docs/images/console-commands.gif" width="600px">
 
 </details>
 
@@ -129,7 +136,7 @@ You can request a translation into your language or report a translation error o
 <details>
     <summary>⛔️ Disable fog for specific game modes</summary>
 
-![no-fog-game-modes.gif](docs/images/no-fog-game-modes.gif)
+<img src="docs/images/no-fog-game-modes.gif" width="600px">
 
 In the config `config/foggy-pale-garden.json`, the value `"noFogGameModes": ["SPECTATOR"]` is set.
 
@@ -314,10 +321,9 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 
 ## 🚀 Plans
 
-🚀 (After 1.21.2 release) Port to NeoForge<br/>
-🚀 (After 1.21.2 release) Add visual configuration<br/>
-❓Maybe it will be possible to implement support for Iris Shaders?<br/>
-❓Maybe port to previous versions to support mods backporting the Winter Drop?
+🚀 Port to NeoForge<br/>
+❓ Maybe it will be possible to implement support for Iris Shaders?<br/>
+❓ Maybe port to previous versions to support mods backporting the Winter Drop?
 
 ## 🤗 Modpacks
 

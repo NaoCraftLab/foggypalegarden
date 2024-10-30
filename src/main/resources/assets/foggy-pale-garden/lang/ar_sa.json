@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "تم تعطيل الضباب لوضع اللعبة: %s",
   "fpg.command.noFogGameMode.notFound": "وضع اللعبة %s غير مدعوم\nأوضاع اللعبة المتاحة للتحكم في الضباب:\n%s",
   "fpg.command.noFogGameMode.list": "أوضاع اللعبة التي تم تعطيل الضباب لها:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "لا توجد أوضاع لعبة تم تعطيل الضباب فيها"
+  "fpg.command.noFogGameMode.listEmpty": "لا توجد أوضاع لعبة تم تعطيل الضباب فيها",
+  "fpg.settings.warning.noClothConfig": "يجب تثبيت Cloth Config API",
+  "fpg.settings.title": "إعدادات Foggy Pale Garden",
+  "fpg.settings.category.general.title": "الإعدادات العامة",
+  "fpg.settings.currentPreset.title": "الضباب الحالي المحدد",
+  "fpg.settings.currentPreset.tooltip": "اختر واحدًا من المتاح أو أضف خاصتك في المجلد %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "تعطيل الضباب لأنماط اللعبة",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "أنماط اللعبة التي لن يتأثر بها إعداد الضباب"
 }

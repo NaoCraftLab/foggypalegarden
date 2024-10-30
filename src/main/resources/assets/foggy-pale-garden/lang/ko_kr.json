@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "게임 모드에 안개가 비활성화되었습니다: %s",
   "fpg.command.noFogGameMode.notFound": "게임 모드 %s(은)는 지원되지 않습니다\n안개 제어를 위한 사용 가능한 게임 모드:\n%s",
   "fpg.command.noFogGameMode.list": "안개가 비활성화된 게임 모드:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "안개가 비활성화된 게임 모드가 없습니다"
+  "fpg.command.noFogGameMode.listEmpty": "안개가 비활성화된 게임 모드가 없습니다",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API를 설치해야 합니다",
+  "fpg.settings.title": "Foggy Pale Garden 설정",
+  "fpg.settings.category.general.title": "일반 설정",
+  "fpg.settings.currentPreset.title": "선택된 안개 프리셋",
+  "fpg.settings.currentPreset.tooltip": "사용 가능한 것 중 하나를 선택하거나 %s 폴더에 직접 추가하세요",
+  "fpg.settings.subCategory.noFogGameMode.title": "게임 모드에서 안개 비활성화",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "안개 프리셋의 영향을 받지 않는 게임 모드"
 }

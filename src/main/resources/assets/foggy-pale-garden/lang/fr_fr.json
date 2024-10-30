@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Brouillard désactivé pour le mode de jeu : %s",
   "fpg.command.noFogGameMode.notFound": "Mode de jeu %s non pris en charge\nModes de jeu disponibles pour le contrôle du brouillard :\n%s",
   "fpg.command.noFogGameMode.list": "Modes de jeu pour lesquels le brouillard est désactivé :\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Aucun mode de jeu avec le brouillard désactivé"
+  "fpg.command.noFogGameMode.listEmpty": "Aucun mode de jeu avec le brouillard désactivé",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API doit être installé",
+  "fpg.settings.title": "Paramètres de Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Paramètres Généraux",
+  "fpg.settings.currentPreset.title": "Preset de Brouillard Sélectionné",
+  "fpg.settings.currentPreset.tooltip": "Choisissez l'un des presets disponibles ou ajoutez le vôtre dans le dossier %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Désactiver le Brouillard pour les Modes de Jeu",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modes de jeu non affectés par le preset de brouillard"
 }

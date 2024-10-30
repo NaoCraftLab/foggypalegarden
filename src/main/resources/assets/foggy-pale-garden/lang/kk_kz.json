@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Тұман ойын режимі үшін өшірілді: %s",
   "fpg.command.noFogGameMode.notFound": "Ойын режимі %s қолдау көрсетілмейді\nТұманды басқару үшін қол жетімді ойын режимдері:\n%s",
   "fpg.command.noFogGameMode.list": "Тұман өшірілген ойын режимдері:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Тұман өшірілген ойын режимдері жоқ"
+  "fpg.command.noFogGameMode.listEmpty": "Тұман өшірілген ойын режимдері жоқ",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API орнатылуы қажет",
+  "fpg.settings.title": "Foggy Pale Garden Параметрлері",
+  "fpg.settings.category.general.title": "Жалпы Параметрлер",
+  "fpg.settings.currentPreset.title": "Таңдалған Тұман Пресеті",
+  "fpg.settings.currentPreset.tooltip": "Қол жетімділердің бірін таңдаңыз немесе өзіңіздің %s қалтасына қосыңыз",
+  "fpg.settings.subCategory.noFogGameMode.title": "Ойын Режимдері үшін Тұманды Өшіру",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Тұман пресеті әсер етпейтін ойын режимдері"
 }

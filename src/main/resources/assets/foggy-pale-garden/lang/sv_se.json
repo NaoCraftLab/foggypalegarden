@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Dimma inaktiverad för spelläge: %s",
   "fpg.command.noFogGameMode.notFound": "Spelläge %s stöds inte\nTillgängliga spellägen för dimkontroll:\n%s",
   "fpg.command.noFogGameMode.list": "Spellägen där dimman är avstängd:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Det finns inga spellägen där dimman är avstängd"
+  "fpg.command.noFogGameMode.listEmpty": "Det finns inga spellägen där dimman är avstängd",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API måste vara installerad",
+  "fpg.settings.title": "Inställningar för Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Allmänna Inställningar",
+  "fpg.settings.currentPreset.title": "Valt Dimma-Preset",
+  "fpg.settings.currentPreset.tooltip": "Välj en av de tillgängliga eller lägg till din egen i mappen %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Inaktivera Dimma för Spellägen",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spellägen som inte påverkas av dimma-preset"
 }

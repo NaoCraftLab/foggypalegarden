@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "已为游戏模式禁用雾：%s",
   "fpg.command.noFogGameMode.notFound": "不支持的游戏模式：%s\n可用于控制雾的游戏模式列表：\n%s",
   "fpg.command.noFogGameMode.list": "禁用雾效果的游戏模式：\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "没有禁用雾效果的游戏模式"
+  "fpg.command.noFogGameMode.listEmpty": "没有禁用雾效果的游戏模式",
+  "fpg.settings.warning.noClothConfig": "需要安装 Cloth Config API",
+  "fpg.settings.title": "雾蒙蒙的苍白花园设置",
+  "fpg.settings.category.general.title": "常规设置",
+  "fpg.settings.currentPreset.title": "选定的雾预设",
+  "fpg.settings.currentPreset.tooltip": "选择一个可用的，或将您的添加到文件夹 %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "为游戏模式禁用雾",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "不受雾预设影响的游戏模式"
 }

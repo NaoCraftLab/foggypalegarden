@@ -9,6 +9,7 @@ import java.util.TreeSet;
 @UtilityClass
 public class FpgCollections {
 
+    @SafeVarargs
     public static <T> Set<T> treeSetOf(T... elements) {
         return new TreeSet<>(Arrays.asList(elements));
     }

@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "ნისლი გამორთულია თამაშის რეჟიმისთვის: %s",
   "fpg.command.noFogGameMode.notFound": "თამაშის რეჟიმი %s არ არის მხარდაჭერილი\nნისლის მართვისთვის ხელმისაწვდომი თამაშის რეჟიმები:\n%s",
   "fpg.command.noFogGameMode.list": "თამაშის რეჟიმები, რომლებსაც გამორთული აქვთ ნისლი:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "ნისლი გამორთული სათამაშო რეჟიმები არ არსებობს"
+  "fpg.command.noFogGameMode.listEmpty": "ნისლი გამორთული სათამაშო რეჟიმები არ არსებობს",
+  "fpg.settings.warning.noClothConfig": "აუცილებელია Cloth Config API-ის დაინსტალირება",
+  "fpg.settings.title": "Foggy Pale Garden-ის პარამეტრები",
+  "fpg.settings.category.general.title": "ზოგადი პარამეტრები",
+  "fpg.settings.currentPreset.title": "არჩეული ნისლის პრესეტი",
+  "fpg.settings.currentPreset.tooltip": "აირჩიეთ ერთ-ერთი არსებული ან დაამატეთ თქვენი %s ფოლდერში",
+  "fpg.settings.subCategory.noFogGameMode.title": "ნისლის გათიშვა სათამაშო რეჟიმებისთვის",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "სათამაშო რეჟიმები, რომელზეც ნისლის პრესეტი არ იმოქმედებს"
 }

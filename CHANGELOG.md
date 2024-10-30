@@ -1,3 +1,14 @@
+## 1.21.2-2.8.0
+
+### Added
+
+- Configuration screen in ModMenu
+- Warning screen if Cloth Config API is not installed
+
+### Changed
+
+- `modId` replaced with `foggypalegarden` for compatibility with other loaders during porting
+
 ## 1.21.2-2.7.0
 
 ### Added

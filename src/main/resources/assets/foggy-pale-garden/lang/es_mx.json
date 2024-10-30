@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Niebla deshabilitada para el modo de juego: %s",
   "fpg.command.noFogGameMode.notFound": "Modo de juego %s no soportado\nModos de juego disponibles para control de niebla:\n%s",
   "fpg.command.noFogGameMode.list": "Modos de juego en los que la niebla está desactivada:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "No hay modos de juego con la niebla desactivada"
+  "fpg.command.noFogGameMode.listEmpty": "No hay modos de juego con la niebla desactivada",
+  "fpg.settings.warning.noClothConfig": "Debe instalar Cloth Config API",
+  "fpg.settings.title": "Configuraciones de Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Configuraciones Generales",
+  "fpg.settings.currentPreset.title": "Preselección de Niebla Seleccionada",
+  "fpg.settings.currentPreset.tooltip": "Elige uno de los disponibles o agrega el tuyo en la carpeta %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Desactivar Niebla para Modos de Juego",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modos de juego no afectados por la preselección de niebla"
 }

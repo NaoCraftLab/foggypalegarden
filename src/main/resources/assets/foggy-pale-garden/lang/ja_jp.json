@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "ゲームモードの霧が無効になりました: %s",
   "fpg.command.noFogGameMode.notFound": "ゲームモード %s はサポートされていません\n霧の制御が可能なゲームモード一覧:\n%s",
   "fpg.command.noFogGameMode.list": "霧が無効になっているゲームモード:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "霧が無効になっているゲームモードはありません"
+  "fpg.command.noFogGameMode.listEmpty": "霧が無効になっているゲームモードはありません",
+  "fpg.settings.warning.noClothConfig": "Cloth Config APIをインストールする必要があります",
+  "fpg.settings.title": "Foggy Pale Gardenの設定",
+  "fpg.settings.category.general.title": "一般設定",
+  "fpg.settings.currentPreset.title": "選択された霧のプリセット",
+  "fpg.settings.currentPreset.tooltip": "利用可能なものから選択するか、自分のプリセットをフォルダ%sに追加してください",
+  "fpg.settings.subCategory.noFogGameMode.title": "ゲームモードで霧を無効にする",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "霧のプリセットが影響しないゲームモード"
 }

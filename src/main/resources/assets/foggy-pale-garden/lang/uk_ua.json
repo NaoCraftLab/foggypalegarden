@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Туман вимкнено для ігрового режиму: %s",
   "fpg.command.noFogGameMode.notFound": "Ігровий режим %s не підтримується\nДоступні ігрові режими для керування туманом:\n%s",
   "fpg.command.noFogGameMode.list": "Режими гри, для яких вимкнено туман:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Режими гри з вимкненим туманом відсутні"
+  "fpg.command.noFogGameMode.listEmpty": "Режими гри з вимкненим туманом відсутні",
+  "fpg.settings.warning.noClothConfig": "Потрібно встановити Cloth Config API",
+  "fpg.settings.title": "Налаштування Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Основні Налаштування",
+  "fpg.settings.currentPreset.title": "Вибраний Пресет Туману",
+  "fpg.settings.currentPreset.tooltip": "Виберіть один з доступних або додайте свій у папку %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Вимкнути Туман для Режимів Гри",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Режими гри, на які не впливає пресет туману"
 }

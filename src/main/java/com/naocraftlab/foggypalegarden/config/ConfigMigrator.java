@@ -45,8 +45,8 @@ import static net.minecraft.world.Difficulty.PEACEFUL;
 
 public final class ConfigMigrator {
 
-    private static final MainConfigV3 DEFAULT_CONFIG = MainConfigV3.builder().preset("FPG_STEPHEN_KING").build();
-    private static final List<FogPresetV3> DEFAULT_PRESETS = List.of(
+    public static final MainConfigV3 DEFAULT_CONFIG = MainConfigV3.builder().preset("FPG_STEPHEN_KING").build();
+    public static final List<FogPresetV3> DEFAULT_PRESETS = List.of(
             FogPresetV3.builder()
                     .code("FPG_AMBIANCE")
                     .bindings(List.of(

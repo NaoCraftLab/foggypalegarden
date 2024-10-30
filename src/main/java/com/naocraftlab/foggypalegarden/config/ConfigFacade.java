@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import static java.nio.file.Files.exists;
@@ -45,11 +46,27 @@ public final class ConfigFacade {
         listeners.add(listener);
     }
 
+
+    @NotNull
+    public Path configFilePtah() {
+        return configFilePtah;
+    }
+
+    @NotNull
+    public Path presetDirectoryPath() {
+        return presetDirectoryPath;
+    }
+
+
     // config
 
     @NotNull
     public List<GameMode> noFogGameModes() {
         return mainConfig.getNoFogGameModes().stream().sorted().toList();
+    }
+
+    public void noFogGameModes(Set<GameMode> gameModes) {
+        mainConfig = mainConfig.withNoFogGameModes(gameModes);
     }
 
     public boolean isNoFogGameMode(@NotNull GameMode gameMode) {

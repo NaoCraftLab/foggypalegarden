@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Nebel deaktiviert für Spielmodus: %s",
   "fpg.command.noFogGameMode.notFound": "Spielmodus %s wird nicht unterstützt\nVerfügbare Spielmodi zur Nebelsteuerung:\n%s",
   "fpg.command.noFogGameMode.list": "Spielmodi, für die der Nebel deaktiviert ist:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Es gibt keine Spielmodi mit deaktiviertem Nebel"
+  "fpg.command.noFogGameMode.listEmpty": "Es gibt keine Spielmodi mit deaktiviertem Nebel",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API muss installiert sein",
+  "fpg.settings.title": "Einstellungen von Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Allgemeine Einstellungen",
+  "fpg.settings.currentPreset.title": "Aktuelles Nebel-Preset",
+  "fpg.settings.currentPreset.tooltip": "Wählen Sie eines der verfügbaren oder fügen Sie Ihr eigenes in den Ordner %s hinzu",
+  "fpg.settings.subCategory.noFogGameMode.title": "Nebel für Spielmodi deaktivieren",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spielmodi, die vom Nebel-Preset nicht beeinflusst werden"
 }

@@ -13,6 +13,9 @@ base {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://maven.terraformersmc.com/") }
+    maven { url = uri("https://maven.shedaniel.me/") }
+    maven { url = uri("https://maven.terraformersmc.com/releases/") }
 }
 
 dependencies {
@@ -22,6 +25,10 @@ dependencies {
     mappings("net.fabricmc:yarn:${project.property("fabricYarnMappingsVersion")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("fabricLoaderMinVersion")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabricApiVersion")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.property("clothConfigVersion")}") {
+        exclude(group = "net.fabricmc.fabric-api")
+    }
+    modImplementation("com.terraformersmc:modmenu:${project.property("fabricModMenuVersion")}")
 
     testCompileOnly("org.projectlombok:lombok:1.18.34")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
@@ -53,6 +60,8 @@ tasks.processResources {
             "modAuthorYouTube" to project.property("modAuthorYouTube"),
             "fabricLoaderMinVersion" to project.property("fabricLoaderMinVersion"),
             "fabricApiVersion" to project.property("fabricApiVersion"),
+            "clothConfigVersion" to project.property("clothConfigVersion"),
+            "fabricModMenuVersion" to project.property("fabricModMenuVersion"),
             "minecraftJavaVersion" to project.property("minecraftJavaVersion"),
             "minecraftFirstSnapshotFullVersion" to project.property("minecraftFirstSnapshotFullVersion")
         )
@@ -126,6 +135,7 @@ if (modrinthToken != null) {
 
         dependencies {
             required.project("fabric-api")
+            required.project("cloth-config")
             optional.project("modmenu")
         }
     }
@@ -157,6 +167,7 @@ if (curseForgeApiKey != null) {
             )
             relations(closureOf<com.matthewprenger.cursegradle.CurseRelation> {
                 requiredDependency("fabric-api")
+                optionalDependency("cloth-config")
                 optionalDependency("modmenu")
             })
         })

@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Fog disabled for game mode: %s",
   "fpg.command.noFogGameMode.notFound": "Game mode %s is not supported\nAvailable game modes for fog control:\n%s",
   "fpg.command.noFogGameMode.list": "Game modes for which fog is disabled:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "There are no game modes with fog disabled"
+  "fpg.command.noFogGameMode.listEmpty": "There are no game modes with fog disabled",
+  "fpg.settings.warning.noClothConfig": "Cloth Config API must be installed",
+  "fpg.settings.title": "Foggy Pale Garden Settings",
+  "fpg.settings.category.general.title": "General Settings",
+  "fpg.settings.currentPreset.title": "Selected Fog Preset",
+  "fpg.settings.currentPreset.tooltip": "Choose one of the available presets or add your own to the folder %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Disable Fog for Game Modes",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Game modes unaffected by the fog preset"
 }

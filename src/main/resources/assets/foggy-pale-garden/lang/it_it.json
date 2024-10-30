@@ -12,5 +12,12 @@
   "fpg.command.noFogGameMode.off": "Nebbia disabilitata per la modalità di gioco: %s",
   "fpg.command.noFogGameMode.notFound": "Modalità di gioco %s non supportata\nModalità di gioco disponibili per il controllo della nebbia:\n%s",
   "fpg.command.noFogGameMode.list": "Modalità di gioco per le quali la nebbia è disattivata:\n%s",
-  "fpg.command.noFogGameMode.listEmpty": "Non ci sono modalità di gioco con la nebbia disattivata"
+  "fpg.command.noFogGameMode.listEmpty": "Non ci sono modalità di gioco con la nebbia disattivata",
+  "fpg.settings.warning.noClothConfig": "È necessario installare Cloth Config API",
+  "fpg.settings.title": "Impostazioni di Foggy Pale Garden",
+  "fpg.settings.category.general.title": "Impostazioni Generali",
+  "fpg.settings.currentPreset.title": "Preset di Nebbia Selezionato",
+  "fpg.settings.currentPreset.tooltip": "Scegli uno tra quelli disponibili o aggiungi il tuo nella cartella %s",
+  "fpg.settings.subCategory.noFogGameMode.title": "Disabilita Nebbia per Modalità di Gioco",
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modalità di gioco non influenzate dal preset di nebbia"
 }
