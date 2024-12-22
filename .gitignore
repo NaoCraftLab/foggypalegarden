@@ -8,6 +8,7 @@ replay_*.log
 ### Gradle ###
 .gradle/
 build/
+lib/
 out/
 classes/
 

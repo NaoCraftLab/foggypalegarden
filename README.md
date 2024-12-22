@@ -1,4 +1,4 @@
-<img src="src/main/resources/assets/foggypalegarden/icon.png" width="128">
+<img src=".idea/icon.png" width="128">
 
 # Foggy Pale Garden
 

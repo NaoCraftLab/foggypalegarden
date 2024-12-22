@@ -1,0 +1,29 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+}
+
+group = 'com.naocraftlab'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation localGroovy()
+}
+
+gradlePlugin {
+    plugins {
+        loadPropertiesSettingsPlugin {
+            id = 'com.naocraftlab.load-properties-settings-plugin'
+            implementationClass = 'com.naocraftlab.LoadPropertiesSettingsPlugin'
+        }
+        applyExtPropertiesPlugin {
+            id = 'com.naocraftlab.apply-ext-properties-plugin'
+            implementationClass = 'com.naocraftlab.ApplyExtPropertiesPlugin'
+        }
+    }
+}

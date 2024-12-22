@@ -1,0 +1,57 @@
+pluginManagement {
+    includeBuild("buildPluginSrc")
+
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = 'Forge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+        maven {
+            name = 'Architectury Plugin'
+            url = 'https://maven.architectury.dev/'
+        }
+        maven {
+            name = 'JitPack'
+            url = "https://jitpack.io"
+        }
+        gradlePluginPortal()
+    }
+
+    plugins {
+        id 'architectury-plugin' version "${settings.ext.architecturyPluginVersion}"
+        id 'dev.architectury.loom' version "${settings.ext.architecturyLoomVersion}" apply false
+        id 'com.github.johnrengelman.shadow' version "${settings.ext.commonShadowVersion}" apply false
+        id 'com.modrinth.minotaur' version "${settings.ext.commonModrinthMinotaurVersion}" apply false
+        id 'com.matthewprenger.cursegradle' version "${settings.ext.commonCurseGradleVersion}" apply false
+    }
+}
+
+plugins {
+    id 'com.naocraftlab.load-properties-settings-plugin'
+}
+
+include('common')
+
+def platforms = settings.ext.architecturyPlatforms.split(',')
+if (platforms.contains('fabric')) {
+    include('fabric')
+} else {
+    println 'Fabric module is disabled for this version.'
+}
+if (platforms.contains('forge')) {
+    include('forge')
+} else {
+    println 'Forge module is disabled for this version.'
+}
+if (platforms.contains('neoforge')) {
+    include('neoforge')
+} else {
+    println 'NeoForge module is disabled for this version.'
+}
+
+rootProject.name = modId
