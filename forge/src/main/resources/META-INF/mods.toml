@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[${forgeMinLoaderVersion},)"
+issueTrackerURL = "${modIssueTracker}"
+displayURL = "${modHomepage}"
+license = "${modLicense}"
+
+[[mods]]
+modId = "${modId}"
+version = "${modVersion}"
+displayName = "${modName}"
+authors = "NaoCraftLab"
+description = "${modDescription}"
+logoFile = "assets/${modId}/icon.png"
+
+[[dependencies.${modId}]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forgeMinVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${forgeMinMinecraftVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "cloth_config"
+mandatory = false
+versionRange = "[${commonClothConfigVersion},)"
+ordering = "NONE"
+side = "CLIENT"

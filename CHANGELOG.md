@@ -1,3 +1,9 @@
+## 2.8.1
+
+### Fixed
+
+- Game crash when spectating a mob in spectator mode
+
 ## 1.21.2-2.8.0
 
 ### Added

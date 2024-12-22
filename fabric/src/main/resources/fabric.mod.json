@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "${modId}",
+  "version": "${modVersion}",
+  "name": "${modName}",
+  "icon": "assets/${modId}/icon.png",
+  "description": "${modDescription}",
+  "license": "${modLicense}",
+  "authors": [
+    "NaoCraftLab"
+  ],
+  "contributors": [],
+  "contact": {
+    "homepage": "${modHomepage}",
+    "sources": "${modSources}",
+    "issues": "${modIssueTracker}",
+    "discord": "${modDiscord}"
+  },
+  "environment": "client",
+  "entrypoints": {
+    "main": [],
+    "client": [
+      "com.naocraftlab.foggypalegarden.fabric.FoggyPaleGardenClientMod"
+    ],
+    "modmenu": [
+      "com.naocraftlab.foggypalegarden.fabric.integration.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "${modId}-common.mixins.json"
+  ],
+  "depends": {
+    "java": ">=${minecraftJavaVersion}",
+    "minecraft": ">=${fabricMinMinecraftVersion}",
+    "fabricloader": ">=${commonFabricLoaderVersion}",
+    "fabric-api": ">=${fabricApiVersion}"
+  },
+  "suggests": {
+    "cloth-config": ">=${commonClothConfigVersion}",
+    "modmenu": ">=${fabricModMenuVersion}"
+  },
+  "custom": {
+    "modmenu": {
+      "update_checker": true,
+      "modmenu.credits.role.author": "NaoCraftLab",
+      "links": {
+        "modmenu.curseforge": "${modCurseForge}",
+        "modmenu.modrinth": "${modModrinth}",
+        "modmenu.github_releases": "${modGitHubReleases}",
+        "modmenu.discord": "${modDiscord}",
+        "modmenu.kofi": "${modKoFi}",
+        "modmenu.youtube": "${modAuthorYouTube}"
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+plugins {
+    id 'com.naocraftlab.apply-ext-properties-plugin'
+    id 'architectury-plugin'
+    id 'dev.architectury.loom' apply false
+    id 'com.github.johnrengelman.shadow' apply false
+    id 'com.modrinth.minotaur' apply false
+    id 'com.matthewprenger.cursegradle' apply false
+}
+
+architectury {
+    minecraft = rootProject.extensions.extraProperties.minecraftVersion
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    archivesBaseName = rootProject.ext.modId
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.ext.minecraftMappingsVersion}"
+        mappings loom.officialMojangMappings()
+
+        compileOnly "org.projectlombok:lombok:${rootProject.ext.commonLombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${rootProject.ext.commonLombokVersion}"
+
+        testCompileOnly "org.projectlombok:lombok:${rootProject.ext.commonLombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${rootProject.ext.commonLombokVersion}"
+        testImplementation "org.junit.jupiter:junit-jupiter-api:${rootProject.ext.commonJunitVersion}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${rootProject.ext.commonJunitVersion}"
+        testImplementation "org.mockito:mockito-core:${rootProject.ext.commonMockitoVersion}"
+        testImplementation "org.assertj:assertj-core:${rootProject.ext.commonAssertJVersion}"
+        testImplementation "org.skyscreamer:jsonassert:${rootProject.ext.commonJsonAssertVersion}"
+    }
+
+    processResources {
+        filesMatching([
+                "${rootProject.extensions.extraProperties.modId}-common.mixins.json".toString(),
+                'fabric.mod.json',
+                'META-INF/neoforge.mods.toml',
+                'META-INF/mods.toml',
+                'pack.mcmeta'
+        ]) {
+            expand(
+                    modId: rootProject.extensions.extraProperties.modId,
+                    modVersion: project.version,
+                    modName: rootProject.extensions.extraProperties.modName,
+                    modDescription: rootProject.extensions.extraProperties.modDescription,
+                    modLicense: rootProject.extensions.extraProperties.modLicense,
+                    modHomepage: rootProject.extensions.extraProperties.modHomepage,
+                    modSources: rootProject.extensions.extraProperties.modSources,
+                    modIssueTracker: rootProject.extensions.extraProperties.modIssueTracker,
+                    modGitHubReleases: rootProject.extensions.extraProperties.modGitHubReleases,
+                    modModrinth: rootProject.extensions.extraProperties.modModrinth,
+                    modCurseForge: rootProject.extensions.extraProperties.modCurseForge,
+                    modDiscord: rootProject.extensions.extraProperties.modDiscord,
+                    modKoFi: rootProject.extensions.extraProperties.modKoFi,
+                    modAuthorYouTube: rootProject.extensions.extraProperties.modAuthorYouTube,
+                    minecraftJavaVersion: rootProject.extensions.extraProperties.minecraftJavaVersion,
+                    commonFabricLoaderVersion: rootProject.extensions.extraProperties.commonFabricLoaderVersion,
+                    commonClothConfigVersion: rootProject.extensions.extraProperties.commonClothConfigVersion,
+                    fabricApiVersion: rootProject.extensions.extraProperties.fabricApiVersion,
+                    fabricMinMinecraftVersion: rootProject.extensions.extraProperties.fabricMinMinecraftVersion,
+                    fabricModMenuVersion: rootProject.extensions.extraProperties.fabricModMenuVersion,
+                    neoforgeMinVersion: rootProject.extensions.extraProperties.neoforgeMinVersion,
+                    neoforgeMinLoaderVersion: rootProject.extensions.extraProperties.neoforgeMinLoaderVersion,
+                    neoforgeMinMinecraftVersion: rootProject.extensions.extraProperties.neoforgeMinMinecraftVersion,
+                    forgeMinVersion: rootProject.extensions.extraProperties.forgeMinVersion,
+                    forgeMinLoaderVersion: rootProject.extensions.extraProperties.forgeMinLoaderVersion,
+                    forgeMinMinecraftVersion: rootProject.extensions.extraProperties.forgeMinMinecraftVersion,
+            )
+        }
+    }
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+
+    group = rootProject.extensions.extraProperties.modGroup
+    version = "${rootProject.extensions.extraProperties.modVersion}+${rootProject.extensions.extraProperties.minecraftVersion}-${project.name}"
+
+    repositories {
+        maven {
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases'
+        }
+        maven {
+            name = 'CurseForge'
+            url = 'https://minecraft.curseforge.com/api/maven'
+        }
+        maven {
+            name = 'Shedaniel Maven'
+            url = 'https://maven.shedaniel.me'
+        }
+        maven {
+            name = 'TerraformersMC'
+            url = 'https://maven.terraformersmc.com/releases'
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = rootProject.extensions.extraProperties.minecraftJavaVersion.toInteger()
+    }
+
+    java {
+        withSourcesJar()
+    }
+}

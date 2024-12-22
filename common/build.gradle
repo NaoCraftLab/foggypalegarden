@@ -1,0 +1,23 @@
+architectury {
+    common(project.extensions.extraProperties.architecturyPlatforms.split(','))
+}
+
+configurations {
+    shadowCommon
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${project.ext.commonFabricLoaderVersion}"
+    modImplementation "me.shedaniel.cloth:cloth-config:${project.ext.commonClothConfigVersion}"
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier.set('dev-shadow')
+}
+
+remapJar {
+    inputFile = shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier.set(null)
+}
