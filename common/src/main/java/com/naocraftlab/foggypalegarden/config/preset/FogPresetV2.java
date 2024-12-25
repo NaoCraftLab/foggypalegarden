@@ -39,32 +39,34 @@ public final class FogPresetV2 extends FogPreset {
         this.bindings = bindings;
     }
 
+    @Data
     @Builder
-    public record Binding(
-            Condition condition,
-            Float startDistance,
-            Integer skyLightStartLevel,
-            Float endDistance,
-            Float surfaceHeightEnd,
-            Float opacity,
-            Float encapsulationSpeed,
-            Brightness brightness,
-            Color color,
-            FogShape shape
-    ) {
+    public static class Binding {
 
+        private final Condition condition;
+        private final Float startDistance;
+        private final Integer skyLightStartLevel;
+        private final Float endDistance;
+        private final Float surfaceHeightEnd;
+        private final Float opacity;
+        private final Float encapsulationSpeed;
+        private final Brightness brightness;
+        private final Color color;
+        private final FogShape shape;
+
+        @Data
         @Builder
-        public record Condition(
-                Set<String> dimensionIn,
-                Set<String> biomeIdIn,
-                Temperature biomeTemperature,
-                Set<Difficulty> difficultyIn,
-                Set<Weather> weatherIn,
-                TimePeriod timeIn,
-                List<Condition> and,
-                List<Condition> or,
-                Condition not
-        ) {
+        public static class Condition {
+
+            private final Set<String> dimensionIn;
+            private final Set<String> biomeIdIn;
+            private final Temperature biomeTemperature;
+            private final Set<Difficulty> difficultyIn;
+            private final Set<Weather> weatherIn;
+            private final TimePeriod timeIn;
+            private final List<Condition> and;
+            private final List<Condition> or;
+            private final Condition not;
 
             public enum Weather {
                 CLEAR,
@@ -72,11 +74,12 @@ public final class FogPresetV2 extends FogPreset {
                 THUNDER
             }
 
+            @Data
             @Builder
-            public record TimePeriod(
-                    Long start,
-                    Long end
-            ) {
+            public static class TimePeriod {
+
+                private final Long start;
+                private final Long end;
 
                 public void validate() {
                     if (start == null || end == null) {
@@ -90,11 +93,12 @@ public final class FogPresetV2 extends FogPreset {
                 }
             }
 
+            @Data
             @Builder
-            public record Temperature(
-                    Float min,
-                    Float max
-            ) {
+            public static class Temperature {
+
+                private final Float min;
+                private final Float max;
 
                 public void validate() {
                     if (min == null && max == null) {
@@ -174,16 +178,16 @@ public final class FogPresetV2 extends FogPreset {
                 } else {
                     Predicate<Environment> predicate = env -> true;
                     if (dimensionIn != null && !dimensionIn.isEmpty()) {
-                        predicate = predicate.and(env -> dimensionIn.contains(env.dimension()));
+                        predicate = predicate.and(env -> dimensionIn.contains(env.getDimension()));
                     }
                     if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
-                        predicate = predicate.and(env -> biomeIdIn.contains(env.biome()));
+                        predicate = predicate.and(env -> biomeIdIn.contains(env.getBiome()));
                     }
                     if (biomeTemperature != null) {
-                        val min = biomeTemperature.min();
-                        val max = biomeTemperature.max();
+                        val min = biomeTemperature.getMin();
+                        val max = biomeTemperature.getMax();
                         predicate = predicate.and(env -> {
-                            val temperature = env.biomeTemperature();
+                            val temperature = env.getBiomeTemperature();
                             if (min != null && max != null) {
                                 return temperature >= min && temperature <= max;
                             } else if (min != null) {
@@ -194,16 +198,16 @@ public final class FogPresetV2 extends FogPreset {
                         });
                     }
                     if (difficultyIn != null && !difficultyIn.isEmpty()) {
-                        predicate = predicate.and(env -> difficultyIn.contains(env.difficulty()));
+                        predicate = predicate.and(env -> difficultyIn.contains(env.getDifficulty()));
                     }
                     if (weatherIn != null && !weatherIn.isEmpty()) {
-                        predicate = predicate.and(env -> weatherIn.contains(Weather.valueOf(env.weather().name())));
+                        predicate = predicate.and(env -> weatherIn.contains(Weather.valueOf(env.getWeather().name())));
                     }
                     if (timeIn != null) {
-                        val start = timeIn.start();
-                        val end = timeIn.end();
+                        val start = timeIn.getStart();
+                        val end = timeIn.getEnd();
                         predicate = predicate.and(env -> {
-                            val time = env.timeOfDay();
+                            val time = env.getTimeOfDay();
                             if (start <= end) {
                                 return time >= start && time <= end;
                             } else {
@@ -216,12 +220,13 @@ public final class FogPresetV2 extends FogPreset {
             }
         }
 
+        @Data
         @Builder
-        public record Brightness(
-                BrightnessMode mode,
-                Float fixedBrightness,
-                Float adjustment
-        ) {
+        public static class Brightness {
+
+            private final BrightnessMode mode;
+            private final Float fixedBrightness;
+            private final Float adjustment;
 
             public enum BrightnessMode {
                 FIXED,
@@ -241,11 +246,12 @@ public final class FogPresetV2 extends FogPreset {
             }
         }
 
+        @Data
         @Builder
-        public record Color(
-                ColorMode mode,
-                String fixedHex
-        ) {
+        public static class Color {
+
+            private final ColorMode mode;
+            private final String fixedHex;
 
             private static final Pattern HEX_PATTERN = Pattern.compile("^[0-9a-fA-F]{6}$");
 
@@ -261,37 +267,30 @@ public final class FogPresetV2 extends FogPreset {
             }
         }
 
-        @Override
         public Float startDistance() {
             return startDistance == null ? 0.0f : startDistance;
         }
 
-        @Override
         public Float endDistance() {
             return endDistance == null ? 0.0f : endDistance;
         }
 
-        @Override
         public Float opacity() {
             return opacity == null ? 100.0f : opacity;
         }
 
-        @Override
         public Float encapsulationSpeed() {
             return encapsulationSpeed == null ? 6.0f : encapsulationSpeed;
         }
 
-        @Override
         public Brightness brightness() {
             return brightness == null ? new Brightness(BrightnessMode.BY_GAME_FOG, null, null) : brightness;
         }
 
-        @Override
         public Color color() {
             return color == null ? new Color(ColorMode.BY_GAME_FOG, null) : color;
         }
 
-        @Override
         public FogShape shape() {
             return shape == null ? FogShape.SPHERE : shape;
         }

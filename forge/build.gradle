@@ -20,10 +20,13 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${forgeVersion}"
 
+    modImplementation "me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}"
+
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionForge')) { transitive = false }
 
-    modImplementation "me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}"
+    common(project(path: "${commonMixinImplementation}", configuration: 'namedElements')) { transitive false }
+    shadowCommon(project(path: "${commonMixinImplementation}", configuration: 'transformProductionFabric')) { transitive false }
 }
 
 shadowJar {
@@ -45,6 +48,10 @@ sourcesJar {
     def commonSources = project(':common').sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
+
+    def mixinSources = project("${commonMixinImplementation}").sourcesJar
+    dependsOn mixinSources
+    from mixinSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {

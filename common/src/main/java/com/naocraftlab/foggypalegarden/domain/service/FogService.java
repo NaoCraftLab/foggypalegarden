@@ -22,14 +22,14 @@ public class FogService {
 
     public static void onCurrentPresetChange(FogPresetV3 currentPreset) {
         presetBindings = currentPreset.getBindings().stream()
-                .map(binding -> new Pair<>(binding.condition().toPredicate(), binding))
+                .map(binding -> new Pair<>(binding.getCondition().toPredicate(), binding))
                 .toList();
     }
 
     public static FogCharacteristics calculateFogCharacteristics(Environment environment) {
         val candidate = presetBindings.stream()
-                .filter(pair -> pair.first().test(environment))
-                .map(Pair::second)
+                .filter(pair -> pair.getFirst().test(environment))
+                .map(Pair::getSecond)
                 .findFirst();
         if (candidate.isEmpty() && currentBinding == null) {
             return FogCharacteristics.builder().fogDensity(0.0f).build();
@@ -37,12 +37,12 @@ public class FogService {
         currentBinding = candidate.orElse(currentBinding);
 
         val fogDensity = candidate.isPresent()
-                ? Math.min(environment.fogDensity() + currentBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
-                : Math.max(environment.fogDensity() - currentBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
+                ? Math.min(environment.getFogDensity() + currentBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
+                : Math.max(environment.getFogDensity() - currentBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
         return FogCharacteristics.builder()
                 .startDistance(currentBinding.startDistance())
                 .endDistance(currentBinding.endDistance())
-                .color(calculateColor(environment.gameFogColor(), currentBinding, fogDensity))
+                .color(calculateColor(environment.getGameFogColor(), currentBinding, fogDensity))
                 .shape(currentBinding.shape())
                 .fogDensity(fogDensity)
                 .build();
@@ -52,20 +52,20 @@ public class FogService {
         float red;
         float green;
         float blue;
-        val brightnessMode = binding.brightness().mode();
-        val colorMode = binding.color().mode();
+        val brightnessMode = binding.brightness().getMode();
+        val colorMode = binding.color().getMode();
         if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.FIXED) {
-            val brightness = binding.brightness().fixedBrightness() / 100.0f;
-            red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
-            green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
-            blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
+            val brightness = binding.brightness().getFixedBrightness() / 100.0f;
+            red = Math.min(hexToRed(binding.color().getFixedHex()) * brightness, 1.0f);
+            green = Math.min(hexToGreen(binding.color().getFixedHex()) * brightness, 1.0f);
+            blue = Math.min(hexToBlue(binding.color().getFixedHex()) * brightness, 1.0f);
         } else if (brightnessMode == BrightnessMode.BY_GAME_FOG && colorMode == ColorMode.FIXED) {
             val brightness = calculateBrightness(gameFogColor);
-            red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
-            green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
-            blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
-            if (binding.brightness().adjustment() != null) {
-                float adjustment = binding.brightness().adjustment();
+            red = Math.min(hexToRed(binding.color().getFixedHex()) * brightness, 1.0f);
+            green = Math.min(hexToGreen(binding.color().getFixedHex()) * brightness, 1.0f);
+            blue = Math.min(hexToBlue(binding.color().getFixedHex()) * brightness, 1.0f);
+            if (binding.brightness().getAdjustment() != null) {
+                float adjustment = binding.brightness().getAdjustment();
 
                 if (adjustment >= 0) {
                     red = red + adjustment * (1.0f - red);
@@ -89,18 +89,18 @@ public class FogService {
                 blue = Math.max(0.0f, Math.min(blue, 1.0f));
             }
         } else if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.BY_GAME_FOG) {
-            val targetBrightness = binding.brightness().fixedBrightness() / 100.0f;
+            val targetBrightness = binding.brightness().getFixedBrightness() / 100.0f;
             val currentBrightness = calculateBrightness(gameFogColor);
             float scale = targetBrightness / currentBrightness;
-            red = Math.min(gameFogColor.red() * scale, 1.0f);
-            green = Math.min(gameFogColor.green() * scale, 1.0f);
-            blue = Math.min(gameFogColor.blue() * scale, 1.0f);
+            red = Math.min(gameFogColor.getRed() * scale, 1.0f);
+            green = Math.min(gameFogColor.getGreen() * scale, 1.0f);
+            blue = Math.min(gameFogColor.getBlue() * scale, 1.0f);
         } else {    // BrightnessMode.BY_GAME_FOG, ColorMode.BY_GAME_FOG
-            red = gameFogColor.red();
-            green = gameFogColor.green();
-            blue = gameFogColor.blue();
-            if (binding.brightness().adjustment() != null) {
-                float adjustment = binding.brightness().adjustment();
+            red = gameFogColor.getRed();
+            green = gameFogColor.getGreen();
+            blue = gameFogColor.getBlue();
+            if (binding.brightness().getAdjustment() != null) {
+                float adjustment = binding.brightness().getAdjustment();
 
                 if (adjustment >= 0) {
                     red = red + adjustment * (1.0f - red);
@@ -134,7 +134,7 @@ public class FogService {
     }
 
     private static float calculateBrightness(Color color) {
-        return (0.299f * color.red() + 0.587f * color.green() + 0.114f * color.blue()) * color.alpha();
+        return (0.299f * color.getRed() + 0.587f * color.getGreen() + 0.114f * color.getBlue()) * color.getAlpha();
     }
 
     private static float hexToRed(String hex) {
