@@ -138,12 +138,12 @@ public final class MainConfigV1ToFogPresetsV2Converter implements Converter<Main
                             .bindings(List.of(
                                     Binding.builder()
                                             .condition(Condition.builder().biomeIdIn(mainConfig.getBiomes()).build())
-                                            .startDistance(mainConfig.getCustomFog().startDistance())
-                                            .skyLightStartLevel(mainConfig.getCustomFog().skyLightStartLevel())
-                                            .endDistance(mainConfig.getCustomFog().endDistance())
-                                            .surfaceHeightEnd(mainConfig.getCustomFog().surfaceHeightEnd())
-                                            .opacity(mainConfig.getCustomFog().opacity())
-                                            .encapsulationSpeed(mainConfig.getCustomFog().encapsulationSpeed())
+                                            .startDistance(mainConfig.getCustomFog().getStartDistance())
+                                            .skyLightStartLevel(mainConfig.getCustomFog().getSkyLightStartLevel())
+                                            .endDistance(mainConfig.getCustomFog().getEndDistance())
+                                            .surfaceHeightEnd(mainConfig.getCustomFog().getSurfaceHeightEnd())
+                                            .opacity(mainConfig.getCustomFog().getOpacity())
+                                            .encapsulationSpeed(mainConfig.getCustomFog().getEncapsulationSpeed())
                                             .brightness(Brightness.builder().mode(BrightnessMode.BY_GAME_FOG).build())
                                             .color(Color.builder().mode(ColorMode.BY_GAME_FOG).build())
                                             .build()
@@ -154,6 +154,6 @@ public final class MainConfigV1ToFogPresetsV2Converter implements Converter<Main
                 .map(preset -> new Pair<>(
                         presetDirectoryPath.resolve(preset.getCode() + ".json"),
                         preset
-                )).collect(Collectors.toMap(Pair::first, Pair::second));
+                )).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 }

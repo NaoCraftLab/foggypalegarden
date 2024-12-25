@@ -115,7 +115,7 @@ public final class ConfigFacade {
 
     @NotNull
     public FogPresetV3 getCurrentPreset() {
-        return presets.get(mainConfig.getPreset()).second();
+        return presets.get(mainConfig.getPreset()).getSecond();
     }
 
     public boolean setCurrentPreset(@NotNull String presetCode) {
@@ -137,15 +137,15 @@ public final class ConfigFacade {
                 configFilePtah,
                 presetDirectoryPath,
                 loadedMainConfig,
-                loadedPresets.stream().collect(toMap(Pair::first, Pair::second))
+                loadedPresets.stream().collect(toMap(Pair::getFirst, Pair::getSecond))
         );
-        migrationResults.mainConfig().validate();
-        migrationResults.presetByPath().forEach((path, preset) -> preset.validate());
+        migrationResults.getMainConfig().validate();
+        migrationResults.getPresetByPath().forEach((path, preset) -> preset.validate());
 
-        mainConfig = migrationResults.mainConfig();
-        presets = migrationResults.presetByPath().entrySet().stream()
+        mainConfig = migrationResults.getMainConfig();
+        presets = migrationResults.getPresetByPath().entrySet().stream()
                 .map(entry -> new Pair<>(entry.getValue().getCode(), new Pair<>(entry.getKey(), entry.getValue())))
-                .collect(toMap(Pair::first, Pair::second));
+                .collect(toMap(Pair::getFirst, Pair::getSecond));
 
         setCurrentPreset(mainConfig.getPreset());
         save();
@@ -154,7 +154,7 @@ public final class ConfigFacade {
     public void save() {
         FpgFiles.writeString(configFilePtah, GSON.toJson(mainConfig));
         for (val preset : presets.values()) {
-            FpgFiles.writeString(preset.first(), GSON.toJson(preset.second()));
+            FpgFiles.writeString(preset.getFirst(), GSON.toJson(preset.getSecond()));
         }
     }
 
@@ -180,7 +180,7 @@ public final class ConfigFacade {
                 return stream
                         .filter(file -> isRegularFile(file) && file.getFileName().toString().endsWith(".json"))
                         .map(path -> new Pair<>(path, GSON.fromJson(FpgFiles.readString(path), FogPreset.class)))
-                        .filter(pair -> pair.second().getVersion() > 0)
+                        .filter(pair -> pair.getSecond().getVersion() > 0)
                         .toList();
             } catch (Exception e) {
                 throw new FoggyPaleGardenEnvironmentException("Failed to read presets", e);
