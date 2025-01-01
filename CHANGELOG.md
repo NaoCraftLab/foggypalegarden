@@ -1,3 +1,9 @@
+## 2.8.2
+
+### Fixed
+
+- The condition timeIn was based on the total game time instead of the time within a day
+
 ## 2.8.1
 
 ### Fixed
