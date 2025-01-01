@@ -71,7 +71,7 @@ public abstract class PaleGardenFogMixin {
                         .biomeTemperature(biomeEntry.value().getBaseTemperature())
                         .difficulty(world.getDifficulty())
                         .weather(resolveWeather(world))
-                        .timeOfDay(world.getDayTime())
+                        .timeOfDay(world.getDayTime() % 24000)
                         .skyLightLevel(world.getBrightness(SKY, blockPos))
                         .height(blockPos.getY())
                         .heightAboveSurface(blockPos.getY() - hitResult.getBlockPos().getY())
