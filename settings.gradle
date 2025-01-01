@@ -37,13 +37,6 @@ plugins {
 
 include('common')
 
-if (settings.ext.commonMixinImplementation == ':mixin1165') {
-    include('mixin1165')
-}
-if (settings.ext.commonMixinImplementation == ':mixin24w40a') {
-    include('mixin24w40a')
-}
-
 def platforms = settings.ext.architecturyPlatforms.split(',')
 if (platforms.contains('fabric')) {
     include('fabric')

@@ -23,6 +23,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.naocraftlab.foggypalegarden.config.ConfigFacade.configFacade;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.CLEAR;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.RAIN;
+import static com.naocraftlab.foggypalegarden.domain.model.Weather.THUNDER;
 import static net.minecraft.world.level.ClipContext.Block.COLLIDER;
 import static net.minecraft.world.level.ClipContext.Fluid.NONE;
 import static net.minecraft.world.level.GameType.ADVENTURE;
@@ -77,27 +80,27 @@ public abstract class PaleGardenFogMixin {
                         .build()
         );
 
-        assert fogCharacteristics.getFogDensity() >= 0.0f : "FPG: Fog density is negative";
-        assert fogCharacteristics.getFogDensity() <= 1.0f : "FPG: Fog density is greater than 1.0";
+        assert fogCharacteristics.fogDensity() >= 0.0f : "FPG: Fog density is negative";
+        assert fogCharacteristics.fogDensity() <= 1.0f : "FPG: Fog density is greater than 1.0";
 
-        fogDensity = fogCharacteristics.getFogDensity();
+        fogDensity = fogCharacteristics.fogDensity();
         if (fogDensity > 0.0f) {
-            assert fogCharacteristics.getStartDistance() >= 0.0f : "FPG: Start distance is negative";
-            assert fogCharacteristics.getEndDistance() >= fogCharacteristics.getStartDistance()
+            assert fogCharacteristics.startDistance() >= 0.0f : "FPG: Start distance is negative";
+            assert fogCharacteristics.endDistance() >= fogCharacteristics.startDistance()
                     : "FPG: End distance is less than start distance";
-            assert fogCharacteristics.getColor().getRed() >= 0.0f : "FPG: Red color component is negative";
-            assert fogCharacteristics.getColor().getRed() <= 1.0f : "FPG: Red color component is greater than 1.0";
-            assert fogCharacteristics.getColor().getGreen() >= 0.0f : "FPG: Green color component is negative";
-            assert fogCharacteristics.getColor().getGreen() <= 1.0f : "FPG: Green color component is greater than 1.0";
-            assert fogCharacteristics.getColor().getBlue() >= 0.0f : "FPG: Blue color component is negative";
-            assert fogCharacteristics.getColor().getBlue() <= 1.0f : "FPG: Blue color component is greater than 1.0";
-            assert fogCharacteristics.getColor().getAlpha() >= 0.0f : "FPG: Alpha color component is negative";
-            assert fogCharacteristics.getColor().getAlpha() <= 1.0f : "FPG: Alpha color component is greater than 1.0";
+            assert fogCharacteristics.color().red() >= 0.0f : "FPG: Red color component is negative";
+            assert fogCharacteristics.color().red() <= 1.0f : "FPG: Red color component is greater than 1.0";
+            assert fogCharacteristics.color().green() >= 0.0f : "FPG: Green color component is negative";
+            assert fogCharacteristics.color().green() <= 1.0f : "FPG: Green color component is greater than 1.0";
+            assert fogCharacteristics.color().blue() >= 0.0f : "FPG: Blue color component is negative";
+            assert fogCharacteristics.color().blue() <= 1.0f : "FPG: Blue color component is greater than 1.0";
+            assert fogCharacteristics.color().alpha() >= 0.0f : "FPG: Alpha color component is negative";
+            assert fogCharacteristics.color().alpha() <= 1.0f : "FPG: Alpha color component is greater than 1.0";
 
-            color.x = color.x * (1.0f - fogDensity) + fogCharacteristics.getColor().getRed() * fogDensity;
-            color.y = color.y * (1.0f - fogDensity) + fogCharacteristics.getColor().getGreen() * fogDensity;
-            color.z = color.z * (1.0f - fogDensity) + fogCharacteristics.getColor().getBlue() * fogDensity;
-            color.w = color.w * (1.0f - fogDensity) + fogCharacteristics.getColor().getAlpha() * fogDensity;
+            color.x = color.x * (1.0f - fogDensity) + fogCharacteristics.color().red() * fogDensity;
+            color.y = color.y * (1.0f - fogDensity) + fogCharacteristics.color().green() * fogDensity;
+            color.z = color.z * (1.0f - fogDensity) + fogCharacteristics.color().blue() * fogDensity;
+            color.w = color.w * (1.0f - fogDensity) + fogCharacteristics.color().alpha() * fogDensity;
 
             cir.setReturnValue(fogOf(fogCharacteristics));
             cir.cancel();
@@ -125,11 +128,11 @@ public abstract class PaleGardenFogMixin {
     @Unique
     private static Weather resolveWeather(ClientLevel world) {
         if (world.isThundering()) {
-            return Weather.THUNDER;
+            return THUNDER;
         } else if (world.isRaining()) {
-            return Weather.RAIN;
+            return RAIN;
         } else {
-            return Weather.CLEAR;
+            return CLEAR;
         }
     }
 
@@ -141,13 +144,13 @@ public abstract class PaleGardenFogMixin {
     @Unique
     private static FogParameters fogOf(FogCharacteristics fogCharacteristics) {
         return new FogParameters(
-                fogCharacteristics.getStartDistance(),
-                fogCharacteristics.getEndDistance(),
-                fogCharacteristics.getShape(),
-                fogCharacteristics.getColor().getRed(),
-                fogCharacteristics.getColor().getGreen(),
-                fogCharacteristics.getColor().getBlue(),
-                fogCharacteristics.getColor().getAlpha()
+                fogCharacteristics.startDistance(),
+                fogCharacteristics.endDistance(),
+                fogCharacteristics.shape(),
+                fogCharacteristics.color().red(),
+                fogCharacteristics.color().green(),
+                fogCharacteristics.color().blue(),
+                fogCharacteristics.color().alpha()
         );
     }
 }

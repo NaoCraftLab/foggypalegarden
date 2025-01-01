@@ -14,13 +14,10 @@ configurations {
 dependencies {
     neoForge "net.neoforged:neoforge:${project.ext.neoforgeVersion}"
 
-    modImplementation "me.shedaniel.cloth:cloth-config-neoforge:${project.ext.commonClothConfigVersion}"
-
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
 
-    common(project(path: "${commonMixinImplementation}", configuration: 'namedElements')) { transitive false }
-    shadowCommon(project(path: "${commonMixinImplementation}", configuration: 'transformProductionFabric')) { transitive false }
+    modImplementation "me.shedaniel.cloth:cloth-config-neoforge:${project.ext.commonClothConfigVersion}"
 }
 
 shadowJar {
@@ -42,10 +39,6 @@ sourcesJar {
     def commonSources = project(':common').sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
-
-    def mixinSources = project("${commonMixinImplementation}").sourcesJar
-    dependsOn mixinSources
-    from mixinSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {
