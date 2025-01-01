@@ -26,7 +26,6 @@ import com.naocraftlab.foggypalegarden.util.Converter;
 import com.naocraftlab.foggypalegarden.util.FpgFiles;
 import com.naocraftlab.foggypalegarden.util.Pair;
 import lombok.Builder;
-import lombok.Data;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -222,7 +221,7 @@ public final class ConfigMigrator {
         } else {
             migratedPresetByPath = DEFAULT_PRESETS.stream()
                     .map(preset -> new Pair<>(presetDirectoryPath.resolve(preset.getCode() + ".json"), (FogPreset) preset))
-                    .collect(toMap(Pair::getFirst, pair -> (FogPresetV3) pair.getSecond()));
+                    .collect(toMap(Pair::first, pair -> (FogPresetV3) pair.second()));
         }
 
         return MigrationResult.<MainConfigV3, FogPresetV3>builder()
@@ -233,7 +232,7 @@ public final class ConfigMigrator {
     }
 
     private @NotNull MainConfigV3 migrateMainConfig(@NotNull Path configPath, @NotNull MainConfig mainConfig) {
-        MainConfig migratedConfig = readMainConfig(configPath, mainConfig.getVersion());
+        var migratedConfig = readMainConfig(configPath, mainConfig.getVersion());
         while (!(migratedConfig instanceof MainConfigV3)) {
             migratedConfig = mainConfigConverters.get(migratedConfig.getVersion()).convert(migratedConfig);
         }
@@ -280,14 +279,10 @@ public final class ConfigMigrator {
         }
     }
 
-    @Data
     @Builder
-    public static class MigrationResult<C, P> {
-        @NotNull
-        private final Path configPath;
-        @NotNull
-        private final C mainConfig;
-        @NotNull
-        private final Map<Path, P> presetByPath;
-    }
+    public record MigrationResult<C, P>(
+            @NotNull Path configPath,
+            @NotNull C mainConfig,
+            @NotNull Map<Path, P> presetByPath
+    ) {}
 }

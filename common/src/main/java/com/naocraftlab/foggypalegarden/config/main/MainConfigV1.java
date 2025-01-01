@@ -63,19 +63,20 @@ public final class MainConfigV1 extends MainConfig {
         CUSTOM
     }
 
-    @Data
-    public static class FogSettings {
-        /** fog start distance (in blocks) */
-        private final float startDistance;
-        /** level of light from sky to start fog (0 - 15) */
-        private final int skyLightStartLevel;
-        /** fog end distance (in blocks) */
-        private final float endDistance;
-        /** height above the surface to turn off fog (in blocks) */
-        private final float surfaceHeightEnd;
-        /** fog opacity (0.0 - 1.0) */
-        private final float opacity;
-        /** fog encapsulation speed (percent/sec) */
-        private final float encapsulationSpeed;
-    }
+    /**
+     * @param startDistance         fog start distance (in blocks)
+     * @param skyLightStartLevel    level of light from sky to start fog (0 - 15)
+     * @param endDistance           fog end distance (in blocks)
+     * @param surfaceHeightEnd      height above the surface to turn off fog (in blocks)
+     * @param opacity               fog opacity (0.0 - 1.0)
+     * @param encapsulationSpeed    fog encapsulation speed (percent/sec)
+     */
+    public record FogSettings(
+        float startDistance,
+        int skyLightStartLevel,
+        float endDistance,
+        float surfaceHeightEnd,
+        float opacity,
+        float encapsulationSpeed
+    ) {}
 }
