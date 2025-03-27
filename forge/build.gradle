@@ -11,23 +11,27 @@ loom {
 
 configurations {
     common
+    versionSpecificCommon
     shadowCommon
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    shadowVersionSpecificCommon
+    compileClasspath.extendsFrom(common, versionSpecificCommon)
+    runtimeClasspath.extendsFrom(common, versionSpecificCommon)
+    developmentForge.extendsFrom(common, versionSpecificCommon)
 }
 
 dependencies {
     forge "net.minecraftforge:forge:${forgeVersion}"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowCommon(project(path: ':common', configuration: 'transformProductionForge')) { transitive = false }
-
     modImplementation "me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}"
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    shadowCommon(project(path: ':common', configuration: 'transformProductionForge')) { transitive false }
+    versionSpecificCommon(project(path: ":${specific}", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":${specific}", configuration: 'transformProductionForge')) { transitive false }
 }
 
 shadowJar {
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowCommon, project.configurations.shadowVersionSpecificCommon]
     archiveClassifier.set('dev-shadow')
 }
 
@@ -43,8 +47,10 @@ jar {
 
 sourcesJar {
     def commonSources = project(':common').sourcesJar
-    dependsOn commonSources
+    def versionSpecificSources = project(":$specific").sourcesJar
+    dependsOn commonSources, versionSpecificSources
     from commonSources.archiveFile.map { zipTree(it) }
+    from versionSpecificSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {
