@@ -5,10 +5,12 @@ architectury {
 
 configurations {
     common
+    versionSpecificCommon
     shadowCommon
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
+    shadowVersionSpecificCommon
+    compileClasspath.extendsFrom(common, versionSpecificCommon)
+    runtimeClasspath.extendsFrom(common, versionSpecificCommon)
+    developmentFabric.extendsFrom(common, versionSpecificCommon)
 }
 
 dependencies {
@@ -26,10 +28,12 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionFabric')) { transitive false }
+    versionSpecificCommon(project(path: ":${specific}", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":${specific}", configuration: 'transformProductionFabric')) { transitive false }
 }
 
 shadowJar {
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowCommon, project.configurations.shadowVersionSpecificCommon]
     archiveClassifier.set('dev-shadow')
 }
 
@@ -45,8 +49,10 @@ jar {
 
 sourcesJar {
     def commonSources = project(':common').sourcesJar
-    dependsOn commonSources
+    def versionSpecificSources = project(":$specific").sourcesJar
+    dependsOn commonSources, versionSpecificSources
     from commonSources.archiveFile.map { zipTree(it) }
+    from versionSpecificSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {

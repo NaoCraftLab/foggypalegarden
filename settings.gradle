@@ -37,6 +37,9 @@ plugins {
 
 include('common')
 
+def specific = settings.ext.specific
+include(specific)
+
 def platforms = settings.ext.architecturyPlatforms.split(',')
 if (platforms.contains('fabric')) {
     include('fabric')
