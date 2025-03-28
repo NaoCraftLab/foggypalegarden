@@ -6,9 +6,13 @@ import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3.Binding.Color.C
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
+import com.naocraftlab.foggypalegarden.domain.model.FogMode;
+import com.naocraftlab.foggypalegarden.domain.model.FogShape;
 import com.naocraftlab.foggypalegarden.util.Pair;
 import lombok.experimental.UtilityClass;
 import lombok.val;
+import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,7 +22,7 @@ public class FogService {
 
     private static List<Pair<Predicate<Environment>, FogPresetV3.Binding>> presetBindings;
 
-    private static FogPresetV3.Binding currentBinding = null;
+    private static FogPresetV3.Binding latestBinding = null;
 
     public static void onCurrentPresetChange(FogPresetV3 currentPreset) {
         presetBindings = currentPreset.getBindings().stream()
@@ -26,46 +30,42 @@ public class FogService {
                 .toList();
     }
 
-    public static FogCharacteristics calculateFogCharacteristics(Environment environment) {
-        val candidate = presetBindings.stream()
+    @Nullable
+    public static FogPresetV3.Binding resolveBinding(Environment environment) {
+        return presetBindings.stream()
                 .filter(pair -> pair.first().test(environment))
                 .map(Pair::second)
-                .findFirst();
-        if (candidate.isEmpty() && currentBinding == null) {
-            return FogCharacteristics.builder().fogDensity(0.0f).build();
-        }
-        currentBinding = candidate.orElse(currentBinding);
-
-        val fogDensity = candidate.isPresent()
-                ? Math.min(environment.fogDensity() + currentBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
-                : Math.max(environment.fogDensity() - currentBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
-        return FogCharacteristics.builder()
-                .startDistance(currentBinding.startDistance())
-                .endDistance(currentBinding.endDistance())
-                .color(calculateColor(environment.gameFogColor(), currentBinding, fogDensity))
-                .shape(currentBinding.shape())
-                .fogDensity(fogDensity)
-                .build();
+                .findFirst()
+                .orElse(null);
     }
 
-    private static Color calculateColor(Color gameFogColor, FogPresetV3.Binding binding, float fogDensity) {
+    public static Color calculateColor(@Nullable FogPresetV3.Binding binding, float fogDensity, Color gameFogColor) {
+        final FogPresetV3.Binding targetBinding;
+        if (binding != null) {
+            targetBinding = binding;
+        } else if (latestBinding != null) {
+            targetBinding = latestBinding;
+        } else {
+            return gameFogColor;
+        }
+
         float red;
         float green;
         float blue;
-        val brightnessMode = binding.brightness().mode();
-        val colorMode = binding.color().mode();
+        val brightnessMode = targetBinding.brightness().mode();
+        val colorMode = targetBinding.color().mode();
         if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.FIXED) {
-            val brightness = binding.brightness().fixedBrightness() / 100.0f;
-            red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
-            green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
-            blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
+            val brightness = targetBinding.brightness().fixedBrightness() / 100.0f;
+            red = Math.min(hexToRed(targetBinding.color().fixedHex()) * brightness, 1.0f);
+            green = Math.min(hexToGreen(targetBinding.color().fixedHex()) * brightness, 1.0f);
+            blue = Math.min(hexToBlue(targetBinding.color().fixedHex()) * brightness, 1.0f);
         } else if (brightnessMode == BrightnessMode.BY_GAME_FOG && colorMode == ColorMode.FIXED) {
             val brightness = calculateBrightness(gameFogColor);
-            red = Math.min(hexToRed(binding.color().fixedHex()) * brightness, 1.0f);
-            green = Math.min(hexToGreen(binding.color().fixedHex()) * brightness, 1.0f);
-            blue = Math.min(hexToBlue(binding.color().fixedHex()) * brightness, 1.0f);
-            if (binding.brightness().adjustment() != null) {
-                float adjustment = binding.brightness().adjustment();
+            red = Math.min(hexToRed(targetBinding.color().fixedHex()) * brightness, 1.0f);
+            green = Math.min(hexToGreen(targetBinding.color().fixedHex()) * brightness, 1.0f);
+            blue = Math.min(hexToBlue(targetBinding.color().fixedHex()) * brightness, 1.0f);
+            if (targetBinding.brightness().adjustment() != null) {
+                float adjustment = targetBinding.brightness().adjustment();
 
                 if (adjustment >= 0) {
                     red = red + adjustment * (1.0f - red);
@@ -89,7 +89,7 @@ public class FogService {
                 blue = Math.max(0.0f, Math.min(blue, 1.0f));
             }
         } else if (brightnessMode == BrightnessMode.FIXED && colorMode == ColorMode.BY_GAME_FOG) {
-            val targetBrightness = binding.brightness().fixedBrightness() / 100.0f;
+            val targetBrightness = targetBinding.brightness().fixedBrightness() / 100.0f;
             val currentBrightness = calculateBrightness(gameFogColor);
             float scale = targetBrightness / currentBrightness;
             red = Math.min(gameFogColor.red() * scale, 1.0f);
@@ -99,8 +99,8 @@ public class FogService {
             red = gameFogColor.red();
             green = gameFogColor.green();
             blue = gameFogColor.blue();
-            if (binding.brightness().adjustment() != null) {
-                float adjustment = binding.brightness().adjustment();
+            if (targetBinding.brightness().adjustment() != null) {
+                float adjustment = targetBinding.brightness().adjustment();
 
                 if (adjustment >= 0) {
                     red = red + adjustment * (1.0f - red);
@@ -124,13 +124,59 @@ public class FogService {
                 blue = Math.max(0.0f, Math.min(blue, 1.0f));
             }
         }
-        val alpha = (binding.opacity() > 0f) ? fogDensity * (binding.opacity() / 100f - 0.001f) : 0f;
         return Color.builder()
-                .red(red)
-                .green(green)
-                .blue(blue)
-                .alpha(alpha)
+                .red(clamp(gameFogColor.red(), red, fogDensity))
+                .green(clamp(gameFogColor.green(), green, fogDensity))
+                .blue(clamp(gameFogColor.blue(), blue, fogDensity))
+                .alpha(clamp(1.0f, targetBinding.opacity() / 100.0f, fogDensity))
                 .build();
+    }
+
+    public static FogCharacteristics calculateFogCharacteristics(
+            @Nullable FogPresetV3.Binding binding,
+             float fogDensity,
+             FogMode fogMode,
+             float viewDistance,
+             Color gameFogColor
+    ) {
+        if (binding == null && latestBinding == null) {
+            return FogCharacteristics.builder().fogDensity(0.0f).build();
+        }
+        if (binding != null) {
+            latestBinding = binding;
+        }
+        val currentFogDensity = binding != null
+                ? Math.min(fogDensity + latestBinding.encapsulationSpeed() / 100f / 20f, 1.0f)
+                : Math.max(fogDensity - latestBinding.encapsulationSpeed() / 100f / 20f, 0.0f);
+
+        final float startDistance;
+        final float endDistance;
+        final FogShape shape;
+        if (fogMode == FogMode.FOG_SKY) {
+            startDistance = 0.0f;
+            endDistance = viewDistance;
+            shape = FogShape.CYLINDER;
+        } else {
+            val h = Mth.clamp(viewDistance / 10.0F, 4.0F, 64.0F);
+            val start = viewDistance - h;
+            val end = viewDistance;
+
+            startDistance = clamp(start, latestBinding.startDistance(), currentFogDensity);
+            endDistance = clamp(end, latestBinding.endDistance(), currentFogDensity);
+            shape = latestBinding.shape();
+        }
+        return FogCharacteristics.builder()
+                .startDistance(startDistance)
+                .endDistance(endDistance)
+                .color(calculateColor(binding, currentFogDensity, gameFogColor))
+                .shape(shape)
+                .fogDensity(currentFogDensity)
+                .build();
+    }
+
+    private static float clamp(float source, float target, float modifier) {
+        val clampedModifier = Mth.clamp(modifier, 0.0f, 1.0f);
+        return source + (target - source) * clampedModifier;
     }
 
     private static float calculateBrightness(Color color) {

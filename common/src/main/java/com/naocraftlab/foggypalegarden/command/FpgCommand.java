@@ -1,17 +1,18 @@
 package com.naocraftlab.foggypalegarden.command;
 
-import java.util.List;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 
-public interface FpgCommand {
+public class FpgCommand extends AbstractCommand {
 
-    String BASE_COMMAND = "fpg";
-    String PRESET_ARGUMENT = "preset";
-    String RELOAD_CONFIG_ARGUMENT = "reloadConfig";
-    String NO_FOG_GAME_MODE_ARGUMENT = "noFogGameMode";
-    String NO_FOG_GAME_MODE_ARGUMENT_FIRST_ARG = "gameMode";
-    List<String> ALL_ARGUMENTS = List.of(
-            PRESET_ARGUMENT,
-            RELOAD_CONFIG_ARGUMENT,
-            NO_FOG_GAME_MODE_ARGUMENT
-    );
+    public static final LiteralArgumentBuilder<CommandSourceStack> INSTANCE = Commands.literal(BASE_COMMAND)
+            .executes(FpgCommand::executeBaseCommand);
+
+    private static int executeBaseCommand(CommandContext<CommandSourceStack> context) {
+        context.getSource().sendSuccess(() -> Component.translatable("fpg.command.help", String.join("\n", ALL_COMMANDS)), false);
+        return 1;
+    }
 }

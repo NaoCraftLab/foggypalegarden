@@ -1,9 +1,9 @@
 package com.naocraftlab.foggypalegarden.config.preset;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import com.naocraftlab.foggypalegarden.config.preset.FogPresetV2.Binding.Brightness.BrightnessMode;
 import com.naocraftlab.foggypalegarden.config.preset.FogPresetV2.Binding.Color.ColorMode;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
+import com.naocraftlab.foggypalegarden.domain.model.FogShape;
 import com.naocraftlab.foggypalegarden.exception.FoggyPaleGardenConfigurationException;
 import lombok.Builder;
 import lombok.Data;

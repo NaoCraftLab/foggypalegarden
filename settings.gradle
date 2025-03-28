@@ -36,23 +36,28 @@ plugins {
 }
 
 include('common')
+project(':common').name = 'common'
 
 def specific = settings.ext.specific
 include(specific)
+project(":$specific").name = specific
 
 def platforms = settings.ext.architecturyPlatforms.split(',')
 if (platforms.contains('fabric')) {
     include('fabric')
+    project(':fabric').name = 'fabric'
 } else {
     println 'Fabric module is disabled for this version.'
 }
 if (platforms.contains('forge')) {
     include('forge')
+    project(':forge').name = 'forge'
 } else {
     println 'Forge module is disabled for this version.'
 }
 if (platforms.contains('neoforge')) {
     include('neoforge')
+    project(':neoforge').name = 'neoforge'
 } else {
     println 'NeoForge module is disabled for this version.'
 }

@@ -1,10 +1,10 @@
-package com.naocraftlab.foggypalegarden.fabric.command;
+package com.naocraftlab.foggypalegarden.command;
 
-import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import com.naocraftlab.foggypalegarden.command.FpgCommand;
 import lombok.val;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
 import java.util.stream.Collectors;
@@ -13,15 +13,11 @@ import static com.naocraftlab.foggypalegarden.config.ConfigFacade.configFacade;
 import static net.minecraft.ChatFormatting.GREEN;
 import static net.minecraft.ChatFormatting.RED;
 
-public class FpgReloadConfigCommand implements FpgCommand {
+public class FpgReloadConfigCommand extends AbstractCommand {
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(
-                net.minecraft.commands.Commands.literal(BASE_COMMAND)
-                        .then(net.minecraft.commands.Commands.literal(RELOAD_CONFIG_ARGUMENT)
-                                .executes(FpgReloadConfigCommand::reloadConfig))
-        );
-    }
+    public static final LiteralArgumentBuilder<CommandSourceStack> INSTANCE = Commands.literal(BASE_COMMAND).then(
+            Commands.literal(RELOAD_CONFIG_COMMAND).executes(FpgReloadConfigCommand::reloadConfig)
+    );
 
     private static int reloadConfig(CommandContext<CommandSourceStack> context) {
         try {
