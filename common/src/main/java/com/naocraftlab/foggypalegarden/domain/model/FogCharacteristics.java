@@ -1,6 +1,5 @@
 package com.naocraftlab.foggypalegarden.domain.model;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import lombok.Builder;
 
 @Builder

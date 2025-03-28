@@ -1,3 +1,13 @@
+## 2.8.3
+
+### Fixed
+
+- Error when executing the `/fpg` command in Minecraft versions above 1.21.4
+- Sharp horizon boundary during fog thickening and dissolving
+- Custom fog replacing the blindness effect from suspicious stew
+- Custom fog replacing the darkness effect from the Warden
+- Custom fog replacing effects when being in lava, water, and powder snow
+
 ## 2.8.2
 
 ### Fixed

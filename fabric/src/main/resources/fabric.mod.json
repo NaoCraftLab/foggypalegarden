@@ -23,7 +23,7 @@
       "com.naocraftlab.foggypalegarden.fabric.FoggyPaleGardenClientMod"
     ],
     "modmenu": [
-      "com.naocraftlab.foggypalegarden.fabric.integration.ModMenuIntegration"
+      "com.naocraftlab.foggypalegarden.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -47,7 +47,7 @@ subprojects {
         ]) {
             expand(
                     modId: rootProject.extensions.extraProperties.modId,
-                    modVersion: project.version,
+                    modVersion: rootProject.extensions.extraProperties.modVersion,
                     modName: rootProject.extensions.extraProperties.modName,
                     modDescription: rootProject.extensions.extraProperties.modDescription,
                     modLicense: rootProject.extensions.extraProperties.modLicense,
