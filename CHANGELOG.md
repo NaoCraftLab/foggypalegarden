@@ -1,3 +1,20 @@
+## 2.9.0
+
+### Added
+- Backport to versions before 24w40a
+- Support for ALL mods porting the Pale Garden biome to older game versions
+- Support for wildcard "*" for conditions dimensionIn and biomeIdIn. Now you can add fog to several biomes or dimensions at once that match the specified pattern by name
+- Built-in immutable fog presets
+- Support for resource packs (simply add a fog preset to `assets/foggypalegarden/preset.json`)
+- Automatic backup of fog presets from the `config/foggypalegarden` folder if their codes conflict with built-in presets or resource pack presets
+
+### Fixed
+- Warning about the need to disable Fog Occlusion when using Sodium and its forks
+
+### Removed
+- Automatic migration of the configuration file version
+- Automatic migration of fog preset versions from the configuration folder
+
 ## 2.8.3
 
 ### Fixed
@@ -20,7 +37,7 @@
 
 - Game crash when spectating a mob in spectator mode
 
-## 1.21.2-2.8.0
+## 2.8.0
 
 ### Added
 
@@ -33,13 +50,13 @@
 
 ⚠️ The configuration file `config/foggy-pale-garden.json` will be renamed to `config/foggypalegarden.json` on the first mod launch.
 
-## 1.21.2-2.7.0
+## 2.7.0
 
 ### Added
 
 - The command `/fpg noFogGameMode` now outputs to chat a list of game modes where the fog is disabled
 
-## 1.21.2-2.6.0
+## 2.6.0
 
 ### Added
 
@@ -50,25 +67,25 @@
 
 ⚠️ Config and preset migration from version 2 to version 3 is performed automatically
 
-## 1.21.2-2.5.0
+## 2.5.0
 
 ### Added
 
 - Basic support for ModMenu with mod description translation into all supported languages
 
-## 1.21.2-2.4.1
+## 2.4.1
 
 ### Fixed
 
 - Incorrect sky color causing the horizon to be visible through the fog
 
-## 1.21.2-2.4.0
+## 2.4.0
 
 ### Added
 
 - The command `/fpg noFogGameMode <gameMode>` allows you to disable or enable the application of fog settings for the selected game mode
 
-## 1.21.2-2.3.0
+## 2.3.0
 
 ### Added
 
@@ -94,13 +111,13 @@
   - 🇸🇪 Swedish
   - 🇺🇦 Ukrainian
 
-## 1.21.2-2.2.0
+## 2.2.0
 
 ### Added
 
 - Brightness adjustment based on in-game fog brightness (you can increase or decrease the brightness calculated by the game)
 
-## 1.21.2-2.1.0
+## 2.1.0
 
 ### Added
 
@@ -109,7 +126,7 @@
 - Fog shape control (available options: SPHERE and CYLINDER)
 - Disable fog for selected game modes
 
-## 1.21.2-2.0.0
+## 2.0.0
 
 ### Added
 - New fog preset format allowing you to add different fog based on selected conditions
@@ -120,13 +137,13 @@
 - When configuring fog, you can set the color based on in-game fog or a custom HEX value
 - When configuring fog, you can set the brightness based on in-game fog or a custom value
 
-## 1.21.2-1.2.1
+## 1.2.1
 
 ### Fixed
 - Game crash when the config folder is missing
 - Fixed fog transparency caused by block culling, revealing the void behind it
 
-## 1.21.2-1.2.0
+## 1.2.0
 
 ### Added
 
@@ -139,7 +156,7 @@
 
 - A new beautiful icon!
 
-## 1.21.2-1.1.0
+## 1.1.0
 
 ### Added
 - The fog does not fill caves beneath the Pale Garden
@@ -152,7 +169,7 @@
 ### Fixed
 - Removed dependency on Fabric API
 
-## 1.21.2-1.0.0
+## 1.0.0
 
 ### Added
 - Envelops the Pale Garden in fog

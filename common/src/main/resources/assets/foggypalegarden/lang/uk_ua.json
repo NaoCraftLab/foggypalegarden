@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Вибраний Пресет Туману",
   "fpg.settings.currentPreset.tooltip": "Виберіть один з доступних або додайте свій у папку %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Вимкнути Туман для Режимів Гри",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Режими гри, на які не впливає пресет туману"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Режими гри, на які не впливає пресет туману",
+  "fpg.message.disableFogOcclusion": "Для коректної роботи \"%s\" вимкніть параметр"
 }

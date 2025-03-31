@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "არჩეული ნისლის პრესეტი",
   "fpg.settings.currentPreset.tooltip": "აირჩიეთ ერთ-ერთი არსებული ან დაამატეთ თქვენი %s ფოლდერში",
   "fpg.settings.subCategory.noFogGameMode.title": "ნისლის გათიშვა სათამაშო რეჟიმებისთვის",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "სათამაშო რეჟიმები, რომელზეც ნისლის პრესეტი არ იმოქმედებს"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "სათამაშო რეჟიმები, რომელზეც ნისლის პრესეტი არ იმოქმედებს",
+  "fpg.message.disableFogOcclusion": "„%s“ სწორი მუშაობისთვის, გამორთეთ პარამეტრი"
 }

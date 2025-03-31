@@ -1,17 +1,18 @@
 package com.naocraftlab.foggypalegarden.gui;
 
+import com.naocraftlab.foggypalegarden.domain.model.GameType;
 import lombok.experimental.UtilityClass;
 import lombok.val;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.GameType;
 
 import java.util.HashSet;
 import java.util.List;
 
 import static com.naocraftlab.foggypalegarden.config.ConfigFacade.configFacade;
-import static com.naocraftlab.foggypalegarden.config.ConfigMigrator.DEFAULT_CONFIG;
+import static com.naocraftlab.foggypalegarden.config.presetsource.PresetSourceEmbedded.DEFAULT_PRESET_CODE;
+import static com.naocraftlab.foggypalegarden.converter.GameTypeConverter.toDomainGameType;
 import static net.minecraft.world.level.GameType.ADVENTURE;
 import static net.minecraft.world.level.GameType.CREATIVE;
 import static net.minecraft.world.level.GameType.SPECTATOR;
@@ -32,27 +33,30 @@ public class ClothConfigScreen {
                         Component.translatable("fpg.settings.currentPreset.title"),
                         configFacade().getAvailablePresetCodes().toArray(),
                         configFacade().getCurrentPreset().getCode()
-                ).setTooltip(
-                        Component.translatable("fpg.settings.currentPreset.tooltip", configFacade().presetDirectoryPath().normalize().toString())
-                ).setDefaultValue(DEFAULT_CONFIG.getPreset())
+                )
+                // TODO new tooltip
+                // .setTooltip(
+                //         Component.translatable("fpg.settings.currentPreset.tooltip", configFacade().presetDirectoryPath().normalize().toString())
+                // )
+                .setDefaultValue(DEFAULT_PRESET_CODE)
                 .build();
         generalCategory.addEntry(presetEntry);
 
         val creativeEntry = entryBuilder.startBooleanToggle(
                 Component.translatable("selectWorld.gameMode.creative"),
-                configFacade().isNoFogGameMode(CREATIVE)
+                configFacade().isNoFogGameMode(toDomainGameType(CREATIVE))
         ).setDefaultValue(false).build();
         val survivalEntry = entryBuilder.startBooleanToggle(
                 Component.translatable("selectWorld.gameMode.survival"),
-                configFacade().isNoFogGameMode(SURVIVAL)
+                configFacade().isNoFogGameMode(toDomainGameType(SURVIVAL))
         ).setDefaultValue(false).build();
         val adventureEntry = entryBuilder.startBooleanToggle(
                 Component.translatable("selectWorld.gameMode.adventure"),
-                configFacade().isNoFogGameMode(ADVENTURE)
+                configFacade().isNoFogGameMode(toDomainGameType(ADVENTURE))
         ).setDefaultValue(false).build();
         val spectatorEntry = entryBuilder.startBooleanToggle(
                 Component.translatable("selectWorld.gameMode.spectator"),
-                configFacade().isNoFogGameMode(SPECTATOR)
+                configFacade().isNoFogGameMode(toDomainGameType(SPECTATOR))
         ).setDefaultValue(false).build();
         val noFogGameModeCategory = entryBuilder.startSubCategory(
                 Component.translatable("fpg.settings.subCategory.noFogGameMode.title"),
@@ -67,16 +71,16 @@ public class ClothConfigScreen {
 
             val noFogGameModes = new HashSet<GameType>();
             if (creativeEntry.getValue()) {
-                noFogGameModes.add(CREATIVE);
+                noFogGameModes.add(GameType.CREATIVE);
             }
             if (survivalEntry.getValue()) {
-                noFogGameModes.add(SURVIVAL);
+                noFogGameModes.add(GameType.SURVIVAL);
             }
             if (adventureEntry.getValue()) {
-                noFogGameModes.add(ADVENTURE);
+                noFogGameModes.add(GameType.ADVENTURE);
             }
             if (spectatorEntry.getValue()) {
-                noFogGameModes.add(SPECTATOR);
+                noFogGameModes.add(GameType.SPECTATOR);
             }
             configFacade().noFogGameModes(noFogGameModes);
 

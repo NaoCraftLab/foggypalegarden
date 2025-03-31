@@ -1,11 +1,11 @@
 package com.naocraftlab.foggypalegarden.config.main;
 
+import com.naocraftlab.foggypalegarden.domain.model.GameType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.With;
-import net.minecraft.world.level.GameType;
 
 import java.util.Set;
 

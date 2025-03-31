@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Aktuelles Nebel-Preset",
   "fpg.settings.currentPreset.tooltip": "Wählen Sie eines der verfügbaren oder fügen Sie Ihr eigenes in den Ordner %s hinzu",
   "fpg.settings.subCategory.noFogGameMode.title": "Nebel für Spielmodi deaktivieren",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spielmodi, die vom Nebel-Preset nicht beeinflusst werden"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spielmodi, die vom Nebel-Preset nicht beeinflusst werden",
+  "fpg.message.disableFogOcclusion": "Für einen korrekten Betrieb von \"%s\" deaktivieren Sie die Einstellung"
 }

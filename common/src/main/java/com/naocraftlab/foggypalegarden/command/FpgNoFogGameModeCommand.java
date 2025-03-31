@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.naocraftlab.foggypalegarden.converter.GameTypeConverter;
 import lombok.val;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.string;
 import static com.naocraftlab.foggypalegarden.config.ConfigFacade.configFacade;
+import static com.naocraftlab.foggypalegarden.converter.GameTypeConverter.toDomainGameType;
 import static java.util.stream.Collectors.joining;
 import static net.minecraft.ChatFormatting.GRAY;
 import static net.minecraft.ChatFormatting.GREEN;
@@ -37,7 +39,7 @@ public class FpgNoFogGameModeCommand extends AbstractCommand {
         try {
             val gameMode = GameType.valueOf(argumentValue);
             val gameModeName = gameMode.getShortDisplayName().getString();
-            if (configFacade().toggleNoFogGameMode(gameMode)) {
+            if (configFacade().toggleNoFogGameMode(toDomainGameType(gameMode))) {
                 context.getSource().sendSuccess(
                         () -> Component.translatable("fpg.command.noFogGameMode.off", gameModeName).withStyle(GRAY),
                         false
@@ -60,6 +62,7 @@ public class FpgNoFogGameModeCommand extends AbstractCommand {
     private static int listNoFogGameModes(CommandContext<CommandSourceStack> context) {
         if (!configFacade().noFogGameModes().isEmpty()) {
             val noFogGameModes = configFacade().noFogGameModes().stream()
+                    .map(GameTypeConverter::toGameType)
                     .map(GameType::getShortDisplayName)
                     .map(Component::getString)
                     .collect(joining("\n"));

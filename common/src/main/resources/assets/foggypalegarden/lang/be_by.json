@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Абраны прэсэт туману",
   "fpg.settings.currentPreset.tooltip": "Выберыце адзін з даступных або дадайце свой у тэчку %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Адключыць туман для рэжымаў гульні",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Рэжымы гульні, на якія не будзе ўплываць прэсэт туману"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Рэжымы гульні, на якія не будзе ўплываць прэсэт туману",
+  "fpg.message.disableFogOcclusion": "Для карэктнай працы \"%s\" адключыце параметр"
 }

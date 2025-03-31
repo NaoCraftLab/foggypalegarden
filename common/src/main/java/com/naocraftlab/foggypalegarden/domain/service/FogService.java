@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 @UtilityClass
 public class FogService {
 
-    private static List<Pair<Predicate<Environment>, FogPresetV3.Binding>> presetBindings;
+    private static List<Pair<Predicate<Environment>, FogPresetV3.Binding>> presetBindings = List.of();
 
     private static FogPresetV3.Binding latestBinding = null;
 

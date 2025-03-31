@@ -48,7 +48,7 @@ public class FpgFiles {
         }
     }
 
-    private static boolean createDirectories(@NotNull Path path) {
+    public static boolean createDirectories(@NotNull Path path) {
         if (Files.exists(path)) {
             return false;
         }

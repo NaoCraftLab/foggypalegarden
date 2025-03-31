@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "选定的雾预设",
   "fpg.settings.currentPreset.tooltip": "选择一个可用的，或将您的添加到文件夹 %s",
   "fpg.settings.subCategory.noFogGameMode.title": "为游戏模式禁用雾",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "不受雾预设影响的游戏模式"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "不受雾预设影响的游戏模式",
+  "fpg.message.disableFogOcclusion": "为确保 \"%s\" 正常运行，请禁用该设置"
 }

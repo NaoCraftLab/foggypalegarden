@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Selected Fog Preset",
   "fpg.settings.currentPreset.tooltip": "Choose one of the available presets or add your own to the folder %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Disable Fog for Game Modes",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Game modes unaffected by the fog preset"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Game modes unaffected by the fog preset",
+  "fpg.message.disableFogOcclusion": "For \"%s\" to work correctly, disable the setting"
 }

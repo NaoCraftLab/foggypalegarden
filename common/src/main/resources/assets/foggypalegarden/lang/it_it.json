@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Preset di Nebbia Selezionato",
   "fpg.settings.currentPreset.tooltip": "Scegli uno tra quelli disponibili o aggiungi il tuo nella cartella %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Disabilita Nebbia per Modalità di Gioco",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modalità di gioco non influenzate dal preset di nebbia"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modalità di gioco non influenzate dal preset di nebbia",
+  "fpg.message.disableFogOcclusion": "Per il corretto funzionamento di \"%s\", disattiva l'opzione"
 }

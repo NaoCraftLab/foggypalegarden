@@ -32,6 +32,7 @@ subprojects {
         testAnnotationProcessor "org.projectlombok:lombok:${rootProject.ext.commonLombokVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-api:${rootProject.ext.commonJunitVersion}"
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${rootProject.ext.commonJunitVersion}"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:${rootProject.ext.commonJunitVersion}"
         testImplementation "org.mockito:mockito-core:${rootProject.ext.commonMockitoVersion}"
         testImplementation "org.assertj:assertj-core:${rootProject.ext.commonAssertJVersion}"
         testImplementation "org.skyscreamer:jsonassert:${rootProject.ext.commonJsonAssertVersion}"
@@ -47,7 +48,7 @@ subprojects {
         ]) {
             expand(
                     modId: rootProject.extensions.extraProperties.modId,
-                    modVersion: rootProject.extensions.extraProperties.modVersion,
+                    modVersion: project.version,
                     modName: rootProject.extensions.extraProperties.modName,
                     modDescription: rootProject.extensions.extraProperties.modDescription,
                     modLicense: rootProject.extensions.extraProperties.modLicense,
@@ -73,6 +74,13 @@ subprojects {
                     forgeMinLoaderVersion: rootProject.extensions.extraProperties.forgeMinLoaderVersion,
                     forgeMinMinecraftVersion: rootProject.extensions.extraProperties.forgeMinMinecraftVersion,
             )
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
         }
     }
 }

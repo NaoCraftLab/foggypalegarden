@@ -2,6 +2,7 @@ package com.naocraftlab.foggypalegarden.mixin;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3;
+import com.naocraftlab.foggypalegarden.converter.GameTypeConverter;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
@@ -30,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.naocraftlab.foggypalegarden.config.ConfigFacade.configFacade;
+import static com.naocraftlab.foggypalegarden.converter.GameTypeConverter.toDomainGameType;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.CLEAR;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.RAIN;
 import static com.naocraftlab.foggypalegarden.domain.model.Weather.THUNDER;
@@ -94,7 +96,7 @@ public abstract class PaleGardenFogMixin {
         val fogType = camera.getFluidInCamera();
         val entity = camera.getEntity();
         val gameMode = resolveGameMode(entity);
-        if (configFacade().isNoFogGameMode(gameMode) || fogType != FogType.NONE) {
+        if (configFacade().isNoFogGameMode(toDomainGameType(gameMode)) || fogType != FogType.NONE) {
             return;
         }
         if (hasMobEffect(entity)) {
