@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Preselección de Niebla Seleccionada",
   "fpg.settings.currentPreset.tooltip": "Elige uno de los disponibles o agrega el tuyo en la carpeta %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Desactivar Niebla para Modos de Juego",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modos de juego no afectados por la preselección de niebla"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modos de juego no afectados por la preselección de niebla",
+  "fpg.message.disableFogOcclusion": "Para que \"%s\" funcione correctamente, desactiva la opción"
 }

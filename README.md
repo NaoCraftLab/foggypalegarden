@@ -1,6 +1,6 @@
 <img src=".idea/icon.png" width="128">
 
-# Foggy Pale Garden
+# Foggy Pale Garden (FPG)
 
 A Minecraft mod that adds fog to the Pale Garden biome. But you can customize any kind of fog anywhere you like!
 
@@ -215,11 +215,13 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             // correct - { "and": [{ "biomeIdIn": ["minecraft:desert"] }, { "difficultyIn": ["HARD"] }] }
             // incorrect - { "biomeIdIn": ["minecraft:desert"], "difficultyIn": ["HARD"] }
             "condition": {
-            
+
                 // (optional) list of dimensions where this binding is applied (for example, "minecraft:overworld")
+                // you can use wildcard with asterisk, e.g. "minecraft:*" will include all vanilla game dimensions, excluding mod dimensions
                 "dimensionIn": [""],
-            
+
                 // (optional) list of biomes where this binding is applied (for example, "minecraft:desert")
+                // you can use wildcard with asterisk, e.g. "minecraft:*" will include all vanilla game biomes, excluding mod biomes
                 "biomeIdIn": [""],
               
                 // (optional) biome temperature range where this binding is applied
@@ -266,7 +268,8 @@ Preset files are located in the `config/foggypalegarden` directory. Each file co
             "endDistance": 0.0,
 
             // (optional) fog density in percent (0.0, 100.0]
-            "opacity": 0.0,
+            // this parameter does not work on Minecraft versions prior to snapshot 24w40a
+          "opacity": 0.0,
             
             // (optional) fog spread speed (in blocks per second) when entering or exiting it (cannot be less than or equal to 0)
             "encapsulationSpeed": 0.0,
@@ -321,9 +324,7 @@ If you encounter compatibility issues between Foggy Pale Garden and other mods, 
 
 ## 🚀 Plans
 
-🚀 Port to NeoForge<br/>
 ❓ Maybe it will be possible to implement support for Iris Shaders?<br/>
-❓ Maybe port to previous versions to support mods backporting the Winter Drop?
 
 ## 🤗 Modpacks
 

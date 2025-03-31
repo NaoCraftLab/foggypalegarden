@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "선택된 안개 프리셋",
   "fpg.settings.currentPreset.tooltip": "사용 가능한 것 중 하나를 선택하거나 %s 폴더에 직접 추가하세요",
   "fpg.settings.subCategory.noFogGameMode.title": "게임 모드에서 안개 비활성화",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "안개 프리셋의 영향을 받지 않는 게임 모드"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "안개 프리셋의 영향을 받지 않는 게임 모드",
+  "fpg.message.disableFogOcclusion": "\"%s\"가 올바르게 작동하려면, 설정을 비활성화하십시오"
 }

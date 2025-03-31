@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Preset de Brouillard Sélectionné",
   "fpg.settings.currentPreset.tooltip": "Choisissez l'un des presets disponibles ou ajoutez le vôtre dans le dossier %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Désactiver le Brouillard pour les Modes de Jeu",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modes de jeu non affectés par le preset de brouillard"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modes de jeu non affectés par le preset de brouillard",
+  "fpg.message.disableFogOcclusion": "Pour que \"%s\" fonctionne correctement, désactivez le paramètre"
 }

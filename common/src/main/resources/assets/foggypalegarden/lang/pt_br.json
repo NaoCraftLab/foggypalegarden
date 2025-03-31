@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Preset de Névoa Selecionado",
   "fpg.settings.currentPreset.tooltip": "Escolha um dos disponíveis ou adicione o seu na pasta %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Desativar Névoa para Modos de Jogo",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modos de jogo não afetados pelo preset de névoa"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Modos de jogo não afetados pelo preset de névoa",
+  "fpg.message.disableFogOcclusion": "Para o funcionamento correto de \"%s\", desative a opção"
 }

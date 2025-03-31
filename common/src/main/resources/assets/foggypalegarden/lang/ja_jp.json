@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "選択された霧のプリセット",
   "fpg.settings.currentPreset.tooltip": "利用可能なものから選択するか、自分のプリセットをフォルダ%sに追加してください",
   "fpg.settings.subCategory.noFogGameMode.title": "ゲームモードで霧を無効にする",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "霧のプリセットが影響しないゲームモード"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "霧のプリセットが影響しないゲームモード",
+  "fpg.message.disableFogOcclusion": "「%s」を正しく動作させるには、設定を無効にしてください"
 }

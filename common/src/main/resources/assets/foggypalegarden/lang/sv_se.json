@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Valt Dimma-Preset",
   "fpg.settings.currentPreset.tooltip": "Välj en av de tillgängliga eller lägg till din egen i mappen %s",
   "fpg.settings.subCategory.noFogGameMode.title": "Inaktivera Dimma för Spellägen",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spellägen som inte påverkas av dimma-preset"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Spellägen som inte påverkas av dimma-preset",
+  "fpg.message.disableFogOcclusion": "För att \"%s\" ska fungera korrekt, inaktivera inställningen"
 }

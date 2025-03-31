@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "الضباب الحالي المحدد",
   "fpg.settings.currentPreset.tooltip": "اختر واحدًا من المتاح أو أضف خاصتك في المجلد %s",
   "fpg.settings.subCategory.noFogGameMode.title": "تعطيل الضباب لأنماط اللعبة",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "أنماط اللعبة التي لن يتأثر بها إعداد الضباب"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "أنماط اللعبة التي لن يتأثر بها إعداد الضباب",
+  "fpg.message.disableFogOcclusion": "لضمان عمل \"%s\" بشكل صحيح، قم بتعطيل الإعداد"
 }

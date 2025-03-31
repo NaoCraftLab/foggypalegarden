@@ -5,10 +5,12 @@ import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3.Binding.Color.C
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogShape;
 import com.naocraftlab.foggypalegarden.exception.FoggyPaleGardenConfigurationException;
+import com.naocraftlab.foggypalegarden.util.FpgStrings;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.val;
 import net.minecraft.world.Difficulty;
 import org.jetbrains.annotations.NotNull;
@@ -19,16 +21,10 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 @Data
-@Builder
+@SuperBuilder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 public final class FogPresetV3 extends FogPreset {
-
-    /**
-     * Preset code.
-     */
-    @NotNull
-    private final String code;
 
     /**
      * Bindings.
@@ -37,8 +33,7 @@ public final class FogPresetV3 extends FogPreset {
     private final List<Binding> bindings;
 
     public FogPresetV3(@NotNull String code, @NotNull List<Binding> bindings) {
-        super(3);
-        this.code = code;
+        super(3, code);
         this.bindings = bindings;
     }
 
@@ -250,10 +245,14 @@ public final class FogPresetV3 extends FogPreset {
                 } else {
                     Predicate<Environment> predicate = env -> true;
                     if (dimensionIn != null && !dimensionIn.isEmpty()) {
-                        predicate = predicate.and(env -> dimensionIn.contains(env.dimension()));
+                        predicate = predicate.and(
+                                env -> dimensionIn.stream().anyMatch(pattern -> FpgStrings.wildcardMatch(env.dimension(), pattern))
+                        );
                     }
                     if (biomeIdIn != null && !biomeIdIn.isEmpty()) {
-                        predicate = predicate.and(env -> biomeIdIn.contains(env.biome()));
+                        predicate = predicate.and(
+                                env -> biomeIdIn.stream().anyMatch(pattern -> FpgStrings.wildcardMatch(env.biome(), pattern))
+                        );
                     }
                     if (biomeTemperature != null) {
                         val min = biomeTemperature.min();
@@ -439,6 +438,10 @@ public final class FogPresetV3 extends FogPreset {
 
             color().validate();
         }
+    }
+
+    public FogPresetV3 withCode(String code) {
+        return new FogPresetV3(code, bindings);
     }
 
     @Override

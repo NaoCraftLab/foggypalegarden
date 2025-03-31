@@ -19,5 +19,6 @@
   "fpg.settings.currentPreset.title": "Таңдалған Тұман Пресеті",
   "fpg.settings.currentPreset.tooltip": "Қол жетімділердің бірін таңдаңыз немесе өзіңіздің %s қалтасына қосыңыз",
   "fpg.settings.subCategory.noFogGameMode.title": "Ойын Режимдері үшін Тұманды Өшіру",
-  "fpg.settings.subCategory.noFogGameMode.tooltip": "Тұман пресеті әсер етпейтін ойын режимдері"
+  "fpg.settings.subCategory.noFogGameMode.tooltip": "Тұман пресеті әсер етпейтін ойын режимдері",
+  "fpg.message.disableFogOcclusion": "«%s» дұрыс жұмыс істеуі үшін параметрді өшіріңіз"
 }
