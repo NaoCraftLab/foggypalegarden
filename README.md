@@ -172,9 +172,9 @@ Tested with mods:
 
 ## 📥 Installation
 
-1. Install Minecraft version `24w40a` or newer
-2. If it's a snapshot, enable the Winter Drop experiment when creating a world
-3. Install [Fabric](https://fabricmc.net) or [Quilt](https://quiltmc.org) for this version
+1. Install [Fabric](https://fabricmc.net), [Quilt](https://quiltmc.org), [NeoForge](https://neoforged.net) or [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) for your game version
+2. [Fabric API](https://modrinth.com/mod/fabric-api) installation is required for Fabric and Quilt!
+3. Install [Cloth Config](https://modrinth.com/mod/cloth-config) to change settings through the mods menu
 4. Place the mod in the `mods` folder
 5. Beware of the monsters in the fog!
 
