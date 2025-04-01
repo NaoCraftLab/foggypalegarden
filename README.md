@@ -37,6 +37,16 @@ A Minecraft mod that adds fog to the Pale Garden biome. But you can customize an
 </details>
 
 <details>
+  <summary>📦 Resource Pack Support</summary>
+
+You can easily add a fog preset to your resource pack! Just place it at the path `assets/foggypalegarden/preset.json`. After that, you can select it as the active fog preset in the mod settings.
+
+- If multiple resource packs containing fog are installed, each of their presets will be available in the settings
+- If a preset's `code` from the `config/foggypalegarden` folder matches a `code` from a resource pack, the preset from the config folder will be renamed by adding `_BACKUP` to its code
+
+</details>
+
+<details>
   <summary>🧗‍♀️ The conditions for fog formation will allow for creating different types of fog even in the same location</summary>
 
 <img src="docs/images/different-fog-at-different-heights.gif" width="600px">
@@ -139,6 +149,24 @@ You can request a translation into your language or report a translation error o
 <img src="docs/images/no-fog-game-modes.gif" width="600px">
 
 In the config `config/foggypalegarden.json`, the value `"noFogGameModes": ["SPECTATOR"]` is set.
+
+</details>
+
+<details>
+    <summary>⏮️ Support for ALL backports of the Pale Garden biome to older game versions</summary>
+
+The fog appears in any biomes named `pale_garden`.
+
+Tested with mods:
+- [Pale Garden Backport: The Garden Awakens](https://modrinth.com/mod/pale-garden-backport)
+- [EarlyUpdate: Pale Garden](https://modrinth.com/mod/earlyupdate)
+- [The Pale Garden](https://modrinth.com/mod/the-pale-garden)
+- [Winter drop backport-Pale garden](https://modrinth.com/mod/winter-drop-back-port-pale-garden)
+- [I want it earlier 1.21.4 (Pale Garden)](https://modrinth.com/mod/i-want-it-earlier)
+- [Pale Garden and Creaking](https://www.curseforge.com/minecraft/mc-mods/pale-garden)
+- [Pale Garden - Update](https://www.curseforge.com/minecraft/mc-mods/palegarden-update)
+- [DenizTK's Pale & Lively Update](https://www.curseforge.com/minecraft/mc-mods/dtk-update)
+- [Bundles of Bravery (1.22)](https://www.curseforge.com/minecraft/mc-mods/bundles-of-bravery-1-22)
 
 </details>
 
@@ -321,6 +349,12 @@ Examples of presets can be found in the [GitHub repository](docs/presets).
 ## 💥 Compatibility with Other Mods
 
 If you encounter compatibility issues between Foggy Pale Garden and other mods, please open an [issue on GitHub](https://github.com/NaoCraftLab/foggypalegarden/issues) or [contact us on Discord](https://discord.gg/NmzHNyrGK4).
+
+### Sodium, Embeddium and Rubidium
+
+You need to disable the `Performance - Use Fog Occlusion` setting so that blocks behind the fog continue to render and do not appear suddenly when the player approaches.
+
+<img src="docs/images/disable-occlusion.jpg" width="600px">
 
 ## 🚀 Plans
 

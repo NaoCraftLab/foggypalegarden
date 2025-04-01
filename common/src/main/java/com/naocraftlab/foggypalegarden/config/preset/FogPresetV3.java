@@ -37,33 +37,83 @@ public final class FogPresetV3 extends FogPreset {
         this.bindings = bindings;
     }
 
+    @Data
     @Builder
-    public record Binding(
-            Condition condition,
-            Float startDistance,
-            Float endDistance,
-            Float opacity,
-            Float encapsulationSpeed,
-            Brightness brightness,
-            Color color,
-            FogShape shape
-    ) {
+    public static class Binding {
 
+        private final Condition condition;
+        private final Float startDistance;
+        private final Float endDistance;
+        private final Float opacity;
+        private final Float encapsulationSpeed;
+        private final Brightness brightness;
+        private final Color color;
+        private final FogShape shape;
+
+        @Data
         @Builder
-        public record Condition(
-                Set<String> dimensionIn,
-                Set<String> biomeIdIn,
-                Temperature biomeTemperature,
-                Set<Difficulty> difficultyIn,
-                Set<Weather> weatherIn,
-                TimePeriod timeIn,
-                SkyLightLevel skyLightLevel,
-                Height height,
-                SurfaceHeight surfaceHeight,
-                List<Condition> and,
-                List<Condition> or,
-                Condition not
-        ) {
+        public static class Condition {
+
+            private final Set<String> dimensionIn;
+            private final Set<String> biomeIdIn;
+            private final Temperature biomeTemperature;
+            private final Set<Difficulty> difficultyIn;
+            private final Set<Weather> weatherIn;
+            private final TimePeriod timeIn;
+            private final SkyLightLevel skyLightLevel;
+            private final Height height;
+            private final SurfaceHeight surfaceHeight;
+            private final List<Condition> and;
+            private final List<Condition> or;
+            private final Condition not;
+
+            public Set<String> dimensionIn() {
+                return dimensionIn;
+            }
+
+            public Set<String> biomeIdIn() {
+                return biomeIdIn;
+            }
+
+            public Temperature biomeTemperature() {
+                return biomeTemperature;
+            }
+
+            public Set<Difficulty> difficultyIn() {
+                return difficultyIn;
+            }
+
+            public Set<Weather> weatherIn() {
+                return weatherIn;
+            }
+
+            public TimePeriod timeIn() {
+                return timeIn;
+            }
+
+            public SkyLightLevel skyLightLevel() {
+                return skyLightLevel;
+            }
+
+            public Height height() {
+                return height;
+            }
+
+            public SurfaceHeight surfaceHeight() {
+                return surfaceHeight;
+            }
+
+            public List<Condition> and() {
+                return and;
+            }
+
+            public List<Condition> or() {
+                return or;
+            }
+
+            public Condition not() {
+                return not;
+            }
 
             public enum Weather {
                 CLEAR,
@@ -71,11 +121,20 @@ public final class FogPresetV3 extends FogPreset {
                 THUNDER
             }
 
+            @Data
             @Builder
-            public record TimePeriod(
-                    Long start,
-                    Long end
-            ) {
+            public static class TimePeriod {
+
+                private final Long start;
+                private final Long end;
+
+                public Long start() {
+                    return start;
+                }
+
+                public Long end() {
+                    return end;
+                }
 
                 public void validate() {
                     if (start == null || end == null) {
@@ -89,11 +148,20 @@ public final class FogPresetV3 extends FogPreset {
                 }
             }
 
+            @Data
             @Builder
-            public record Temperature(
-                    Float min,
-                    Float max
-            ) {
+            public static class Temperature {
+
+                private final Float min;
+                private final Float max;
+
+                public Float min() {
+                    return min;
+                }
+
+                public Float max() {
+                    return max;
+                }
 
                 public void validate() {
                     if (min == null && max == null) {
@@ -105,13 +173,22 @@ public final class FogPresetV3 extends FogPreset {
                 }
             }
 
+            @Data
             @Builder
-            public record SkyLightLevel(
-                    Integer min,
-                    Integer max
-            ) {
+            public static class SkyLightLevel {
 
-                    public void validate() {
+                private final Integer min;
+                private final Integer max;
+
+                public Integer min() {
+                    return min;
+                }
+
+                public Integer max() {
+                    return max;
+                }
+
+                public void validate() {
                         if (min == null && max == null) {
                             throw new FoggyPaleGardenConfigurationException("Sky light level min and max cannot be both null");
                         }
@@ -127,13 +204,22 @@ public final class FogPresetV3 extends FogPreset {
                     }
             }
 
+            @Data
             @Builder
-            public record Height(
-                    Double min,
-                    Double max
-            ) {
+            public static class Height {
 
-                    public void validate() {
+                private final Double min;
+                private final Double max;
+
+                public Double min() {
+                    return min;
+                }
+
+                public Double max() {
+                    return max;
+                }
+
+                public void validate() {
                         if (min == null && max == null) {
                             throw new FoggyPaleGardenConfigurationException("Height min and max cannot be both null");
                         }
@@ -143,13 +229,22 @@ public final class FogPresetV3 extends FogPreset {
                     }
             }
 
+            @Data
             @Builder
-            public record SurfaceHeight(
-                    Float min,
-                    Float max
-            ) {
+            public static class SurfaceHeight {
 
-                    public void validate() {
+                private final Float min;
+                private final Float max;
+
+                public Float min() {
+                    return min;
+                }
+
+                public Float max() {
+                    return max;
+                }
+
+                public void validate() {
                         if (min == null && max == null) {
                             throw new FoggyPaleGardenConfigurationException("Surface height min and max cannot be both null");
                         }
@@ -333,12 +428,25 @@ public final class FogPresetV3 extends FogPreset {
             }
         }
 
+        @Data
         @Builder
-        public record Brightness(
-                BrightnessMode mode,
-                Float fixedBrightness,
-                Float adjustment
-        ) {
+        public static class Brightness {
+
+            private final BrightnessMode mode;
+            private final Float fixedBrightness;
+            private final Float adjustment;
+
+            public BrightnessMode mode() {
+                return mode;
+            }
+
+            public Float fixedBrightness() {
+                return fixedBrightness;
+            }
+
+            public Float adjustment() {
+                return adjustment;
+            }
 
             public enum BrightnessMode {
                 FIXED,
@@ -358,13 +466,22 @@ public final class FogPresetV3 extends FogPreset {
             }
         }
 
+        @Data
         @Builder
-        public record Color(
-                ColorMode mode,
-                String fixedHex
-        ) {
+        public static class Color {
 
             private static final Pattern HEX_PATTERN = Pattern.compile("^[0-9a-fA-F]{6}$");
+
+            private final ColorMode mode;
+            private final String fixedHex;
+
+            public ColorMode mode() {
+                return mode;
+            }
+
+            public String fixedHex() {
+                return fixedHex;
+            }
 
             public enum ColorMode {
                 FIXED,
@@ -372,43 +489,41 @@ public final class FogPresetV3 extends FogPreset {
             }
 
             public void validate() {
-                if (mode == ColorMode.FIXED && (fixedHex == null || fixedHex.isBlank() || !HEX_PATTERN.matcher(fixedHex).matches())) {
+                if (mode == ColorMode.FIXED && (fixedHex == null || fixedHex.trim().isEmpty() || !HEX_PATTERN.matcher(fixedHex).matches())) {
                     throw new FoggyPaleGardenConfigurationException("Binding fixedHex is not defined or invalid");
                 }
             }
         }
 
-        @Override
+
+        public Condition condition() {
+            return condition;
+        }
+
         public Float startDistance() {
             return startDistance == null ? 0.0f : startDistance;
         }
 
-        @Override
         public Float endDistance() {
             return endDistance == null ? 0.0f : endDistance;
         }
 
-        @Override
         public Float opacity() {
             return opacity == null ? 100.0f : opacity;
         }
 
-        @Override
         public Float encapsulationSpeed() {
             return encapsulationSpeed == null ? 6.0f : encapsulationSpeed;
         }
 
-        @Override
         public Brightness brightness() {
             return brightness == null ? new Brightness(BrightnessMode.BY_GAME_FOG, null, null) : brightness;
         }
 
-        @Override
         public Color color() {
             return color == null ? new Color(ColorMode.BY_GAME_FOG, null) : color;
         }
 
-        @Override
         public FogShape shape() {
             return shape == null ? FogShape.SPHERE : shape;
         }
@@ -447,7 +562,7 @@ public final class FogPresetV3 extends FogPreset {
     @Override
     public void validate() {
         super.validate();
-        if (code == null || code.isBlank()) {
+        if (code == null || code.trim().isEmpty()) {
             throw new FoggyPaleGardenConfigurationException("Preset code is not defined");
         }
         if (bindings == null || bindings.isEmpty()) {

@@ -7,7 +7,7 @@ class LoadPropertiesSettingsPlugin implements Plugin<Settings> {
 
     @Override
     void apply(Settings settings) {
-        def mcVersion = System.getenv("mcVersion") ?: "1.21"
+        def mcVersion = System.getenv("mcVersion") ?: "local"
 
         def rootPropsFile = new File(settings.rootDir, "gradle.properties")
         def rootProps = new Properties()
