@@ -28,6 +28,8 @@ dependencies {
 
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':core', configuration: 'transformProductionFabric')) { transitive false }
+    versionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'transformProductionFabric')) { transitive false }
     versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
     shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionFabric')) { transitive false }
 }
@@ -49,9 +51,11 @@ jar {
 
 sourcesJar {
     def coreSources = project(':core').sourcesJar
+    def commandsSources = project(":commands:$moduleCommands").sourcesJar
     def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
-    dependsOn coreSources, versionSpecificSources
+    dependsOn coreSources, commandsSources, versionSpecificSources
     from coreSources.archiveFile.map { zipTree(it) }
+    from commandsSources.archiveFile.map { zipTree(it) }
     from versionSpecificSources.archiveFile.map { zipTree(it) }
 }
 

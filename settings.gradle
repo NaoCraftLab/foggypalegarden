@@ -38,6 +38,9 @@ plugins {
 include('core')
 project(':core').name = 'core'
 
+def moduleCommands = settings.ext.moduleCommands
+include(":commands:$moduleCommands")
+
 def moduleMixin = settings.ext.moduleMixin
 include(":mixin:$moduleMixin")
 
