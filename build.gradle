@@ -39,10 +39,34 @@ subprojects {
     }
 
     processResources {
-        def fabricModMenuEntrypoint = !commonModMenuVersion.isEmpty()
-                ? "\"com.naocraftlab.foggypalegarden.integration.ModMenuIntegration\""
+        def fabricClothConfigSuggestion = (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
+                ? "\"cloth-config\": \">=$commonClothConfigVersion\""
                 : ""
-        def fabricModMenuSuggestion = !commonModMenuVersion.isEmpty() ? ", \"modmenu\": \">=$commonModMenuVersion\"" : ""
+        def fabricModMenuEntrypoint = (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty() && !commonModMenuVersion.isEmpty())
+                ? "\"com.naocraftlab.foggypalegarden.modmenu.ModMenuIntegration\""
+                : ""
+        def fabricModMenuSuggestion = (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty() && !commonModMenuVersion.isEmpty())
+                ? ", \"modmenu\": \">=$commonModMenuVersion\""
+                : ""
+
+        def neoForgeClothConfigSuggestion = (neoforgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
+                ? "[[dependencies.$modId]]\n" +
+                "modId = \"cloth_config\"\n" +
+                "mandatory = false\n" +
+                "versionRange = \"[$commonClothConfigVersion,)\"\n" +
+                "ordering = \"NONE\"\n" +
+                "side = \"CLIENT\""
+                : ""
+
+        def forgeClothConfigSuggestion = (forgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
+                ? "[[dependencies.$modId]]\n" +
+                "modId = \"cloth_config\"\n" +
+                "mandatory = false\n" +
+                "versionRange = \"[$commonClothConfigVersion,)\"\n" +
+                "ordering = \"NONE\"\n" +
+                "side = \"CLIENT\""
+                : ""
+
         filesMatching([
                 "${rootProject.extensions.extraProperties.modId}.mixins.json".toString(),
                 'fabric.mod.json',
@@ -65,19 +89,27 @@ subprojects {
                     modDiscord: rootProject.extensions.extraProperties.modDiscord,
                     modKoFi: rootProject.extensions.extraProperties.modKoFi,
                     modAuthorYouTube: rootProject.extensions.extraProperties.modAuthorYouTube,
+
                     minecraftJavaVersion: rootProject.extensions.extraProperties.minecraftJavaVersion,
+
                     commonFabricLoaderVersion: rootProject.extensions.extraProperties.commonFabricLoaderVersion,
                     commonClothConfigVersion: rootProject.extensions.extraProperties.commonClothConfigVersion,
+
                     fabricApiVersion: rootProject.extensions.extraProperties.fabricApiVersion,
                     fabricMinMinecraftVersion: rootProject.extensions.extraProperties.fabricMinMinecraftVersion,
+                    fabricClothConfigSuggestion: fabricClothConfigSuggestion,
                     fabricModMenuEntrypoint: fabricModMenuEntrypoint,
                     fabricModMenuSuggestion: fabricModMenuSuggestion,
+
                     neoforgeMinVersion: rootProject.extensions.extraProperties.neoforgeMinVersion,
                     neoforgeMinLoaderVersion: rootProject.extensions.extraProperties.neoforgeMinLoaderVersion,
                     neoforgeMinMinecraftVersion: rootProject.extensions.extraProperties.neoforgeMinMinecraftVersion,
+                    neoForgeClothConfigSuggestion: neoForgeClothConfigSuggestion,
+
                     forgeMinVersion: rootProject.extensions.extraProperties.forgeMinVersion,
                     forgeMinLoaderVersion: rootProject.extensions.extraProperties.forgeMinLoaderVersion,
                     forgeMinMinecraftVersion: rootProject.extensions.extraProperties.forgeMinMinecraftVersion,
+                    forgeClothConfigSuggestion: forgeClothConfigSuggestion
             )
         }
     }

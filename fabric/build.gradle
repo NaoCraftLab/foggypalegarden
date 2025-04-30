@@ -21,10 +21,6 @@ dependencies {
         exclude(module: 'fabric-api-deprecated')
     }
 
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${commonClothConfigVersion}") {
-        exclude(group: 'net.fabricmc.fabric-api')
-    }
-
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':core', configuration: 'transformProductionFabric')) { transitive false }
 
@@ -34,12 +30,20 @@ dependencies {
     versionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'namedElements')) { transitive false }
     shadowVersionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'transformProductionFabric')) { transitive false }
 
-    if (!commonModMenuVersion.isEmpty()) {
-        modImplementation("com.terraformersmc:modmenu:$commonModMenuVersion") {
+    if (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty()) {
+        modImplementation("me.shedaniel.cloth:cloth-config-fabric:${commonClothConfigVersion}") {
             exclude(group: 'net.fabricmc.fabric-api')
         }
-        versionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'namedElements')) { transitive false }
-        shadowVersionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'transformProductionFabric')) { transitive false }
+        versionSpecificCommon(project(path: ":cloth-config-$moduleClothConfig", configuration: 'namedElements')) { transitive false }
+        shadowVersionSpecificCommon(project(path: ":cloth-config-$moduleClothConfig", configuration: 'transformProductionFabric')) { transitive false }
+
+        if (!commonModMenuVersion.isEmpty()) {
+            modImplementation("com.terraformersmc:modmenu:$commonModMenuVersion") {
+                exclude(group: 'net.fabricmc.fabric-api')
+            }
+            versionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'namedElements')) { transitive false }
+            shadowVersionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'transformProductionFabric')) { transitive false }
+        }
     }
 }
 
@@ -73,10 +77,16 @@ sourcesJar {
     dependencies.add(mixinSources)
     from mixinSources.archiveFile.map { zipTree(it) }
 
-    if (!commonModMenuVersion.isEmpty()) {
-        def modMenuSources = project(":modmenu-$moduleModMenu").sourcesJar
-        dependencies.add(modMenuSources)
-        from modMenuSources.archiveFile.map { zipTree(it) }
+    if (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty()) {
+        def clothConfigSources = project(":cloth-config-$moduleClothConfig").sourcesJar
+        dependencies.add(clothConfigSources)
+        from clothConfigSources.archiveFile.map { zipTree(it) }
+
+        if (!commonModMenuVersion.isEmpty()) {
+            def modMenuSources = project(":modmenu-$moduleModMenu").sourcesJar
+            dependencies.add(modMenuSources)
+            from modMenuSources.archiveFile.map { zipTree(it) }
+        }
     }
 
     dependsOn dependencies

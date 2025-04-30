@@ -1,7 +1,7 @@
-package com.naocraftlab.foggypalegarden.integration;
+package com.naocraftlab.foggypalegarden.modmenu;
 
-import com.naocraftlab.foggypalegarden.gui.ClothConfigScreen;
-import com.naocraftlab.foggypalegarden.gui.NoClothConfigScreen;
+import com.naocraftlab.foggypalegarden.clothconfig.ClothConfigScreen;
+import com.naocraftlab.foggypalegarden.clothconfig.NoClothConfigScreen;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.loader.api.FabricLoader;

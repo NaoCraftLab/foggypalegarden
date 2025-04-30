@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.gui;
+package com.naocraftlab.foggypalegarden.clothconfig;
 
 import com.naocraftlab.foggypalegarden.domain.model.GameType;
 import lombok.experimental.UtilityClass;

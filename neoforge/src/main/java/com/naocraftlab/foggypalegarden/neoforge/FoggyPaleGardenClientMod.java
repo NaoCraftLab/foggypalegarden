@@ -1,8 +1,6 @@
 package com.naocraftlab.foggypalegarden.neoforge;
 
 import com.mojang.logging.LogUtils;
-import com.naocraftlab.foggypalegarden.gui.ClothConfigScreen;
-import com.naocraftlab.foggypalegarden.gui.NoClothConfigScreen;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -14,6 +12,8 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.slf4j.Logger;
 
 import static com.naocraftlab.foggypalegarden.FoggyPaleGarden.MOD_ID;
+import static com.naocraftlab.foggypalegarden.util.ReflectUtil.buildScreen;
+import static com.naocraftlab.foggypalegarden.util.ReflectUtil.isClassAvailable;
 import static net.neoforged.api.distmarker.Dist.CLIENT;
 import static net.neoforged.fml.common.EventBusSubscriber.Bus.MOD;
 
@@ -25,17 +25,24 @@ public final class FoggyPaleGardenClientMod {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        registerConfigScreenFactory();
+        LOGGER.info("Foggy Pale Garden client setup complete");
+    }
+
+    private static void registerConfigScreenFactory() {
+        if (!isClassAvailable("com.naocraftlab.foggypalegarden.clothconfig.ClothConfigScreen")) {
+            return;
+        }
         ModLoadingContext.get().registerExtensionPoint(
                 IConfigScreenFactory.class,
                 () -> (modContainer, parent) -> {
                     if (isModLoaded("cloth_config")) {
-                        return ClothConfigScreen.of(parent);
+                        return buildScreen("com.naocraftlab.foggypalegarden.clothconfig.ClothConfigScreen", parent);
                     } else {
-                        return NoClothConfigScreen.of(parent);
+                        return buildScreen("com.naocraftlab.foggypalegarden.clothconfig.NoClothConfigScreen", parent);
                     }
                 }
         );
-        LOGGER.info("Foggy Pale Garden client setup complete");
     }
 
     private static boolean isModLoaded(String modId) {

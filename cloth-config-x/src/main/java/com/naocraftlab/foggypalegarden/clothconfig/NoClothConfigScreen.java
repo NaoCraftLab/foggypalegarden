@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.gui;
+package com.naocraftlab.foggypalegarden.clothconfig;
 
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

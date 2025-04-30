@@ -26,9 +26,4 @@ versionRange = "[${forgeMinMinecraftVersion},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${modId}]]
-modId = "cloth_config"
-mandatory = false
-versionRange = "[${commonClothConfigVersion},)"
-ordering = "NONE"
-side = "CLIENT"
+${forgeClothConfigSuggestion}

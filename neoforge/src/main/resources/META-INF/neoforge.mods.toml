@@ -28,3 +28,5 @@ mandatory = true
 versionRange = "[${neoforgeMinMinecraftVersion},)"
 ordering = "NONE"
 side = "BOTH"
+
+${neoForgeClothConfigSuggestion}

@@ -24,8 +24,6 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${forgeVersion}"
 
-    modImplementation "me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}"
-
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':core', configuration: 'transformProductionForge')) { transitive false }
 
@@ -34,6 +32,12 @@ dependencies {
 
     versionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'namedElements')) { transitive false }
     shadowVersionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'transformProductionForge')) { transitive false }
+
+    if (forgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty()) {
+        modImplementation("me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}")
+        versionSpecificCommon(project(path: ":cloth-config-$moduleClothConfig", configuration: 'namedElements')) { transitive false }
+        shadowVersionSpecificCommon(project(path: ":cloth-config-$moduleClothConfig", configuration: 'transformProductionForge')) { transitive false }
+    }
 }
 
 shadowJar {
@@ -52,16 +56,27 @@ jar {
 }
 
 sourcesJar {
+    def dependencies = new ArrayList<>()
+
     def coreSources = project(':core').sourcesJar
+    dependencies.add(coreSources)
     from coreSources.archiveFile.map { zipTree(it) }
 
     def commandSources = project(":command-$moduleCommand").sourcesJar
+    dependencies.add(commandSources)
     from commandSources.archiveFile.map { zipTree(it) }
 
     def mixinSources = project(":mixin-$moduleMixin").sourcesJar
+    dependencies.add(mixinSources)
     from mixinSources.archiveFile.map { zipTree(it) }
 
-    dependsOn coreSources, commandSources, mixinSources
+    if (forgeClothConfigEnabled && !commonClothConfigVersion.isEmpty()) {
+        def clothConfigSources = project(":cloth-config-$moduleClothConfig").sourcesJar
+        dependencies.add(clothConfigSources)
+        from clothConfigSources.archiveFile.map { zipTree(it) }
+    }
+
+    dependsOn dependencies
 }
 
 components.java {

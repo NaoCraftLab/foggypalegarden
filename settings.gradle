@@ -42,10 +42,22 @@ def moduleCommand = settings.ext.moduleCommand
 include(":command-$moduleCommand")
 project(":command-$moduleCommand").name = "command-$moduleCommand"
 
-def moduleModMenu = settings.ext.moduleModMenu
-if (!moduleModMenu.isEmpty()) {
-    include(":modmenu-$moduleModMenu")
-    project(":modmenu-$moduleModMenu").name = "modmenu-$moduleModMenu"
+def commonClothConfigVersion = settings.ext.commonClothConfigVersion
+if (!commonClothConfigVersion.isEmpty()) {
+    def moduleClothConfig = settings.ext.moduleClothConfig
+    include(":cloth-config-$moduleClothConfig")
+    project(":cloth-config-$moduleClothConfig").name = "cloth-config-$moduleClothConfig"
+
+    def commonModMenuVersion = settings.ext.commonModMenuVersion
+    if (!commonModMenuVersion.isEmpty()) {
+        def moduleModMenu = settings.ext.moduleModMenu
+        include(":modmenu-$moduleModMenu")
+        project(":modmenu-$moduleModMenu").name = "modmenu-$moduleModMenu"
+    } else {
+        println 'ModMenu module is disabled for this version.'
+    }
+} else {
+    println 'Cloth Config module is disabled for this version.'
 }
 
 def moduleMixin = settings.ext.moduleMixin

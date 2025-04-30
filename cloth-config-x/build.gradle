@@ -8,12 +8,9 @@ configurations {
 
 dependencies {
     implementation project(':core')
-    implementation project(":cloth-config-$moduleClothConfig")
 
     modImplementation "net.fabricmc:fabric-loader:$commonFabricLoaderVersion"
-    modImplementation("com.terraformersmc:modmenu:$commonModMenuVersion") {
-        exclude(group: 'net.fabricmc.fabric-api')
-    }
+    modImplementation "me.shedaniel.cloth:cloth-config:${project.ext.commonClothConfigVersion}"
 }
 
 shadowJar {
