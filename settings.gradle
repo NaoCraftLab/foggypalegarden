@@ -35,8 +35,8 @@ plugins {
     id 'com.naocraftlab.load-properties-settings-plugin'
 }
 
-include('common')
-project(':common').name = 'common'
+include('core')
+project(':core').name = 'core'
 
 def moduleMixin = settings.ext.moduleMixin
 include(":mixin:$moduleMixin")

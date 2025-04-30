@@ -7,7 +7,7 @@ configurations {
 }
 
 dependencies {
-    implementation project(':common')
+    implementation project(':core')
 
     modImplementation "net.fabricmc:fabric-loader:${project.ext.commonFabricLoaderVersion}"
     modImplementation "me.shedaniel.cloth:cloth-config:${project.ext.commonClothConfigVersion}"

@@ -24,8 +24,8 @@ dependencies {
 
     modImplementation "me.shedaniel.cloth:cloth-config-forge:${commonClothConfigVersion}"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowCommon(project(path: ':common', configuration: 'transformProductionForge')) { transitive false }
+    common(project(path: ':core', configuration: 'namedElements')) { transitive false }
+    shadowCommon(project(path: ':core', configuration: 'transformProductionForge')) { transitive false }
     versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
     shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionForge')) { transitive false }
 }
@@ -46,10 +46,10 @@ jar {
 }
 
 sourcesJar {
-    def commonSources = project(':common').sourcesJar
+    def coreSources = project(':core').sourcesJar
     def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
-    dependsOn commonSources, versionSpecificSources
-    from commonSources.archiveFile.map { zipTree(it) }
+    dependsOn coreSources, versionSpecificSources
+    from coreSources.archiveFile.map { zipTree(it) }
     from versionSpecificSources.archiveFile.map { zipTree(it) }
 }
 

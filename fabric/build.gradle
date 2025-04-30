@@ -26,8 +26,8 @@ dependencies {
         exclude(group: 'net.fabricmc.fabric-api')
     }
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowCommon(project(path: ':common', configuration: 'transformProductionFabric')) { transitive false }
+    common(project(path: ':core', configuration: 'namedElements')) { transitive false }
+    shadowCommon(project(path: ':core', configuration: 'transformProductionFabric')) { transitive false }
     versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
     shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionFabric')) { transitive false }
 }
@@ -48,10 +48,10 @@ jar {
 }
 
 sourcesJar {
-    def commonSources = project(':common').sourcesJar
+    def coreSources = project(':core').sourcesJar
     def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
-    dependsOn commonSources, versionSpecificSources
-    from commonSources.archiveFile.map { zipTree(it) }
+    dependsOn coreSources, versionSpecificSources
+    from coreSources.archiveFile.map { zipTree(it) }
     from versionSpecificSources.archiveFile.map { zipTree(it) }
 }
 
