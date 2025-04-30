@@ -13,7 +13,7 @@ description = "${modDescription}"
 logoFile = "assets/${modId}/icon.png"
 
 [[mixins]]
-config = "${modId}-common.mixins.json"
+config = "${modId}.mixins.json"
 
 [[dependencies.${modId}]]
 modId = "neoforge"

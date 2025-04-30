@@ -38,9 +38,8 @@ plugins {
 include('common')
 project(':common').name = 'common'
 
-def specific = settings.ext.specific
-include(specific)
-project(":$specific").name = specific
+def moduleMixin = settings.ext.moduleMixin
+include(":mixin:$moduleMixin")
 
 def platforms = settings.ext.architecturyPlatforms.split(',')
 if (platforms.contains('fabric')) {

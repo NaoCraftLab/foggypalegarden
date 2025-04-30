@@ -20,8 +20,8 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
-    versionSpecificCommon(project(path: ":${specific}", configuration: 'namedElements')) { transitive false }
-    shadowVersionSpecificCommon(project(path: ":${specific}", configuration: 'transformProductionNeoForge')) { transitive false }
+    versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionNeoForge')) { transitive false }
 }
 
 shadowJar {
@@ -41,7 +41,7 @@ jar {
 
 sourcesJar {
     def commonSources = project(':common').sourcesJar
-    def versionSpecificSources = project(":$specific").sourcesJar
+    def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
     dependsOn commonSources, versionSpecificSources
     from commonSources.archiveFile.map { zipTree(it) }
     from versionSpecificSources.archiveFile.map { zipTree(it) }

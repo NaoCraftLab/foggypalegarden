@@ -40,7 +40,7 @@ subprojects {
 
     processResources {
         filesMatching([
-                "${rootProject.extensions.extraProperties.modId}-common.mixins.json".toString(),
+                "${rootProject.extensions.extraProperties.modId}.mixins.json".toString(),
                 'fabric.mod.json',
                 'META-INF/neoforge.mods.toml',
                 'META-INF/mods.toml',

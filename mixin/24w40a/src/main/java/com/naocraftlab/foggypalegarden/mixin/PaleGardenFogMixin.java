@@ -2,7 +2,6 @@ package com.naocraftlab.foggypalegarden.mixin;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3;
-import com.naocraftlab.foggypalegarden.converter.GameTypeConverter;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;

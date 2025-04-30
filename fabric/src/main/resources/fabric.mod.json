@@ -27,7 +27,7 @@
     ]
   },
   "mixins": [
-    "${modId}-common.mixins.json"
+    "${modId}.mixins.json"
   ],
   "depends": {
     "java": ">=${minecraftJavaVersion}",
