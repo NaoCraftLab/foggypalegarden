@@ -39,6 +39,10 @@ subprojects {
     }
 
     processResources {
+        def fabricModMenuEntrypoint = !commonModMenuVersion.isEmpty()
+                ? "\"com.naocraftlab.foggypalegarden.integration.ModMenuIntegration\""
+                : ""
+        def fabricModMenuSuggestion = !commonModMenuVersion.isEmpty() ? ", \"modmenu\": \">=$commonModMenuVersion\"" : ""
         filesMatching([
                 "${rootProject.extensions.extraProperties.modId}.mixins.json".toString(),
                 'fabric.mod.json',
@@ -66,7 +70,8 @@ subprojects {
                     commonClothConfigVersion: rootProject.extensions.extraProperties.commonClothConfigVersion,
                     fabricApiVersion: rootProject.extensions.extraProperties.fabricApiVersion,
                     fabricMinMinecraftVersion: rootProject.extensions.extraProperties.fabricMinMinecraftVersion,
-                    fabricModMenuVersion: rootProject.extensions.extraProperties.fabricModMenuVersion,
+                    fabricModMenuEntrypoint: fabricModMenuEntrypoint,
+                    fabricModMenuSuggestion: fabricModMenuSuggestion,
                     neoforgeMinVersion: rootProject.extensions.extraProperties.neoforgeMinVersion,
                     neoforgeMinLoaderVersion: rootProject.extensions.extraProperties.neoforgeMinLoaderVersion,
                     neoforgeMinMinecraftVersion: rootProject.extensions.extraProperties.neoforgeMinMinecraftVersion,

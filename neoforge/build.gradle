@@ -6,8 +6,10 @@ architectury {
 configurations {
     common
     versionSpecificCommon
+
     shadowCommon
     shadowVersionSpecificCommon
+
     compileClasspath.extendsFrom(common, versionSpecificCommon)
     runtimeClasspath.extendsFrom(common, versionSpecificCommon)
     developmentNeoForge.extendsFrom(common, versionSpecificCommon)
@@ -20,10 +22,12 @@ dependencies {
 
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':core', configuration: 'transformProductionNeoForge')) { transitive false }
-    versionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'namedElements')) { transitive false }
-    shadowVersionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'transformProductionNeoForge')) { transitive false }
-    versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
-    shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionNeoForge')) { transitive false }
+
+    versionSpecificCommon(project(path: ":command-$moduleCommand", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":command-$moduleCommand", configuration: 'transformProductionNeoForge')) { transitive false }
+
+    versionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'transformProductionNeoForge')) { transitive false }
 }
 
 shadowJar {
@@ -43,12 +47,15 @@ jar {
 
 sourcesJar {
     def coreSources = project(':core').sourcesJar
-    def commandsSources = project(":commands:$moduleCommands").sourcesJar
-    def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
-    dependsOn coreSources, commandsSources, versionSpecificSources
     from coreSources.archiveFile.map { zipTree(it) }
-    from commandsSources.archiveFile.map { zipTree(it) }
-    from versionSpecificSources.archiveFile.map { zipTree(it) }
+
+    def commandSources = project(":command-$moduleCommand").sourcesJar
+    from commandSources.archiveFile.map { zipTree(it) }
+
+    def mixinSources = project(":mixin-$moduleMixin").sourcesJar
+    from mixinSources.archiveFile.map { zipTree(it) }
+
+    dependsOn coreSources, commandSources, mixinSources
 }
 
 components.java {

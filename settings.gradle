@@ -38,11 +38,19 @@ plugins {
 include('core')
 project(':core').name = 'core'
 
-def moduleCommands = settings.ext.moduleCommands
-include(":commands:$moduleCommands")
+def moduleCommand = settings.ext.moduleCommand
+include(":command-$moduleCommand")
+project(":command-$moduleCommand").name = "command-$moduleCommand"
+
+def moduleModMenu = settings.ext.moduleModMenu
+if (!moduleModMenu.isEmpty()) {
+    include(":modmenu-$moduleModMenu")
+    project(":modmenu-$moduleModMenu").name = "modmenu-$moduleModMenu"
+}
 
 def moduleMixin = settings.ext.moduleMixin
-include(":mixin:$moduleMixin")
+include(":mixin-$moduleMixin")
+project(":mixin-$moduleMixin").name = "mixin-$moduleMixin"
 
 def platforms = settings.ext.architecturyPlatforms.split(',')
 if (platforms.contains('fabric')) {

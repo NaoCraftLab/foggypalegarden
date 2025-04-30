@@ -2,6 +2,7 @@ package com.naocraftlab.foggypalegarden.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import com.naocraftlab.foggypalegarden.AbstractCommand;
 import lombok.val;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

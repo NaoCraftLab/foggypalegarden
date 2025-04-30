@@ -23,7 +23,7 @@
       "com.naocraftlab.foggypalegarden.fabric.FoggyPaleGardenClientMod"
     ],
     "modmenu": [
-      "com.naocraftlab.foggypalegarden.fabric.ModMenuIntegration"
+      ${fabricModMenuEntrypoint}
     ]
   },
   "mixins": [
@@ -36,8 +36,8 @@
     "fabric-api": ">=${fabricApiVersion}"
   },
   "suggests": {
-    "cloth-config": ">=${commonClothConfigVersion}",
-    "modmenu": ">=${fabricModMenuVersion}"
+    "cloth-config": ">=${commonClothConfigVersion}"
+    ${fabricModMenuSuggestion}
   },
   "custom": {
     "modmenu": {

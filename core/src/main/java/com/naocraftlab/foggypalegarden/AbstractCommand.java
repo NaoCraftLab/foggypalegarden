@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.command;
+package com.naocraftlab.foggypalegarden;
 
 import java.util.List;
 

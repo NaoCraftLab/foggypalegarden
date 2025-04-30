@@ -6,8 +6,10 @@ architectury {
 configurations {
     common
     versionSpecificCommon
+
     shadowCommon
     shadowVersionSpecificCommon
+
     compileClasspath.extendsFrom(common, versionSpecificCommon)
     runtimeClasspath.extendsFrom(common, versionSpecificCommon)
     developmentFabric.extendsFrom(common, versionSpecificCommon)
@@ -22,16 +24,23 @@ dependencies {
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:${commonClothConfigVersion}") {
         exclude(group: 'net.fabricmc.fabric-api')
     }
-    modImplementation("com.terraformersmc:modmenu:${fabricModMenuVersion}") {
-        exclude(group: 'net.fabricmc.fabric-api')
-    }
 
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':core', configuration: 'transformProductionFabric')) { transitive false }
-    versionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'namedElements')) { transitive false }
-    shadowVersionSpecificCommon(project(path: ":commands:$moduleCommands", configuration: 'transformProductionFabric')) { transitive false }
-    versionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'namedElements')) { transitive false }
-    shadowVersionSpecificCommon(project(path: ":mixin:$moduleMixin", configuration: 'transformProductionFabric')) { transitive false }
+
+    versionSpecificCommon(project(path: ":command-$moduleCommand", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":command-$moduleCommand", configuration: 'transformProductionFabric')) { transitive false }
+
+    versionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'namedElements')) { transitive false }
+    shadowVersionSpecificCommon(project(path: ":mixin-$moduleMixin", configuration: 'transformProductionFabric')) { transitive false }
+
+    if (!commonModMenuVersion.isEmpty()) {
+        modImplementation("com.terraformersmc:modmenu:$commonModMenuVersion") {
+            exclude(group: 'net.fabricmc.fabric-api')
+        }
+        versionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'namedElements')) { transitive false }
+        shadowVersionSpecificCommon(project(path: ":modmenu-$moduleModMenu", configuration: 'transformProductionFabric')) { transitive false }
+    }
 }
 
 shadowJar {
@@ -50,13 +59,27 @@ jar {
 }
 
 sourcesJar {
+    def dependencies = new ArrayList<>()
+
     def coreSources = project(':core').sourcesJar
-    def commandsSources = project(":commands:$moduleCommands").sourcesJar
-    def versionSpecificSources = project(":mixin:$moduleMixin").sourcesJar
-    dependsOn coreSources, commandsSources, versionSpecificSources
+    dependencies.add(coreSources)
     from coreSources.archiveFile.map { zipTree(it) }
-    from commandsSources.archiveFile.map { zipTree(it) }
-    from versionSpecificSources.archiveFile.map { zipTree(it) }
+
+    def commandSources = project(":command-$moduleCommand").sourcesJar
+    dependencies.add(commandSources)
+    from commandSources.archiveFile.map { zipTree(it) }
+
+    def mixinSources = project(":mixin-$moduleMixin").sourcesJar
+    dependencies.add(mixinSources)
+    from mixinSources.archiveFile.map { zipTree(it) }
+
+    if (!commonModMenuVersion.isEmpty()) {
+        def modMenuSources = project(":modmenu-$moduleModMenu").sourcesJar
+        dependencies.add(modMenuSources)
+        from modMenuSources.archiveFile.map { zipTree(it) }
+    }
+
+    dependsOn dependencies
 }
 
 components.java {

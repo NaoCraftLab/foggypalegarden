@@ -1,4 +1,4 @@
-package com.naocraftlab.foggypalegarden.fabric;
+package com.naocraftlab.foggypalegarden.integration;
 
 import com.naocraftlab.foggypalegarden.gui.ClothConfigScreen;
 import com.naocraftlab.foggypalegarden.gui.NoClothConfigScreen;
