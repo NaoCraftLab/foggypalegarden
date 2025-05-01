@@ -62,13 +62,3 @@ public class PresetSourceResourcePack<T extends FogPreset> implements PresetSour
         // not supported
     }
 }
-
-//1.20.1
-//read
-//tryBuild
-//tryParse
-
-//1.21.4
-//read
-//tryBuild
-//tryParse

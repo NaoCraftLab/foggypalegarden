@@ -13,7 +13,7 @@ public class FpgCommand extends AbstractCommand {
             .executes(FpgCommand::executeBaseCommand);
 
     private static int executeBaseCommand(CommandContext<CommandSourceStack> context) {
-        context.getSource().sendSuccess(Component.translatable("fpg.command.help", String.join("\n", ALL_COMMANDS)), false);
+        context.getSource().sendSuccess(() -> Component.translatable("fpg.command.help", String.join("\n", ALL_COMMANDS)), false);
         return 1;
     }
 }

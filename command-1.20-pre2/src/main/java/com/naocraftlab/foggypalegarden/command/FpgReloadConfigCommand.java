@@ -26,7 +26,7 @@ public class FpgReloadConfigCommand extends AbstractCommand {
             val currentPreset = configFacade().getCurrentPreset().getCode();
             val allPresets = configFacade().getAvailablePresetCodes().stream().collect(Collectors.joining("\n"));
             context.getSource().sendSuccess(
-                    Component.translatable("fpg.command.reloadConfig.success", currentPreset, allPresets).withStyle(GREEN),
+                    () -> Component.translatable("fpg.command.reloadConfig.success", currentPreset, allPresets).withStyle(GREEN),
                     false
             );
             return 1;

@@ -28,7 +28,7 @@ public class FpgPresetCommand extends AbstractCommand {
                     Commands.argument(PRESET_COMMAND, string()).suggests(PRESET_SUGGESTIONS).executes(FpgPresetCommand::setPreset)
             ).executes(context -> {
                 val currentPreset = configFacade().getCurrentPreset().getCode();
-                context.getSource().sendSuccess(Component.translatable("fpg.command.preset.current", currentPreset), false);
+                context.getSource().sendSuccess(() -> Component.translatable("fpg.command.preset.current", currentPreset), false);
                 return 1;
             })
     );
@@ -38,7 +38,7 @@ public class FpgPresetCommand extends AbstractCommand {
         try {
             if (configFacade().setCurrentPreset(preset)) {
                 context.getSource().sendSuccess(
-                        Component.translatable("fpg.command.preset.applied", preset).withStyle(GREEN),
+                        () -> Component.translatable("fpg.command.preset.applied", preset).withStyle(GREEN),
                         false
                 );
                 configFacade().save();

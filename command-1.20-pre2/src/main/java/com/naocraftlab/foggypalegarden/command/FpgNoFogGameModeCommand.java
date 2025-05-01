@@ -42,12 +42,12 @@ public class FpgNoFogGameModeCommand extends AbstractCommand {
             val gameModeName = gameMode.getShortDisplayName().getString();
             if (configFacade().toggleNoFogGameMode(toDomainGameType(gameMode))) {
                 context.getSource().sendSuccess(
-                        Component.translatable("fpg.command.noFogGameMode.off", gameModeName).withStyle(GRAY),
+                        () -> Component.translatable("fpg.command.noFogGameMode.off", gameModeName).withStyle(GRAY),
                         false
                 );
             } else {
                 context.getSource().sendSuccess(
-                        Component.translatable("fpg.command.noFogGameMode.on", gameModeName).withStyle(GREEN),
+                        () -> Component.translatable("fpg.command.noFogGameMode.on", gameModeName).withStyle(GREEN),
                         false
                 );
             }
@@ -67,10 +67,10 @@ public class FpgNoFogGameModeCommand extends AbstractCommand {
                     .map(GameType::getShortDisplayName)
                     .map(Component::getString)
                     .collect(joining("\n"));
-            context.getSource().sendSuccess(Component.translatable("fpg.command.noFogGameMode.list", noFogGameModes), false);
+            context.getSource().sendSuccess(() -> Component.translatable("fpg.command.noFogGameMode.list", noFogGameModes), false);
         } else {
             context.getSource().sendSuccess(
-                    Component.translatable("fpg.command.noFogGameMode.listEmpty").withStyle(GREEN),
+                    () -> Component.translatable("fpg.command.noFogGameMode.listEmpty").withStyle(GREEN),
                     false
             );
         }
