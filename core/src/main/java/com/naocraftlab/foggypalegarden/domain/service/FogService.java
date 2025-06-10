@@ -45,8 +45,6 @@ public class FogService {
                     .map(Pair::second)
                     .findFirst()
                     .orElse(null);
-        } else {
-//            newFogBinding = null;
         }
     }
 

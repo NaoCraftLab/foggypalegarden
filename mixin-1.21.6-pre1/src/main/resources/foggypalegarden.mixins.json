@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.naocraftlab.foggypalegarden.mixin",
+  "compatibilityLevel": "JAVA_${minecraftJavaVersion}",
+  "minVersion": "0.8",
+  "client": [
+    "AtmosphericFogEnvironmentFpgMixin"
+  ],
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

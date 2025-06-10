@@ -15,6 +15,10 @@ configurations {
     developmentFabric.extendsFrom(common, versionSpecificCommon)
 }
 
+loom {
+    accessWidenerPath = project(":core").loom.accessWidenerPath
+}
+
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${commonFabricLoaderVersion}"
     modApi("net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}") {

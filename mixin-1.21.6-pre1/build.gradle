@@ -6,13 +6,9 @@ configurations {
     shadowCommon
 }
 
-loom {
-    if (!project.ext.accessWidener.isBlank()) {
-        accessWidenerPath = file("src/main/resources/${project.ext.modId}-${project.ext.accessWidener}.accesswidener")
-    }
-}
-
 dependencies {
+    implementation project(':core')
+
     modImplementation "net.fabricmc:fabric-loader:${project.ext.commonFabricLoaderVersion}"
 }
 
