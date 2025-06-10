@@ -47,20 +47,6 @@ public abstract class PaleGardenFogMixin {
     @Shadow
     private static boolean fogEnabled;
 
-    @Unique
-    private static FogPresetV3.Binding binding = null;
-
-    @Unique
-    private static float fogDensity = 0.0f;
-
-    @Unique
-    private static boolean hasMobEffect(Entity entity) {
-        if (entity instanceof LivingEntity livingEntity) {
-            return livingEntity.hasEffect(MobEffects.BLINDNESS) || livingEntity.hasEffect(MobEffects.DARKNESS);
-        } else {
-            return false;
-        }
-    }
 
     @Inject(method = "computeFogColor", at = @At("RETURN"), cancellable = true)
     private static void injectComputeFogColor(
@@ -127,6 +113,7 @@ public abstract class PaleGardenFogMixin {
             cir.cancel();
         }
     }
+
 
     @Unique
     private static boolean hasMobEffect(Entity entity) {
