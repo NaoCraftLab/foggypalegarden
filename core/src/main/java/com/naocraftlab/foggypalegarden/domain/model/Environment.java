@@ -17,8 +17,7 @@ public final class Environment {
     private final int skyLightLevel;
     private final double height;
     private final double heightAboveSurface;
-    private final Color gameFogColor;
-    private final float fogDensity;
+    private final boolean canApplyFog;
 
     public String dimension() {
         return dimension;
@@ -56,11 +55,7 @@ public final class Environment {
         return heightAboveSurface;
     }
 
-    public Color gameFogColor() {
-        return gameFogColor;
-    }
-
-    public float fogDensity() {
-        return fogDensity;
+    public boolean canApplyFog() {
+        return canApplyFog;
     }
 }

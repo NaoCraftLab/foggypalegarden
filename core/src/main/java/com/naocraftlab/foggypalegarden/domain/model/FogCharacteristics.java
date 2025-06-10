@@ -9,9 +9,7 @@ public final class FogCharacteristics {
 
     private final float startDistance;
     private final float endDistance;
-    private final Color color;
     private final FogShape shape;
-    private final float fogDensity;
 
     public float startDistance() {
         return startDistance;
@@ -21,15 +19,7 @@ public final class FogCharacteristics {
         return endDistance;
     }
 
-    public Color color() {
-        return color;
-    }
-
     public FogShape shape() {
         return shape;
-    }
-
-    public float fogDensity() {
-        return fogDensity;
     }
 }

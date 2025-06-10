@@ -1,7 +1,6 @@
 package com.naocraftlab.foggypalegarden.mixin;
 
 import com.mojang.blaze3d.shaders.FogShape;
-import com.naocraftlab.foggypalegarden.config.preset.FogPresetV3;
 import com.naocraftlab.foggypalegarden.domain.model.Color;
 import com.naocraftlab.foggypalegarden.domain.model.Environment;
 import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
@@ -66,14 +65,14 @@ public abstract class PaleGardenFogMixin {
     @Inject(method = "computeFogColor", at = @At("RETURN"), cancellable = true)
     private static void injectComputeFogColor(
             Camera camera,
-            float f,
-            ClientLevel clientLevel,
-            int i,
-            float g,
+            float partialTick,
+            ClientLevel level,
+            int renderDistance,
+            float darkenWorldAmount,
             CallbackInfoReturnable<Vector4f> cir
     ) {
-        val color = cir.getReturnValue();
-        val newColor = FogService.calculateColor(binding, fogDensity, toColor(color));
+        val gameFogColor = cir.getReturnValue();
+        val newColor = FogService.calculateFogColor(toColor(gameFogColor));
         cir.setReturnValue(toVector4f(newColor));
     }
 
@@ -81,35 +80,33 @@ public abstract class PaleGardenFogMixin {
     private static void injectSetupFog(
             Camera camera,
             FogRenderer.FogMode fogMode,
-            Vector4f color,
-            float viewDistance,
-            boolean thickenFog,
-            float tickDelta,
+            Vector4f fogColor,
+            float renderDistance,
+            boolean isFoggy,
+            float partialTick,
             CallbackInfoReturnable<FogParameters> cir
     ) {
-        if (!fogEnabled) {
-            cir.setReturnValue(FogParameters.NO_FOG);
-            return;
-        }
+        final Entity entity = camera.getEntity();
+        final GameType gameMode = resolveGameMode(entity);
+        final FogType fogType = camera.getFluidInCamera();
+        final boolean canApplyFog = fogEnabled
+                && !configFacade().isNoFogGameMode(toDomainGameType(gameMode))
+                && fogType != FogType.LAVA
+                && fogType != FogType.POWDER_SNOW
+                && fogType != FogType.WATER
+                // level.effects().isFoggyAt(Mth.floor(d), Mth.floor(e)) || this.minecraft.gui.getBossOverlay().shouldCreateWorldFog()
+                && !isFoggy
+                && !hasMobEffect(entity);
 
-        val fogType = camera.getFluidInCamera();
-        val entity = camera.getEntity();
-        val gameMode = resolveGameMode(entity);
-        if (configFacade().isNoFogGameMode(toDomainGameType(gameMode)) || fogType != FogType.NONE) {
-            return;
-        }
-        if (hasMobEffect(entity)) {
-            fogDensity = 0.0f;
-            return;
-        }
+        // fogMode == FogRenderer.FogMode.FOG_SKY || fogMode == FogRenderer.FogMode.FOG_TERRAIN
         val world = (ClientLevel) entity.getCommandSenderWorld();
         val blockPos = camera.getBlockPosition();
         val biomeEntry = world.getBiome(blockPos);
-        val hitResult = world.clip(new ClipContext(
-                blockPos.getCenter(), blockPos.offset(0, -256, 0).getCenter(), COLLIDER, NONE, entity
-        ));
+        val hitResult = world.clip(
+                new ClipContext(blockPos.getCenter(), blockPos.offset(0, -256, 0).getCenter(), COLLIDER, NONE, entity)
+        );
 
-        binding = FogService.resolveBinding(
+        FogService.changeFogBinding(
                 Environment.builder()
                         .dimension(world.dimension().location().toString())
                         .biome(biomeEntry.getRegisteredName())
@@ -120,42 +117,23 @@ public abstract class PaleGardenFogMixin {
                         .skyLightLevel(world.getBrightness(SKY, blockPos))
                         .height(blockPos.getY())
                         .heightAboveSurface(blockPos.getY() - hitResult.getBlockPos().getY())
-                        .gameFogColor(toColor(color))
-                        .fogDensity(fogDensity)
+                        .canApplyFog(canApplyFog)
                         .build()
         );
-        val fogCharacteristics = FogService.calculateFogCharacteristics(
-                binding,
-                fogDensity,
-                FogMode.valueOf(fogMode.name()),
-                viewDistance,
-                Color.builder().red(color.x()).green(color.y()).blue(color.z()).alpha(color.w()).build()
-        );
 
-        assert fogCharacteristics.fogDensity() >= 0.0f : "FPG: Fog density is negative";
-        assert fogCharacteristics.fogDensity() <= 1.0f : "FPG: Fog density is greater than 1.0";
-
-        fogDensity = fogCharacteristics.fogDensity();
-        if (fogDensity > 0.0f) {
-            assert fogCharacteristics.startDistance() >= 0.0f : "FPG: Start distance is negative";
-            assert fogCharacteristics.endDistance() >= fogCharacteristics.startDistance()
-                    : "FPG: End distance is less than start distance";
-            assert fogCharacteristics.color().red() >= 0.0f : "FPG: Red color component is negative";
-            assert fogCharacteristics.color().red() <= 1.0f : "FPG: Red color component is greater than 1.0";
-            assert fogCharacteristics.color().green() >= 0.0f : "FPG: Green color component is negative";
-            assert fogCharacteristics.color().green() <= 1.0f : "FPG: Green color component is greater than 1.0";
-            assert fogCharacteristics.color().blue() >= 0.0f : "FPG: Blue color component is negative";
-            assert fogCharacteristics.color().blue() <= 1.0f : "FPG: Blue color component is greater than 1.0";
-            assert fogCharacteristics.color().alpha() >= 0.0f : "FPG: Alpha color component is negative";
-            assert fogCharacteristics.color().alpha() <= 1.0f : "FPG: Alpha color component is greater than 1.0";
-
-            color.x = color.x * (1.0f - fogDensity) + fogCharacteristics.color().red() * fogDensity;
-            color.y = color.y * (1.0f - fogDensity) + fogCharacteristics.color().green() * fogDensity;
-            color.z = color.z * (1.0f - fogDensity) + fogCharacteristics.color().blue() * fogDensity;
-            color.w = color.w * (1.0f - fogDensity) + fogCharacteristics.color().alpha() * fogDensity;
-
-            cir.setReturnValue(fogOf(fogCharacteristics));
+        val characteristics = FogService.calculateFogCharacteristics(FogMode.valueOf(fogMode.name()), renderDistance);
+        if (characteristics != null) {
+            cir.setReturnValue(fogOf(characteristics, toColor(fogColor)));
             cir.cancel();
+        }
+    }
+
+    @Unique
+    private static boolean hasMobEffect(Entity entity) {
+        if (entity instanceof LivingEntity livingEntity) {
+            return livingEntity.hasEffect(MobEffects.BLINDNESS) || livingEntity.hasEffect(MobEffects.DARKNESS);
+        } else {
+            return false;
         }
     }
 
@@ -199,15 +177,15 @@ public abstract class PaleGardenFogMixin {
     }
 
     @Unique
-    private static FogParameters fogOf(FogCharacteristics fogCharacteristics) {
+    private static FogParameters fogOf(FogCharacteristics fogCharacteristics, Color fogColor) {
         return new FogParameters(
                 fogCharacteristics.startDistance(),
                 fogCharacteristics.endDistance(),
                 FogShape.valueOf(fogCharacteristics.shape().name()),
-                fogCharacteristics.color().red(),
-                fogCharacteristics.color().green(),
-                fogCharacteristics.color().blue(),
-                fogCharacteristics.color().alpha()
+                fogColor.red(),
+                fogColor.green(),
+                fogColor.blue(),
+                fogColor.alpha()
         );
     }
 }
