@@ -7,19 +7,22 @@ import com.naocraftlab.foggypalegarden.domain.model.FogCharacteristics;
 import com.naocraftlab.foggypalegarden.domain.model.FogMode;
 import com.naocraftlab.foggypalegarden.domain.model.Weather;
 import com.naocraftlab.foggypalegarden.domain.service.FogService;
-import lombok.val;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
+import net.minecraft.world.phys.BlockHitResult;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -57,12 +60,12 @@ public abstract class PaleGardenFogMixin {
             float darkenWorldAmount,
             CallbackInfoReturnable<Vector4f> cir
     ) {
-        val gameFogColor = cir.getReturnValue();
-        val newColor = FogService.calculateFogColor(toColor(gameFogColor));
+        final Vector4f gameFogColor = cir.getReturnValue();
+        final Color newColor = FogService.calculateFogColor(toColor(gameFogColor));
         cir.setReturnValue(toVector4f(newColor));
     }
 
-    @Inject(method = "setupFog", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "setupFog", at = @At("RETURN"), cancellable = true)
     private static void injectSetupFog(
             Camera camera,
             FogRenderer.FogMode fogMode,
@@ -85,10 +88,10 @@ public abstract class PaleGardenFogMixin {
                 && !hasMobEffect(entity);
 
         // fogMode == FogRenderer.FogMode.FOG_SKY || fogMode == FogRenderer.FogMode.FOG_TERRAIN
-        val world = (ClientLevel) entity.getCommandSenderWorld();
-        val blockPos = camera.getBlockPosition();
-        val biomeEntry = world.getBiome(blockPos);
-        val hitResult = world.clip(
+        final ClientLevel world = (ClientLevel) entity.getCommandSenderWorld();
+        final BlockPos blockPos = camera.getBlockPosition();
+        final Holder<Biome> biomeEntry = world.getBiome(blockPos);
+        final BlockHitResult hitResult = world.clip(
                 new ClipContext(blockPos.getCenter(), blockPos.offset(0, -256, 0).getCenter(), COLLIDER, NONE, entity)
         );
 
@@ -107,7 +110,12 @@ public abstract class PaleGardenFogMixin {
                         .build()
         );
 
-        val characteristics = FogService.calculateFogCharacteristics(FogMode.valueOf(fogMode.name()), renderDistance);
+        final FogParameters originalFogParameters = cir.getReturnValue();
+        final FogCharacteristics characteristics = FogService.calculateFogCharacteristics(
+                FogMode.valueOf(fogMode.name()),
+                originalFogParameters.start(),
+                originalFogParameters.end()
+        );
         if (characteristics != null) {
             cir.setReturnValue(fogOf(characteristics, toColor(fogColor)));
             cir.cancel();

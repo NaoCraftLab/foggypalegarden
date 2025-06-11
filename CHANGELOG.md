@@ -1,3 +1,11 @@
+## 2.9.1
+
+### Fixed
+- When submerged in water, lava, and snow, fog is no longer overridden
+- Boss fog is no longer overridden
+- When blindness or darkness effect is removed, fog returns to the last state
+- When dissipating, fog returns to the boundaries of the original in-game fog
+
 ## 2.9.0
 
 ### Added

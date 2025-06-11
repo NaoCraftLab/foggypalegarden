@@ -15,6 +15,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -111,8 +112,12 @@ public abstract class PaleGardenFogMixin {
                         .build()
         );
 
+        final float originalFogStart = (fogMode == FogRenderer.FogMode.FOG_TERRAIN)
+                ? farPlaneDistance - Mth.clamp(farPlaneDistance / 10.0F, 4.0F, 64.0F)
+                : 0.0f;
         final FogCharacteristics characteristics = FogService.calculateFogCharacteristics(
                 FogMode.valueOf(fogMode.name()),
+                originalFogStart,
                 farPlaneDistance
         );
         if (characteristics != null) {

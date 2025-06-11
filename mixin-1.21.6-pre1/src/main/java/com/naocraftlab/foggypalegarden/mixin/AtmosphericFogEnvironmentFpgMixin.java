@@ -59,7 +59,7 @@ public abstract class AtmosphericFogEnvironmentFpgMixin extends AirBasedFogEnvir
         return ARGB.colorFromFloat(newColor.alpha(), newColor.red(), newColor.green(), newColor.blue());
     }
 
-    @Inject(method = "setupFog", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "setupFog", at = @At("RETURN"), cancellable = true)
     private static void injectSetupFog(
             FogData fogData,
             Entity entity,
@@ -91,8 +91,12 @@ public abstract class AtmosphericFogEnvironmentFpgMixin extends AirBasedFogEnvir
                         .build()
         );
 
-        final FogCharacteristics terrainCharacteristics = FogService.calculateFogCharacteristics(FogMode.FOG_TERRAIN, renderDistance);
-        final FogCharacteristics skyCharacteristics = FogService.calculateFogCharacteristics(FogMode.FOG_SKY, renderDistance);
+        final FogCharacteristics terrainCharacteristics = FogService.calculateFogCharacteristics(
+                FogMode.FOG_TERRAIN,
+                fogData.environmentalStart,
+                fogData.environmentalEnd
+        );
+        final FogCharacteristics skyCharacteristics = FogService.calculateFogCharacteristics(FogMode.FOG_SKY, 0.0f, fogData.skyEnd);
         if (terrainCharacteristics != null && skyCharacteristics != null) {
             fogData.environmentalStart = terrainCharacteristics.getStartDistance();
             fogData.environmentalEnd = terrainCharacteristics.getEndDistance();
