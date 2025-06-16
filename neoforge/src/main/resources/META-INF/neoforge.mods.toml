@@ -25,7 +25,7 @@ side = "BOTH"
 [[dependencies.${modId}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[${neoforgeMinMinecraftVersion},)"
+versionRange = "${neoforgeMcVersionRange}"
 ordering = "NONE"
 side = "BOTH"
 

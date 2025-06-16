@@ -47,6 +47,11 @@ subprojects {
     }
 
     processResources {
+        def fabricMcVersionRange = fabricVersionRange(
+                fabricMinMinecraftVersion,
+                fabricMaxMinecraftVersion,
+                fabricIncludeMaxMinecraftVersion.toBoolean()
+        )
         def fabricClothConfigSuggestion = (fabricClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
                 ? "\"cloth-config\": \">=$commonClothConfigVersion\""
                 : ""
@@ -57,7 +62,12 @@ subprojects {
                 ? ", \"modmenu\": \">=$commonModMenuVersion\""
                 : ""
 
-        def neoForgeClothConfigSuggestion = (neoforgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
+        def neoforgeMcVersionRange = forgeVersionRange(
+                neoforgeMinMinecraftVersion,
+                neoforgeMaxMinecraftVersion,
+                neoforgeIncludeMaxMinecraftVersion.toBoolean()
+        )
+        def neoforgeClothConfigSuggestion = (neoforgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
                 ? "[[dependencies.$modId]]\n" +
                 "modId = \"cloth_config\"\n" +
                 "mandatory = false\n" +
@@ -66,6 +76,11 @@ subprojects {
                 "side = \"CLIENT\""
                 : ""
 
+        def forgeMcVersionRange = forgeVersionRange(
+                forgeMinMinecraftVersion,
+                forgeMaxMinecraftVersion,
+                forgeIncludeMaxMinecraftVersion.toBoolean()
+        )
         def forgeClothConfigSuggestion = (forgeClothConfigEnabled.toBoolean() && !commonClothConfigVersion.isEmpty())
                 ? "[[dependencies.$modId]]\n" +
                 "modId = \"cloth_config\"\n" +
@@ -103,17 +118,20 @@ subprojects {
                     commonFabricLoaderVersion: rootProject.extensions.extraProperties.commonFabricLoaderVersion,
                     commonClothConfigVersion: rootProject.extensions.extraProperties.commonClothConfigVersion,
 
+                    fabricMcVersionRange: fabricMcVersionRange,
                     fabricApiVersion: rootProject.extensions.extraProperties.fabricApiVersion,
                     fabricMinMinecraftVersion: rootProject.extensions.extraProperties.fabricMinMinecraftVersion,
                     fabricClothConfigSuggestion: fabricClothConfigSuggestion,
                     fabricModMenuEntrypoint: fabricModMenuEntrypoint,
                     fabricModMenuSuggestion: fabricModMenuSuggestion,
 
+                    neoforgeMcVersionRange: neoforgeMcVersionRange,
                     neoforgeMinVersion: rootProject.extensions.extraProperties.neoforgeMinVersion,
                     neoforgeMinLoaderVersion: rootProject.extensions.extraProperties.neoforgeMinLoaderVersion,
                     neoforgeMinMinecraftVersion: rootProject.extensions.extraProperties.neoforgeMinMinecraftVersion,
-                    neoForgeClothConfigSuggestion: neoForgeClothConfigSuggestion,
+                    neoForgeClothConfigSuggestion: neoforgeClothConfigSuggestion,
 
+                    forgeMcVersionRange: forgeMcVersionRange,
                     forgeMinVersion: rootProject.extensions.extraProperties.forgeMinVersion,
                     forgeMinLoaderVersion: rootProject.extensions.extraProperties.forgeMinLoaderVersion,
                     forgeMinMinecraftVersion: rootProject.extensions.extraProperties.forgeMinMinecraftVersion,
@@ -170,4 +188,27 @@ allprojects {
     java {
         withSourcesJar()
     }
+}
+
+static String fabricVersionRange(String min, String max, Boolean includeMax) {
+    if (!max.isBlank()) {
+        if (includeMax) {
+            if (min == max) {
+                return "$min"
+            }
+            return ">=$min, <=$max"
+        }
+        return ">=$min, <$max"
+    }
+    return ">=$min"
+}
+
+static String forgeVersionRange(String min, String max, Boolean includeMax) {
+    if (!max.isBlank()) {
+        if (includeMax) {
+            return "[$min,$max]"
+        }
+        return "[$min,$max)"
+    }
+    return "[$min,)"
 }

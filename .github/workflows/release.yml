@@ -1,0 +1,33 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: changelog
+        run: |
+          TAG_NAME=${GITHUB_REF##*/}
+          ./create_version_changelog.sh "$TAG_NAME"
+
+      - name: build
+        run: ./build_all.sh
+
+      - name: publish
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: HnYv9te8
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 1114471
+          curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          changelog-file: CHANGELOG-${{ github.ref_name }}.md
+          files: distrs/*.jar
