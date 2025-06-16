@@ -18,6 +18,12 @@ jobs:
           TAG_NAME=${GITHUB_REF##*/}
           ./create_version_changelog.sh "$TAG_NAME"
 
+      - name: setup jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
+
       - name: build
         run: ./build_all.sh
 
