@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: changelog
+      - name: Changelog
         run: |
           TAG_NAME=${GITHUB_REF##*/}
           ./create_version_changelog.sh "$TAG_NAME"
 
-      - name: setup jdk
+      - name: Set Up JDK
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 21
 
-      - name: build
+      - name: Build
         run: ./build_all.sh
 
-      - name: publish
+      - name: Publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: HnYv9te8
@@ -37,3 +37,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           changelog-file: CHANGELOG-${{ github.ref_name }}.md
           files: distrs/*.jar
+          game-version-filter: any
