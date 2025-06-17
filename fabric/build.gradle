@@ -1,3 +1,7 @@
+plugins {
+    id "me.shedaniel.unified-publishing"
+}
+
 architectury {
     platformSetupLoomIde()
     fabric()
@@ -99,5 +103,53 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+unifiedPublishing {
+    project {
+        changelog = rootProject.getChangelogForVersion(project.modVersion)
+        gameLoaders = ["fabric", "quilt"]
+
+        relations {
+            depends {
+                modrinth = "fabric-api"
+                curseforge = "fabric-api"
+            }
+            if (project.fabricClothConfigEnabled.toBoolean()) {
+                optional {
+                    modrinth = "cloth-config"
+                    curseforge = "cloth-config"
+                }
+            }
+            if (project.fabricModMenuEnabled.toBoolean()) {
+                optional {
+                    modrinth = "modmenu"
+                    curseforge = "modmenu"
+                }
+            }
+        }
+
+        mainPublication remapJar
+        secondaryPublication sourcesJar.archiveFile
+
+        def modrinthToken = project.findProperty("modrinthToken")?.toString() ?: System.getenv("MODRINTH_TOKEN")
+        if (modrinthToken != null && !modrinthToken.isBlank()) {
+            modrinth {
+                token = modrinthToken
+                id = project.modModrinthId
+                gameVersions = project.modModrinthGameVersions.split(',').toList()
+            }
+        }
+
+        def curseForgeApiKey = project.findProperty("curseforgeApiKey")?.toString() ?: System.getenv("CURSEFORGE_API_KEY")
+        if (curseForgeApiKey != null && !curseForgeApiKey.isBlank()) {
+            curseforge {
+                token = curseForgeApiKey
+                id = project.modCurseForgeId
+                gameVersions = project.modCurseForgeGameVersions.split(',').toList()
+                gameVersions.addAll "Java $project.minecraftJavaVersion"
+            }
+        }
     }
 }
