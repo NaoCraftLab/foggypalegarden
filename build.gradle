@@ -60,6 +60,7 @@ subprojects {
                 ? "[[dependencies.$modId]]\n" +
                 "modId = \"cloth_config\"\n" +
                 "mandatory = false\n" +
+                "type = \"optional\"\n" +
                 "versionRange = \"[$commonClothConfigVersion,)\"\n" +
                 "ordering = \"NONE\"\n" +
                 "side = \"CLIENT\""

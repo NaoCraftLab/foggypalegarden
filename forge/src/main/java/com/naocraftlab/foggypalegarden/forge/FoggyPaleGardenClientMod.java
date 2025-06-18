@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 
 import static com.naocraftlab.foggypalegarden.FoggyPaleGarden.MOD_ID;
 import static com.naocraftlab.foggypalegarden.util.ReflectUtil.buildScreen;
-import static com.naocraftlab.foggypalegarden.util.ReflectUtil.isClassAvailable;
 import static net.minecraftforge.api.distmarker.Dist.CLIENT;
 
 @OnlyIn(CLIENT)
@@ -25,9 +24,6 @@ public final class FoggyPaleGardenClientMod {
     }
 
     private static void registerConfigScreenFactory() {
-        if (!isClassAvailable("com.naocraftlab.foggypalegarden.clothconfig.ClothConfigScreen")) {
-            return;
-        }
         ModLoadingContext.get().registerExtensionPoint(
                 ConfigScreenFactory.class,
                 () -> new ConfigScreenFactory((mc, screen) -> {
