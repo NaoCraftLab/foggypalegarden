@@ -1,3 +1,7 @@
+⚠️ Further development of the mod continues in the form of the [Foggy Pale Garden resource pack](https://modrinth.com/resourcepack/foggypalegarden-rp) based on [Polytone](https://modrinth.com/mod/polytone).
+
+---
+
 <img src=".idea/icon.png" width="128">
 
 # Foggy Pale Garden (FPG)
